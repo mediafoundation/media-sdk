@@ -1,0 +1,3 @@
+[submodule "media-evm-abis"]
+	path = media-evm-abis
+	url = git@github.com:mediafoundation/media-evm-abis.git
