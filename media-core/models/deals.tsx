@@ -1,4 +1,4 @@
-const env = require('/config/env')
+const env = require('/config/')
 const {BigNumber} = require("ethers");
 
 module.exports = {
