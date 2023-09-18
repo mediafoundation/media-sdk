@@ -7,12 +7,17 @@
   "license": "MIT",
   "private": true,
   "devDependencies": {
+    "@babel/preset-typescript": "^7.22.15",
     "@types/jest": "^29.5.4",
     "@types/node": "^20.6.0",
+    "@types/sequelize": "^4.28.15",
     "jest": "^29.6.4",
     "sqlite3": "^5.1.6"
   },
   "dependencies": {
+    "@babel/core": "^7.22.20",
+    "@babel/preset-env": "^7.22.20",
+    "babel-jest": "^29.7.0",
     "dotenv": "^16.3.1",
     "mysql2": "^3.6.1",
     "pg": "^8.11.3",
@@ -23,6 +28,7 @@
     "test": "jest"
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "verbose": false
   }
 }

@@ -1,19 +1,13 @@
-require('dotenv').config();
+const env = require('../../config/env')
 const {Sequelize} = require('sequelize');
-const isTesting = process.env.NODE_ENV === 'test';
+const isTesting = env.debug === 'test';
+
+console.log(isTesting, env.debug)
 
 
-const sequelize = isTesting ?
-  new Sequelize('sqlite::memory:', {logging: false}) :
-  new Sequelize(
-    process.env.DB_NAME,
-    process.env.DB_USERNAME,
-    process.env.DB_PASSWORD,
-    {
-      host: process.env.DB_HOST,
-      dialect: process.env.DB_DIALECT,
-      port: process.env.DB_PORT
-    }
-  );
-
-module.exports = sequelize;
+export const sequelize = new Sequelize(env.DB_NAME, env.DB_USERNAME, env.DB_PASSWORD, {
+  host: env.DB_HOST,
+  port: env.DB_PORT,
+  dialect: env.DB_DIALECT,
+  logging: false
+})

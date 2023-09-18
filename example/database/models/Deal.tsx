@@ -1,10 +1,7 @@
-const {DataTypes, Model} = require('sequelize');
-const sequelize = require('../database');
+import {sequelize} from "../database";
+import {DataTypes} from "sequelize";
 
-class Deal extends Model {
-}
-
-Deal.init(
+export const Deal = sequelize.define("Deals",
   {
     id: {type: DataTypes.STRING, primaryKey: true},
     offerId: DataTypes.STRING,
@@ -32,5 +29,3 @@ Deal.init(
     freezeTableName: true
   }
 );
-
-module.exports = Deal;

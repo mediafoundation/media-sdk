@@ -1,12 +1,12 @@
+import {Deal} from "../../database/models/Deal";
+
 let { upsertDeal } = require('../../database/controllers/dealsController');
-const sequelize = require('./../../database/database');
+
 
 beforeAll(async () => {
-  await sequelize.sync({ force: true }); // Esto creará la estructura de la base de datos antes de ejecutar los tests
-});
-
-afterAll(async () => {
-  await sequelize.close(); // Esto cerrará la conexión después de ejecutar todos los tests
+  //console.log(sequelize)
+  await Deal.sync({force: true})
+  //await sequelize.sync({ force: true });
 });
 
 describe('Deal Controller', () => {

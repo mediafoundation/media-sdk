@@ -1,4 +1,4 @@
-const Deal = require('./../models/deal');
+import {Deal} from "../models/Deal";
 
 const upsertDeal = async (deal) => {
   try {
