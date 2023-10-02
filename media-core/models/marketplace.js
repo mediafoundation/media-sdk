@@ -48,9 +48,8 @@ export default class Marketplace {
         address: addresses.MarketplaceViewer.networks[this.networkId].address,
         abi: MarketplaceViewerAbi.abi,
         functionName: 'getPaginatedDeals',
-        args: [1, "0xe2D5992C16b12D2682De9074592973065aA9221F", true, paginatorIndex, steps]
+        args: [1, this.walletClient.account.address, true, paginatorIndex, steps]
       })
-      console.log("Result", result[0], parseInt(formatUnits(result[1])))
       deals.push(...result[0])
 
       if(result[1] > deals.length){
@@ -60,7 +59,7 @@ export default class Marketplace {
             address: addresses.MarketplaceViewer[this.networkId],
             abi: MarketplaceViewerAbi.abi,
             functionName: 'getPaginatedDeals',
-            args: [this.marketPlaceId, this.publicClient.account.address, true, steps * i, steps]
+            args: [this.marketPlaceId, this.walletClient.account.address, true, steps * i, steps]
           })
           deals.push(...result[0])
         }
@@ -70,7 +69,7 @@ export default class Marketplace {
             address: addresses.MarketplaceViewer[this.networkId],
             abi: MarketplaceViewerAbi.abi,
             functionName: 'getPaginatedDeals',
-            args: [this.marketPlaceId, this.publicClient.account.address, true, deals.length, totalDeals - deals.length]
+            args: [this.marketPlaceId, this.walletClient.account.address, true, deals.length, totalDeals - deals.length]
           })
           deals.push(...result[0])
         }
