@@ -1,0 +1,34 @@
+{
+  "MarketplaceViewer": {
+    "networks": {
+      "5": {
+        "address": "0x1Ee5f0CF5F010F8c2E3f4Ab75C353A4C930B0a0c"
+      },
+      "222": {
+        "address": "0x53e4b81aA979489dfC9A05cac317Ef58690804D1"
+      },
+      "418": {
+        "address": "0xDb9fD53f224a21edC6b38A1dFd5709B32C9FB820"
+      },
+      "84531": {
+        "address": "0xd10FE2475bE0FC7f935C7D536CF114C7b3489000"
+      }
+    }
+  },
+  "Marketplace": {
+    "networks": {
+      "5": {
+        "address": "0x95B817309f11969FD95eC6d83C9B1358Edb59af9"
+      },
+      "222": {
+        "address": "0xe9403631a858521262761467Cbf5d7037784a899"
+      },
+      "418": {
+        "address": "0xe71979074310B23a049aA384fC9a3d8369fe97AA"
+      },
+      "84531": {
+        "address": "0x09F09BeeC44213EF4607Baf8b222bf3bb370CbAd"
+      }
+    }
+  }
+}
