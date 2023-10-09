@@ -50,6 +50,7 @@ export default class Marketplace {
         functionName: 'getPaginatedDeals',
         args: [1, this.walletClient.account.address, true, paginatorIndex, steps]
       })
+      console.log("Result", result)
       deals.push(...result[0])
 
       if(result[1] > deals.length){

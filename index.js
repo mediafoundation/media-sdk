@@ -3,12 +3,17 @@ import Marketplace from "./media-core/models/marketplace.js";
 import {privateKeyToAccount} from "viem/accounts";
 
 export default class MediaSdk extends Marketplace {
-    constructor(privateKey, chainOptions, rpcUrl) {
+    constructor(privateKey, chainOptions, rpcUrl, walletClient) {
+        if(privateKey === undefined && walletClient === undefined){
+            throw "Either privateKey or walletClient must be provided"
+        }
 
-        console.log("options", chainOptions)
+        if(walletClient === undefined && privateKey !== undefined){
+            walletClient = generateWalletClient(privateKey, chainOptions, rpcUrl)
+        }
 
         super(
-            generateWalletClient(privateKey, chainOptions, rpcUrl),
+            walletClient,
             generatePublicClient(chainOptions, rpcUrl),
             chainOptions.marketPlaceId,
             chainOptions.id
