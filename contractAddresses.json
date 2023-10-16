@@ -30,5 +30,22 @@
         "address": "0x09F09BeeC44213EF4607Baf8b222bf3bb370CbAd"
       }
     }
+  },
+
+  "Resources": {
+    "networks": {
+      "5": {
+        "address": "0xe27056D8994d1E7F4E978eFDE3279A278ea578F8"
+      },
+      "222": {
+        "address": "0xEa9E787170F15cC070E901468a6b3Da69a56b9bb"
+      },
+      "418": {
+        "address": "0x883891580084F90E8A39172755f9b3080C9Cc5b6"
+      },
+      "84531": {
+        "address": "0x50E28E2496CD74C872B6Ca32b649B174F50143db"
+      }
+    }
   }
 }
