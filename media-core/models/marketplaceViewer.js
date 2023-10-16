@@ -1,8 +1,7 @@
 import MarketplaceViewerAbi from "../../abis/MarketplaceViewer.json" assert { type: "json" };
 import addresses from "../../contractAddresses.json" assert { type: "json" };
-import {formatUnits} from "viem";
 
-export default class Marketplace {
+export default class MarketplaceViewer {
   networkId
   walletClient
    publicClient

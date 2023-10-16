@@ -1,8 +1,8 @@
 import {createPublicClient, createWalletClient, http} from "viem";
-import Marketplace from "./media-core/models/marketplace.js";
+import MarketplaceViewer from "./media-core/models/marketplaceViewer.js";
 import {privateKeyToAccount} from "viem/accounts";
 
-export default class MediaSdk extends Marketplace {
+export default class MediaSdk extends MarketplaceViewer {
     constructor(privateKey, chainOptions, rpcUrl, walletClient) {
         if(privateKey === undefined && walletClient === undefined){
             throw "Either privateKey or walletClient must be provided"
