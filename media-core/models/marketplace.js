@@ -15,7 +15,7 @@ export default class Marketplace extends MarketplaceViewer {
         this.publicClient = publicClient;
         this.marketPlaceId = marketPlaceId;
 
-        if (addresses.MarketplaceViewer.networks[this.networkId] === undefined) {
+        if (addresses.Marketplace.networks[this.networkId] === undefined) {
             throw new Error('MarketplaceViewer address not found for network id: ' + this.networkId)
         }
     }
@@ -136,6 +136,5 @@ export default class Marketplace extends MarketplaceViewer {
             return error
         }
     }
-
 
 }
