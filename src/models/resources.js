@@ -1,28 +1,21 @@
-import addresses from "../../contractAddresses.json" assert {type: "json"};
-import ResourcesAbi from "../../abis/Resources.json" assert {type: "json"};
-import Marketplace from "./marketplace.js";
-import MarketplaceAbi from "../../abis/Marketplace.json";
+const addresses = require("./../../contractAddresses.json")
+const ResourcesAbi = require("./../../abis/Resources.json")
+const {getConfig} = require("../config/config");
 
-export default class Resources extends Marketplace {
-    networkId
-    walletClient
-    publicClient
+class Resources {
 
     constructor(walletClient, publicClient, marketPlaceId = 1, networkId = 1) {
-        super(walletClient, publicClient, marketPlaceId, networkId)
-        this.networkId = networkId
-        this.walletClient = walletClient;
-        this.publicClient = publicClient;
+        this.config = getConfig()
 
-        if (addresses.Resources.networks[this.networkId] === undefined) {
-            throw new Error('MarketplaceViewer address not found for network id: ' + this.networkId)
+        if (addresses.Resources.networks[this.config.networkId] === undefined) {
+            throw new Error('MarketplaceViewer address not found for network id: ' + this.config.networkId)
         }
     }
 
     async addResource(encryptedData, sharedKeyCopy, ownerKeys){
         try {
-            return await this.walletClient.writeContract({
-                address: addresses.Resources.networks[this.networkId].address,
+            return await this.config.walletClient.writeContract({
+                address: addresses.Resources.networks[this.config.networkId].address,
                 abi: ResourcesAbi.abi,
                 functionName: 'addResource',
                 args: [encryptedData, sharedKeyCopy, ownerKeys]
@@ -34,8 +27,8 @@ export default class Resources extends Marketplace {
 
     async updateResource(id, encryptedData){
         try {
-            return await this.walletClient.writeContract({
-                address: addresses.Resources.networks[this.networkId].address,
+            return await this.config.walletClient.writeContract({
+                address: addresses.Resources.networks[this.config.networkId].address,
                 abi: ResourcesAbi.abi,
                 functionName: 'updateResource',
                 args: [id, encryptedData]
@@ -47,8 +40,8 @@ export default class Resources extends Marketplace {
 
     async removeResource(id, ownerKeys){
         try {
-            return await this.walletClient.writeContract({
-                address: addresses.Resources.networks[this.networkId].address,
+            return await this.config.walletClient.writeContract({
+                address: addresses.Resources.networks[this.config.networkId].address,
                 abi: ResourcesAbi.abi,
                 functionName: 'removeResource',
                 args: [id, ownerKeys]
@@ -61,8 +54,8 @@ export default class Resources extends Marketplace {
     //todo adapt like in the marketplace viewer
     async getPaginatedResources(userAddress, start, count){
         try {
-            return await this.publicClient.readContract({
-                address: addresses.Resources.networks[this.networkId].address,
+            return await this.config.publicClient.readContract({
+                address: addresses.Resources.networks[this.config.networkId].address,
                 abi: ResourcesAbi.abi,
                 functionName: 'getPaginatedResources',
                 args: [userAddress, start, count]
@@ -72,3 +65,5 @@ export default class Resources extends Marketplace {
         }
     }
 }
+
+module.exports = Resources
