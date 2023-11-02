@@ -48,7 +48,7 @@ const generateWalletClient = (privateKey, options, rpcUrl) => {
     })
 }
 
-module.exports.init = (privateKey, chainOptions, rpcUrl, walletClient) => {
+module.exports.initSdk = (privateKey, chainOptions, marketplaceId, rpcUrl, walletClient) => {
     if(privateKey === undefined && walletClient === undefined){
         throw "Either privateKey or walletClient must be provided"
     }
@@ -60,8 +60,8 @@ module.exports.init = (privateKey, chainOptions, rpcUrl, walletClient) => {
     _config = {
         walletClient: walletClient,
         publicClient: generatePublicClient(chainOptions, rpcUrl),
-        marketPlaceId: chainOptions.marketPlaceId,
-        chainId: chainOptions.id
+        marketPlaceId: marketplaceId,
+        networkId: chainOptions.id
     };
 };
 

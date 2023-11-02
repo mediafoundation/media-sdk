@@ -4,7 +4,7 @@ const {getConfig} = require("../config/config");
 
 class Resources {
 
-    constructor(walletClient, publicClient, marketPlaceId = 1, networkId = 1) {
+    constructor() {
         this.config = getConfig()
 
         if (addresses.Resources.networks[this.config.networkId] === undefined) {
