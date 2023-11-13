@@ -51,15 +51,46 @@ class Resources {
         }
     }
 
-    //todo adapt like in the marketplace viewer
-    async getPaginatedResources(userAddress, start, count){
+    async getResources(userAddress, start, count){
+        let resources = []
+
+        let steps = count
+
         try {
-            return await this.config.publicClient.readContract({
+            console.log("Address", addresses.Resources.networks[this.config.networkId], this.config.networkId)
+            let result = await this.config.publicClient.readContract({
                 address: addresses.Resources.networks[this.config.networkId].address,
                 abi: ResourcesAbi.abi,
                 functionName: 'getPaginatedResources',
                 args: [userAddress, start, count]
             })
+            console.log("Result", result)
+            resources.push(...result[0])
+
+            if (result[1] > resources.length) {
+                let totalResources = result[1]
+                for (let i = 1; i * steps < totalResources; i++) {
+                    let result = await this.config.publicClient.readContract({
+                        address: addresses.Resources[this.config.networkId],
+                        abi: ResourcesAbi.abi,
+                        functionName: 'getPaginatedResources',
+                        args: [userAddress, steps * i, steps]
+                    })
+                    resources.push(...result[0])
+                }
+
+                if (totalResources > resources.length) {
+                    let result = await this.config.publicClient.readContract({
+                        address: addresses.Resources[this.config.networkId],
+                        abi: ResourcesAbi.abi,
+                        functionName: 'getPaginatedResources',
+                        args: [userAddress, resources.length, totalResources - resources.length]
+                    })
+                    resources.push(...result[0])
+                }
+            }
+
+            return resources
         } catch (error) {
             return error
         }

@@ -4,7 +4,7 @@ const {getConfig} = require("../config/config");
 
 class Marketplace {
 
-    constructor(walletClient, publicClient, marketPlaceId = 1, networkId = 1) {
+    constructor() {
 
         this.config = getConfig()
 
