@@ -12,7 +12,7 @@ npm install # Install dependencies
 
 ## Usage
 
-### Create a New Media SDK Instance
+### Initializing the SDK
 
 To create an instance of the Media SDK, you must provide the following parameters:
 
@@ -26,16 +26,15 @@ To create an instance of the Media SDK, you must provide the following parameter
 Using a private key instead of a client.
 
 ```javascript
-const sdk = new MediaSdk("PRIVATE_KEY",
-    {
-        id: 1,
-        name: "Ethereum Mainnet",
-        network: "Ethereum Mainnet",
-        nativeCurrency: {
-            symbol: "ETH",
-            name: "ETH",
-        }
-    }, "RPC_URL")
+initSdk("PRIVATE_KEY", {
+    id: chainId, // E.g 1
+    name: "chainName", // E.g Ethereum
+    network: "chainNetwork", // E.g Mainnet
+    nativeCurrency: {
+        symbol: "chainSymbol", // E.g ETH
+        name: "symbolName", // E.g Ether
+    }
+}, marketplaceId, "RPC_URL");
 ```
 
 #### Creating a Wallet Client from JSON-RPC Accounts using Viem's Default Chain for Ethereum Mainnet
@@ -53,14 +52,13 @@ const client = createWalletClient({
 })
 
 // Creating an instance of the Media SDK using the wallet client. 
-const sdk = new MediaSdk(undefined,
-    {
-        id: 1,
-        name: "Ethereum Mainnet",
-        network: "Ethereum Mainnet",
-        nativeCurrency: {
-            symbol: "ETH",
-            name: "ETH",
-        }
-    }, "RPC_URL", client)
+initSdk({
+    id: chainId, // E.g 1
+    name: "chainName", // E.g Ethereum
+    network: "chainNetwork", // E.g Mainnet
+    nativeCurrency: {
+        symbol: "chainSymbol", // E.g ETH
+        name: "symbolName", // E.g Ether
+    }
+}, marketplaceId, "RPC_URL", client);
 ```
