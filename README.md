@@ -1,7 +1,6 @@
-# media-sdk
+The Media SDK is a comprehensive toolkit for interacting with Media Protocol's contracts. Developed in JavaScript, it leverages the [viem](https://viem.sh/) library for seamless contract interactions, offering a straightforward interface for engaging with the Media Protocol contracts.
 
-The media sdk is a collection of tools for working with media protocol's contracts. It is written in javascript and uses the [viem](https://viem.sh/) library for contract interactions.
-Provides a simple interface for interacting with the media protocol contracts.
+**Important Note:** Contract addresses are subject to change. Always ensure to refer to the official documentation for the latest and valid contract addresses before any interaction.
 
 ## Installation
 
@@ -12,16 +11,20 @@ npm install # Install dependencies
 ```
 
 ## Usage
-### Create a new media sdk instance
-To create an instance of the media sdk, you must provide the following parameters.
 
-- privateKey: string // Used to create clients. Could be not provided and provide a walletClient instead. Provide it without the 0x prefix.
-- chainOptions: ChainOptions // Options for the chain. If non provided a default one will be used.
-- rpcUrl: string // RPC url for the chain.
-- walletClient: WalletClient // Optional wallet client. If not provided, a new one will be created using the private key.
+### Create a New Media SDK Instance
+
+To create an instance of the Media SDK, you must provide the following parameters:
+
+- `privateKey`: string // Used to create clients. Can be omitted if providing a walletClient instead. Provide it without the 0x prefix.
+- `chainOptions`: ChainOptions // Options for the chain. If none provided, a default one will be used.
+- `rpcUrl`: string // RPC url for the chain.
+- `walletClient`: WalletClient // Optional wallet client. If not provided, a new one will be created using the private key.
 
 #### Example
+
 Using a private key instead of a client.
+
 ```javascript
 const sdk = new MediaSdk("PRIVATE_KEY",
     {
@@ -35,7 +38,8 @@ const sdk = new MediaSdk("PRIVATE_KEY",
     }, "RPC_URL")
 ```
 
-#### Creating a wallet client from JSON-RPC Accounts using viem's default chain for ethereum mainnet.
+#### Creating a Wallet Client from JSON-RPC Accounts using Viem's Default Chain for Ethereum Mainnet
+
 ```javascript
 import { createWalletClient, http } from 'viem'
 import { mainnet } from 'viem/chains'
@@ -48,7 +52,7 @@ const client = createWalletClient({
   transport: custom(window.ethereum)
 })
 
-//Creating an instance of the media sdk using the wallet client. 
+// Creating an instance of the Media SDK using the wallet client. 
 const sdk = new MediaSdk(undefined,
     {
         id: 1,
