@@ -5,17 +5,9 @@
   "repository": "git@github.com:mediafoundation/media-sdk.git",
   "author": "Media Foundation <hello@media.foundation>",
   "license": "MIT",
-  "private": true,
+  "private": false,
   "dependencies": {
+    "@metamask/eth-sig-util": "^7.0.0",
     "viem": "^1.11.0"
-  },
-  "scripts": {
-    "build:cjs": "webpack --mode production --env buildType=cjs",
-    "build:esm": "webpack --mode production --env buildType=esm",
-    "build": "npm run build:cjs && npm run build:esm"
-  },
-  "jest": {
-    "testEnvironment": "node",
-    "verbose": false
   }
 }
