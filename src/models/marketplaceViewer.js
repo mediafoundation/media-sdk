@@ -1,6 +1,6 @@
 const addresses = require("./../../contractAddresses.json")
 const {getConfig} = require("../config/config");
-const MarketplaceAbi = require("../../abis/Marketplace.json");
+const {MarketplaceViewerAbi} = require("./../../abis/MarketplaceViewer.json")
 
 class MarketplaceViewer {
 
@@ -15,8 +15,8 @@ class MarketplaceViewer {
     async view(functionName, args) {
         try {
             return await this.config.publicClient.writeContract({
-                address: addresses.Marketplace.networks[this.config.networkId].address,
-                abi: MarketplaceAbi.abi,
+                address: addresses.MarketplaceViewer.networks[this.config.networkId].address,
+                abi: MarketplaceViewerAbi.abi,
                 functionName: functionName,
                 args: args
             })
