@@ -22,7 +22,7 @@ class Marketplace {
                 args: args
             })
         } catch (error) {
-            return error
+            throw error
         }
     }
 

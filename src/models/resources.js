@@ -20,7 +20,7 @@ class Resources {
                 args: args
             })
         } catch (error) {
-            return error
+            throw error
         }
     }
 
@@ -33,7 +33,7 @@ class Resources {
                 args: args
             })
         } catch (error) {
-            return error
+            throw error
         }
     }
 

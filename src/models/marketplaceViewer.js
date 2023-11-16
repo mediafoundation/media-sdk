@@ -21,7 +21,7 @@ class MarketplaceViewer {
                 args: args
             })
         } catch (error) {
-            return error
+            throw error
         }
     }
 
