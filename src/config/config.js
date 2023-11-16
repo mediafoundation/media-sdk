@@ -3,7 +3,6 @@ const accounts = require("viem/accounts");
 let _config = {
     walletClient: undefined,
     publicClient: undefined,
-    marketPlaceId: 1,
     networkId: 1
 };
 
@@ -48,7 +47,7 @@ const generateWalletClient = (privateKey, options, rpcUrl) => {
     })
 }
 
-module.exports.initSdk = (privateKey, chainOptions, marketplaceId, rpcUrl, walletClient) => {
+module.exports.initSdk = (privateKey, chainOptions, rpcUrl, walletClient) => {
     if(privateKey === undefined && walletClient === undefined){
         throw "Either privateKey or walletClient must be provided"
     }
@@ -60,7 +59,6 @@ module.exports.initSdk = (privateKey, chainOptions, marketplaceId, rpcUrl, walle
     _config = {
         walletClient: walletClient,
         publicClient: generatePublicClient(chainOptions, rpcUrl),
-        marketPlaceId: marketplaceId,
         networkId: chainOptions.id
     };
 };

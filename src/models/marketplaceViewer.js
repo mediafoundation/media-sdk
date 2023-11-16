@@ -12,7 +12,7 @@ class MarketplaceViewer{
         }
     }
 
-    async getDeals(start, count, isProvider) {
+    async getDeals(marketPlaceId, start, count, isProvider) {
         let deals = []
 
         let paginatorIndex = start
@@ -24,7 +24,7 @@ class MarketplaceViewer{
                 address: addresses.MarketplaceViewer.networks[this.config.networkId].address,
                 abi: MarketplaceViewerAbi.abi,
                 functionName: 'getPaginatedDeals',
-                args: [this.config.marketPlaceId, this.config.walletClient.account.address, isProvider, paginatorIndex, steps]
+                args: [marketPlaceId, this.config.walletClient.account.address, isProvider, paginatorIndex, steps]
             })
             console.log("Result", result)
             deals.push(...result[0])
@@ -36,7 +36,7 @@ class MarketplaceViewer{
                         address: addresses.MarketplaceViewer[this.config.networkId],
                         abi: MarketplaceViewerAbi.abi,
                         functionName: 'getPaginatedDeals',
-                        args: [this.config.marketPlaceId, this.config.walletClient.account.address, isProvider, steps * i, steps]
+                        args: [marketPlaceId, this.config.walletClient.account.address, isProvider, steps * i, steps]
                     })
                     deals.push(...result[0])
                 }
@@ -46,7 +46,7 @@ class MarketplaceViewer{
                         address: addresses.MarketplaceViewer[this.config.networkId],
                         abi: MarketplaceViewerAbi.abi,
                         functionName: 'getPaginatedDeals',
-                        args: [this.config.marketPlaceId, this.config.walletClient.account.address, isProvider, deals.length, totalDeals - deals.length]
+                        args: [marketPlaceId, this.config.walletClient.account.address, isProvider, deals.length, totalDeals - deals.length]
                     })
                     deals.push(...result[0])
                 }

@@ -1,6 +1,9 @@
-The Media SDK is a comprehensive toolkit for interacting with Media Protocol's contracts. Developed in JavaScript, it leverages the [viem](https://viem.sh/) library for seamless contract interactions, offering a straightforward interface for engaging with the Media Protocol contracts.
+The Media SDK is a comprehensive toolkit for interacting with Media Protocol's contracts. Developed in JavaScript, it
+leverages the [viem](https://viem.sh/) library for seamless contract interactions, offering a straightforward interface
+for engaging with the Media Protocol contracts.
 
-> ⚠️ **Important Note:** Contract addresses are subject to change. Always ensure to refer to the official documentation for the latest and valid contract addresses before any interaction.
+> ⚠️ **Important Note:** Contract addresses are subject to change. Always ensure to refer to the official documentation
+> for the latest and valid contract addresses before any interaction.
 
 ## Installation
 
@@ -16,10 +19,12 @@ npm install # Install dependencies
 
 To create an instance of the Media SDK, you must provide the following parameters:
 
-- `privateKey`: string // Used to create clients. Can be omitted if providing a walletClient instead. Provide it without the 0x prefix.
+- `privateKey`: string // Used to create clients. Can be omitted if providing a walletClient instead. Provide it without
+  the 0x prefix.
 - `chainOptions`: ChainOptions // Options for the chain. If none provided, a default one will be used.
 - `rpcUrl`: string // RPC url for the chain.
-- `walletClient`: WalletClient // Optional wallet client. If not provided, a new one will be created using the private key.
+- `walletClient`: WalletClient // Optional wallet client. If not provided, a new one will be created using the private
+  key.
 
 #### Example
 
@@ -34,21 +39,21 @@ initSdk("PRIVATE_KEY", {
         symbol: "chainSymbol", // E.g ETH
         name: "symbolName", // E.g Ether
     }
-}, marketplaceId, "RPC_URL");
+}, "RPC_URL");
 ```
 
 #### Creating a Wallet Client from JSON-RPC Accounts using Viem's Default Chain for Ethereum Mainnet
 
 ```javascript
-import { createWalletClient, http } from 'viem'
-import { mainnet } from 'viem/chains'
+import {createWalletClient, http} from 'viem'
+import {mainnet} from 'viem/chains'
 
-const [account] = await window.ethereum.request({ method: 'eth_requestAccounts' })
+const [account] = await window.ethereum.request({method: 'eth_requestAccounts'})
 
-const client = createWalletClient({ 
-  account, 
-  chain: mainnet,
-  transport: custom(window.ethereum)
+const client = createWalletClient({
+    account,
+    chain: mainnet,
+    transport: custom(window.ethereum)
 })
 
 // Creating an instance of the Media SDK using the wallet client. 
@@ -60,5 +65,21 @@ initSdk({
         symbol: "chainSymbol", // E.g ETH
         name: "symbolName", // E.g Ether
     }
-}, marketplaceId, "RPC_URL", client);
+}, "RPC_URL", client);
+```
+
+#### Initializing the Marketplace  
+After creating an instance of the Media SDK, you can initialize the marketplace using the initializeMarketplace function. Here's an example: 
+
+```javascript 
+// Example usage 
+
+const requiredStake = 100; 
+// replace with your required stake 
+const marketFeeTo = '0x...'; 
+// replace with your market fee recipient address 
+const marketFeeRate = 0.05; 
+// replace with your market fee rate
+const marketplace = new Marketplace(); 
+const marketplaceId = await marketplace.initializeMarketplace(requiredStake, marketFeeTo, marketFeeRate);
 ```
