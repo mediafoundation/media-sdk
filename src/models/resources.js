@@ -13,7 +13,7 @@ class Resources {
 
     async view(functionName, args) {
         try {
-            return await this.config.publicClient.writeContract({
+            return await this.config.publicClient.readContract({
                 address: addresses.Resources.networks[this.config.networkId].address,
                 abi: ResourcesAbi.abi,
                 functionName: functionName,
@@ -55,6 +55,7 @@ class Resources {
         let steps = count
 
         let result = await this.view('getPaginatedResources', [userAddress, start, steps])
+        console.log(result)
         resources.push(...result[0])
 
         if (result[1] > resources.length) {
