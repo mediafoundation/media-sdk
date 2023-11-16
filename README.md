@@ -1,6 +1,6 @@
 The Media SDK is a comprehensive toolkit for interacting with Media Protocol's contracts. Developed in JavaScript, it leverages the [viem](https://viem.sh/) library for seamless contract interactions, offering a straightforward interface for engaging with the Media Protocol contracts.
 
-**Important Note:** Contract addresses are subject to change. Always ensure to refer to the official documentation for the latest and valid contract addresses before any interaction.
+> ⚠️ **Important Note:** Contract addresses are subject to change. Always ensure to refer to the official documentation for the latest and valid contract addresses before any interaction.
 
 ## Installation
 
