@@ -130,6 +130,19 @@ class Marketplace {
         }
     }
 
+    async initializeMarketplace(requiredStake, marketFeeTo, marketFeeRate){
+        try {
+            return await this.config.walletClient.writeContract({
+                address: addresses.Marketplace.networks[this.config.networkId].address,
+                abi: MarketplaceAbi.abi,
+                functionName: 'initializeMarketplace',
+                args: [requiredStake, marketFeeTo, marketFeeRate]
+            })
+        } catch (error) {
+            return error
+        }
+    }
+
 }
 
 module.exports = Marketplace
