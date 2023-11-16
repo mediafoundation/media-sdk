@@ -1,7 +1,6 @@
 const addresses = require("./../../contractAddresses.json")
 const ResourcesAbi = require("./../../abis/Resources.json")
 const {getConfig} = require("../config/config");
-
 class Resources {
 
     constructor() {
@@ -12,88 +11,66 @@ class Resources {
         }
     }
 
-    async addResource(encryptedData, sharedKeyCopy, ownerKeys){
+    async view(functionName, args) {
         try {
-            return await this.config.walletClient.writeContract({
+            return await this.config.publicClient.writeContract({
                 address: addresses.Resources.networks[this.config.networkId].address,
                 abi: ResourcesAbi.abi,
-                functionName: 'addResource',
-                args: [encryptedData, sharedKeyCopy, ownerKeys]
+                functionName: functionName,
+                args: args
             })
         } catch (error) {
             return error
         }
     }
 
-    async updateResource(id, encryptedData){
+    async execute(functionName, args) {
         try {
             return await this.config.walletClient.writeContract({
                 address: addresses.Resources.networks[this.config.networkId].address,
                 abi: ResourcesAbi.abi,
-                functionName: 'updateResource',
-                args: [id, encryptedData]
+                functionName: functionName,
+                args: args
             })
         } catch (error) {
             return error
         }
     }
 
-    async removeResource(id, ownerKeys){
-        try {
-            return await this.config.walletClient.writeContract({
-                address: addresses.Resources.networks[this.config.networkId].address,
-                abi: ResourcesAbi.abi,
-                functionName: 'removeResource',
-                args: [id, ownerKeys]
-            })
-        } catch (error) {
-            return error
-        }
+    async addResource(encryptedData, sharedKeyCopy, ownerKeys) {
+        return await this.execute('addResource', [encryptedData, sharedKeyCopy, ownerKeys])
     }
 
-    async getResources(userAddress, start, count){
+    async updateResource(id, encryptedData) {
+        return await this.execute('updateResource', [id, encryptedData])
+    }
+
+    async removeResource(id, ownerKeys) {
+        return await this.execute('removeResource', [id, ownerKeys])
+    }
+
+    async getResources(userAddress, start, count) {
         let resources = []
 
         let steps = count
 
-        try {
-            console.log("Address", addresses.Resources.networks[this.config.networkId], this.config.networkId)
-            let result = await this.config.publicClient.readContract({
-                address: addresses.Resources.networks[this.config.networkId].address,
-                abi: ResourcesAbi.abi,
-                functionName: 'getPaginatedResources',
-                args: [userAddress, start, count]
-            })
-            console.log("Result", result)
-            resources.push(...result[0])
+        let result = await this.view('getPaginatedResources', [userAddress, start, steps])
+        resources.push(...result[0])
 
-            if (result[1] > resources.length) {
-                let totalResources = result[1]
-                for (let i = 1; i * steps < totalResources; i++) {
-                    let result = await this.config.publicClient.readContract({
-                        address: addresses.Resources[this.config.networkId],
-                        abi: ResourcesAbi.abi,
-                        functionName: 'getPaginatedResources',
-                        args: [userAddress, steps * i, steps]
-                    })
-                    resources.push(...result[0])
-                }
-
-                if (totalResources > resources.length) {
-                    let result = await this.config.publicClient.readContract({
-                        address: addresses.Resources[this.config.networkId],
-                        abi: ResourcesAbi.abi,
-                        functionName: 'getPaginatedResources',
-                        args: [userAddress, resources.length, totalResources - resources.length]
-                    })
-                    resources.push(...result[0])
-                }
+        if (result[1] > resources.length) {
+            let totalResources = result[1]
+            for (let i = 1; i * steps < totalResources; i++) {
+                let result = await this.view('getPaginatedResources', [userAddress, start + i * steps, steps])
+                resources.push(...result[0])
             }
 
-            return resources
-        } catch (error) {
-            return error
+            if (totalResources > resources.length) {
+                let result = await this.view('getPaginatedResources', [userAddress, start + totalResources, totalResources - resources.length])
+                resources.push(...result[0])
+            }
         }
+
+        return resources
     }
 }
 
