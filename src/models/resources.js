@@ -55,7 +55,6 @@ class Resources {
         let steps = count
 
         let result = await this.view('getPaginatedResources', [userAddress, start, steps])
-        console.log(result)
         resources.push(...result[0])
 
         if (result[1] > resources.length) {
