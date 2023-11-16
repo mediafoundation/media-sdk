@@ -2,7 +2,7 @@ const crypt = require('crypto');
 const ethSigUtil = require('@metamask/eth-sig-util');
 
 class Encryption {
-  async static ethSigDecrypt (encryptedData, privateKey) {
+  static async ethSigDecrypt (encryptedData, privateKey) {
 
     return ethSigUtil.decrypt({
       encryptedData: JSON.parse(Buffer.from(encryptedData.slice(2), 'hex').toString('utf8')),
@@ -10,7 +10,7 @@ class Encryption {
     });
   }
 
-  async static ethSigEncrypt (data, publicKey) {
+  static async ethSigEncrypt (data, publicKey) {
     const encryptedData = ethSigUtil.encrypt(
       publicKey,
       { data },
@@ -20,7 +20,7 @@ class Encryption {
   }
 
 
-  async static decrypt (key, iv, tag, resourceData) {
+  static async decrypt (key, iv, tag, resourceData) {
     let decipher = crypt.createDecipheriv(
       'aes-256-gcm',
       Buffer.from(key, 'base64'),
