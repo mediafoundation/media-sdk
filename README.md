@@ -1,48 +1,47 @@
-The Media SDK is a comprehensive toolkit for interacting with Media Protocol's contracts. Developed in JavaScript, it
-leverages the [viem](https://viem.sh/) library for seamless contract interactions, offering a straightforward interface
-for engaging with the Media Protocol contracts.
+# Media SDK 🚀
 
-> ⚠️ **Important Note:** Contract addresses are subject to change. Always ensure to refer to the official documentation
-> for the latest and valid contract addresses before any interaction.
+The Media SDK is a comprehensive toolkit designed for seamless interaction with the Media Protocol's contracts. Developed in JavaScript, it harnesses the power of the [viem](https://viem.sh/) library, providing an intuitive interface for engaging with the Media Protocol.
 
-## Installation
+> ⚠️ **Important Note:** The contract addresses provided are currently from testnets and are subject to change. Always refer to the official documentation for the most up-to-date and valid contract addresses before any interactions.
+
+## 📥 Installation
 
 ```bash
-git clone git@github.com:mediafoundation/media-sdk.git # Clone the repo
-cd media-sdk # Change directory to the repo
-npm install # Install dependencies
+git clone git@github.com:mediafoundation/media-sdk.git # Clone the repository
+cd media-sdk # Navigate to the repository
+npm install # Install the necessary dependencies
 ```
 
-## Usage
+## 🛠️ Usage
 
-### Initializing the SDK
+### 🔑 Initializing the SDK
 
-To create an instance of the Media SDK, you must provide the following parameters:
+To initialize an instance of the Media SDK, provide the following parameters:
 
-- `privateKey`: string // Used to create clients. Can be omitted if providing a walletClient instead. Provide it without
-  the 0x prefix.
-- `chainOptions`: ChainOptions // Options for the chain. If none provided, a default one will be used.
-- `rpcUrl`: string // RPC url for the chain.
-- `walletClient`: WalletClient // Optional wallet client. If not provided, a new one will be created using the private
-  key.
+- `privateKey`: A string used to create clients. Exclude the 0x prefix. Can be omitted if a `walletClient` is provided.
+- `chainOptions`: Options for the blockchain. Defaults are used if not specified.
+- `rpcUrl`: The RPC URL for the blockchain.
+- `walletClient`: An optional wallet client. If absent, one is created using the private key.
 
 #### Example
 
 Using a private key instead of a client.
 
 ```javascript
-initSdk("PRIVATE_KEY", {
-    id: chainId, // E.g 1
-    name: "chainName", // E.g Ethereum
-    network: "chainNetwork", // E.g Mainnet
+initSdk("YOUR_PRIVATE_KEY", {
+    id: chainId, // Example: 1 for Ethereum
+    name: "chainName", // Example: Ethereum
+    network: "chainNetwork", // Example: Mainnet
     nativeCurrency: {
-        symbol: "chainSymbol", // E.g ETH
-        name: "symbolName", // E.g Ether
+        symbol: "chainSymbol", // Example: ETH
+        name: "symbolName", // Example: Ether
     }
-}, "RPC_URL");
+}, "YOUR_RPC_URL");
 ```
 
 #### Creating a Wallet Client from JSON-RPC Accounts using Viem's Default Chain for Ethereum Mainnet
+
+Using Viem's Default Chain for Ethereum Mainnet:
 
 ```javascript
 import {createWalletClient, http} from 'viem'
@@ -68,8 +67,9 @@ initSdk({
 }, "RPC_URL", client);
 ```
 
-#### Initializing the Marketplace  
-After creating an instance of the Media SDK, you can initialize the marketplace using the initializeMarketplace function. Here's an example: 
+#### 🛒 Initializing the Marketplace
+
+After setting up the Media SDK, initialize the marketplace with the `initializeMarketplace` function.
 
 ```javascript 
 // Example usage 
@@ -83,3 +83,17 @@ const marketFeeRate = 0.05;
 const marketplace = new Marketplace(); 
 const marketplaceId = await marketplace.initializeMarketplace(requiredStake, marketFeeTo, marketFeeRate);
 ```
+
+## 📚 More Information
+
+For more details and a deep dive into our features, check out the official Media SDK documentation at [https://www.mediaprotocol.net/sdk/overview](https://www.mediaprotocol.net/sdk/overview).
+
+
+## 📝 License
+
+This project is licensed under the MIT License.
+
+## 📢 Stay Connected!
+
+- Twitter: [@Media_FDN](https://twitter.com/Media_FDN)
+- Website: [media.network](https://media.network)
