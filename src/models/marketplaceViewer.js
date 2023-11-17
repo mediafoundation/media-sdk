@@ -14,7 +14,6 @@ class MarketplaceViewer {
 
     async view(functionName, args) {
         try {
-            console.log(MarketplaceViewerAbi)
             return await this.config.publicClient.readContract({
                 address: addresses.MarketplaceViewer.networks[this.config.networkId].address,
                 abi: MarketplaceViewerAbi.abi,
