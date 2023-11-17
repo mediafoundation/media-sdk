@@ -4,17 +4,6 @@ const addresses = require("../../contractAddresses.json");
 class EventsHandler {
     constructor() {
         this.config = getConfig()
-
-        if (addresses.MarketplaceViewer.networks[this.config.networkId] === undefined) {
-            throw new Error('MarketplaceViewer address not found for network id: ' + this.config.networkId)
-        }
-
-        if (addresses.Resources.networks[this.config.networkId] === undefined) {
-            throw new Error('Resources address not found for network id: ' + this.config.networkId)
-        }
-        if (addresses.Marketplace.networks[this.config.networkId] === undefined) {
-            throw new Error('Marketplace address not found for network id: ' + this.config.networkId)
-        }
     }
 
     async getPastEvents(contractName, contractAbi, eventName, fromBlock, toBlock) {
