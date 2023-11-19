@@ -1,65 +1,39 @@
 const viem = require("viem");
-const accounts = require("viem/accounts");
+const chains = require("viem/chains");
+
+let defaultChain = chains.goerli;
+
+const generatePublicClient = (chain = defaultChain) => {
+    return viem.createPublicClient({
+        transport: viem.http(chain.rpcUrls.default.http),
+        chain: chain
+    })
+}
+
+const generateWalletClient = (privateKey, chain = defaultChain) => {
+    return viem.createWalletClient({
+        account: viem.accounts.privateKeyToAccount(`0x${privateKey}`),
+        transport: viem.http(chain.rpcUrls.default.http),
+        chain: chain
+    })
+}
+
 let _config = {
-    walletClient: undefined,
-    publicClient: undefined,
-    networkId: 1
+  walletClient: undefined,
+  publicClient: generatePublicClient(defaultChain),
 };
 
-
-const generatePublicClient = (options, rpcUrl) => {
-    let customChain = {
-        id: 1,
-        name: 'Ethereum Mainnet',
-        network: 'Ethereum Mainnet',
-        nativeCurrency: {
-            decimals: 18,
-            name: 'Ether',
-            symbol: 'ETH',
-        },
-        ...options
-    };
-
-    return viem.createPublicClient({
-        transport: viem.http(rpcUrl),
-        chain: customChain
-    })
-}
-
-const generateWalletClient = (privateKey, options, rpcUrl) => {
-    let customChain = {
-        id: 1,
-        name: 'Ethereum Mainnet',
-        network: 'Ethereum Mainnet',
-        nativeCurrency: {
-            decimals: 18,
-            name: 'Ether',
-            symbol: 'ETH',
-        },
-        ...options
+module.exports.initSdk = ({ 
+  chain = defaultChain,
+  privateKey = undefined, 
+  walletClient = undefined
+}) => {
+    if(privateKey !== undefined){
+        walletClient = generateWalletClient(privateKey, chain)
     }
-
-
-    return viem.createWalletClient({
-        account: accounts.privateKeyToAccount(`0x${privateKey}`),
-        transport: viem.http(rpcUrl),
-        chain: customChain
-    })
-}
-
-module.exports.initSdk = (privateKey, chainOptions, rpcUrl, walletClient) => {
-    if(privateKey === undefined && walletClient === undefined){
-        throw "Either privateKey or walletClient must be provided"
-    }
-
-    if(walletClient === undefined && privateKey !== undefined){
-        walletClient = generateWalletClient(privateKey, chainOptions, rpcUrl)
-    }
-
     _config = {
         walletClient: walletClient,
-        publicClient: generatePublicClient(chainOptions, rpcUrl),
-        networkId: chainOptions.id
+        publicClient: generatePublicClient(chain)
     };
 };
 

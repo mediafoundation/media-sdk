@@ -14,74 +14,97 @@ npm install # Install the necessary dependencies
 
 ## 🛠️ Usage
 
-### 🔑 Initializing the SDK
+## 🔑 Initializing the SDK
 
-To initialize an instance of the Media SDK, provide the following parameters:
+To initialize an instance of the Media SDK, use the `initSdk` function. This function takes in an object with the following **optional** parameters:
 
-- `privateKey`: A string used to create clients. Exclude the 0x prefix. Can be omitted if a `walletClient` is provided.
-- `chainOptions`: Options for the blockchain. Defaults are used if not specified.
-- `rpcUrl`: The RPC URL for the blockchain.
-- `walletClient`: An optional wallet client. If absent, one is created using the private key.
+- `chain`: A chain object. See [Viem's Chains](https://viem.sh/docs/clients/chains.html#utilities) for more details. If nothing is provided, the default chain will be used, which is Ethereum Goerli until mainnet launch.
+- `privateKey`: A ECP256K1 private key as a hex string to create a wallet client. Example: 'afdfd9c3d2095ef696594f6cedcae59e72dcd697e2a7521b1578140422a4f890'.
+- `walletClient`: A wallet client. See [Viem's Wallet Client](https://viem.sh/docs/clients/wallet.html) for more details. If absent, a client will be created using the `privateKey` parameter. 
 
-#### Example
+All parameters are optional. If both `privateKey` and `walletClient` are absent, only view functions will be available.
 
-Using a private key instead of a client.
+## Examples
+
+Using a private key. (Useful for backend applications)
 
 ```javascript
-initSdk("YOUR_PRIVATE_KEY", {
-    id: chainId, // Example: 1 for Ethereum
-    name: "chainName", // Example: Ethereum
-    network: "chainNetwork", // Example: Mainnet
-    nativeCurrency: {
-        symbol: "chainSymbol", // Example: ETH
-        name: "symbolName", // Example: Ether
-    }
-}, "YOUR_RPC_URL");
+// @ts-ignore
+import { initSdk, MarketplaceViewer, Marketplace, Resources } from 'media-sdk';
+
+initSdk({ privateKey: "YOUR_PRIVATE_KEY" });
 ```
 
-#### Creating a Wallet Client from JSON-RPC Accounts using Viem's Default Chain for Ethereum Mainnet
-
-Using Viem's Default Chain for Ethereum Mainnet:
+Using a browser wallet and Ethereum Goerli:
 
 ```javascript
 import {createWalletClient, http} from 'viem'
-import {mainnet} from 'viem/chains'
+import {goerli} from 'viem/chains'
 
 const [account] = await window.ethereum.request({method: 'eth_requestAccounts'})
 
-const client = createWalletClient({
+const walletClient = createWalletClient({
     account,
-    chain: mainnet,
+    chain: goerli,
     transport: custom(window.ethereum)
 })
 
 // Creating an instance of the Media SDK using the wallet client. 
-initSdk({
-    id: chainId, // E.g 1
-    name: "chainName", // E.g Ethereum
-    network: "chainNetwork", // E.g Mainnet
-    nativeCurrency: {
-        symbol: "chainSymbol", // E.g ETH
-        name: "symbolName", // E.g Ether
-    }
-}, "RPC_URL", client);
+initSdk({ walletClient: walletClient });
 ```
 
-#### 🛒 Initializing the Marketplace
+Using it just for view functions with a custom chain:
 
-After setting up the Media SDK, initialize the marketplace with the `initializeMarketplace` function.
+```javascript
+import { baseGoerli } from 'viem/chains'
+
+initSdk({ chain: baseGoerli });
+
+const marketplaceViewer = new MarketplaceViewer();
+
+const result = await marketplaceViewer.getOffers(1, 1, 100);
+console.log(result);
+
+```
+
+
+
+### 🛒 Initializing a Marketplace
+
+After setting up the Media SDK, you can initialize a marketplace with the `initializeMarketplace` function.
 
 ```javascript 
-// Example usage 
+const requiredStake = 100; // replace with your required stake 
+const marketFeeTo = '0x...';  // replace with your market fee recipient address 
+const marketFeeRate = 5; // replace with your market fee rate %
 
-const requiredStake = 100; 
-// replace with your required stake 
-const marketFeeTo = '0x...'; 
-// replace with your market fee recipient address 
-const marketFeeRate = 0.05; 
-// replace with your market fee rate
 const marketplace = new Marketplace(); 
-const marketplaceId = await marketplace.initializeMarketplace(requiredStake, marketFeeTo, marketFeeRate);
+const hash = await marketplace.initializeMarketplace(
+  requiredStake, 
+  marketFeeTo, 
+  marketFeeRate
+);    
+
+const publicClient = createPublicClient({
+  transport: http(currentChain.rpcUrls.default.http as any),
+  chain: currentChain
+})
+
+const transaction = await publicClient.waitForTransactionReceipt( 
+  { hash: hash }
+)
+console.log(transaction);
+```
+
+### Fetching Offers
+
+```javascript
+const marketplaceViewer = new MarketplaceViewer();
+const marketplaceId = 1;
+const start = 1;
+const limit = 100;
+const result = await marketplaceViewer.getAllOffers(marketplaceId, start, limit);
+console.log(result);
 ```
 
 ## 📚 More Information
