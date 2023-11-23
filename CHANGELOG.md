@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/mediafoundation/media-sdk/compare/v1.1.0...v1.1.1) (2023-11-23)
+
+
+### Bug Fixes
+
+* author of automatic commits ([ab7ec7c](https://github.com/mediafoundation/media-sdk/commit/ab7ec7c372e6fb0802f4548f3c49757c2385f347))
+
 # 1.0.0 (2023-11-23)
 
 
