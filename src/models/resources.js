@@ -1,13 +1,14 @@
 const addresses = require("./../../contractAddresses.json")
 const ResourcesAbi = require("./../../abis/Resources.json")
-const {getConfig} = require("../config/config");
+const { getConfig } = require("../config/config")
 
 class Resources {
 
     constructor() {
+
         this.config = getConfig()
 
-        if (addresses.Resources.networks[this.config.publicClient.chain.id] === undefined) {
+        if (addresses.Resources[this.config.publicClient.chain.id] === undefined) {
             throw new Error('MarketplaceViewer address not found for network id: ' + this.config.publicClient.chain.id)
         }
     }
@@ -15,7 +16,7 @@ class Resources {
     async view(functionName, args) {
         try {
             return await this.config.publicClient.readContract({
-                address: addresses.Resources.networks[this.config.publicClient.chain.id].address,
+                address: addresses.Resources[this.config.publicClient.chain.id],
                 abi: ResourcesAbi.abi,
                 functionName: functionName,
                 args: args
@@ -27,12 +28,15 @@ class Resources {
 
     async execute(functionName, args) {
         try {
-            return await this.config.walletClient.writeContract({
-                address: addresses.Resources.networks[this.config.publicClient.chain.id].address,
+            const { request } = await this.config.publicClient.simulateContract({
+                address: addresses.Resources[this.config.publicClient.chain.id],
                 abi: ResourcesAbi.abi,
                 functionName: functionName,
-                args: args
+                args: args,
+                account: this.config.walletClient.account,
             })
+            const hash = await this.config.walletClient.writeContract(request)
+            return hash
         } catch (error) {
             throw error
         }
