@@ -29,10 +29,9 @@ All parameters are optional. If both `privateKey` and `walletClient` are absent,
 Using a private key. (Useful for backend applications)
 
 ```javascript
-// @ts-ignore
-import { initSdk, MarketplaceViewer, Marketplace, Resources } from 'media-sdk';
+import { initSdk, MarketplaceViewer, Marketplace, Resources, Helper } from 'media-sdk'
 
-initSdk({ privateKey: "YOUR_PRIVATE_KEY" });
+initSdk({ privateKey: "YOUR_PRIVATE_KEY" })
 ```
 
 Using a browser wallet and Ethereum Goerli:
@@ -58,32 +57,38 @@ Using it just for view functions with a custom chain:
 ```javascript
 import { baseGoerli } from 'viem/chains'
 
-initSdk({ chain: baseGoerli });
+initSdk({ chain: baseGoerli })
 
-const marketplaceViewer = new MarketplaceViewer();
+const marketplaceViewer = new MarketplaceViewer()
 
-const result = await marketplaceViewer.getOffers(1, 1, 100);
-console.log(result);
+const marketplaceId = 1
+const start = 1
+const count = 100
+
+const result = await marketplaceViewer.getPaginatedOffers(
+  marketplaceId, 
+  start, 
+  count
+)
+console.log(result)
 
 ```
-
-
 
 ### 🛒 Initializing a Marketplace
 
 After setting up the Media SDK, you can initialize a marketplace with the `initializeMarketplace` function.
 
 ```javascript 
-const requiredStake = 100; // replace with your required stake 
-const marketFeeTo = '0x...';  // replace with your market fee recipient address 
-const marketFeeRate = 5; // replace with your market fee rate %
+const requiredStake = 100 // replace with your required stake 
+const marketFeeTo = '0x...'  // replace with your market fee recipient address 
+const marketFeeRate = 5 // replace with your market fee rate %
 
 const marketplace = new Marketplace(); 
 const hash = await marketplace.initializeMarketplace(
   requiredStake, 
   marketFeeTo, 
   marketFeeRate
-);    
+)
 
 const publicClient = createPublicClient({
   transport: http(currentChain.rpcUrls.default.http as any),
@@ -99,18 +104,25 @@ console.log(transaction);
 ### Fetching Offers
 
 ```javascript
-const marketplaceViewer = new MarketplaceViewer();
-const marketplaceId = 1;
-const start = 1;
-const limit = 100;
-const result = await marketplaceViewer.getAllOffers(marketplaceId, start, limit);
-console.log(result);
+const marketplaceViewer = new MarketplaceViewer()
+const marketplaceId = 1
+const start = 1
+const count = 100
+const result = await marketplaceViewer.getPaginatedOffers(
+  marketplaceId, 
+  start, 
+  count
+)
+console.log(result)
 ```
 
 ## 📚 More Information
 
 For more details and a deep dive into our features, check out the official Media SDK documentation at [https://www.mediaprotocol.net/sdk/overview](https://www.mediaprotocol.net/sdk/overview).
 
+## Front-End Boilerplate
+
+If you're looking for an example to get started with a front-end application, check out our [Media Protocol Frontend Boilerplate](https://github.com/mediafoundation/media-protocol-frontend-boilerplate). It's a great way to get started with the Media Protocol and the Media SDK.
 
 ## 📝 License
 

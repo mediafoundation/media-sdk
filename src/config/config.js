@@ -1,7 +1,7 @@
-const viem = require("viem");
-const chains = require("viem/chains");
+const viem = require("viem")
+const chains = require("viem/chains")
 
-let defaultChain = chains.goerli;
+let defaultChain = chains.goerli
 
 const generatePublicClient = (chain = defaultChain) => {
     return viem.createPublicClient({
@@ -19,14 +19,14 @@ const generateWalletClient = (privateKey, chain = defaultChain) => {
 }
 
 let _config = {
-  walletClient: undefined,
-  publicClient: generatePublicClient(defaultChain),
-};
+    walletClient: undefined,
+    publicClient: generatePublicClient(defaultChain),
+}
 
 module.exports.initSdk = ({ 
-  chain = defaultChain,
-  privateKey = undefined, 
-  walletClient = undefined
+    chain = defaultChain,
+    privateKey = undefined, 
+    walletClient = undefined
 }) => {
     if(privateKey !== undefined){
         walletClient = generateWalletClient(privateKey, chain)
@@ -34,9 +34,7 @@ module.exports.initSdk = ({
     _config = {
         walletClient: walletClient,
         publicClient: generatePublicClient(chain)
-    };
-};
+    }
+}
 
-module.exports.getConfig = () => {
-    return _config;
-};
+module.exports.getConfig = () => _config

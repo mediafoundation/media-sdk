@@ -1,10 +1,11 @@
+const { initSdk } = require("./src/config/config")
 const Marketplace = require("./src/models/marketplace.js")
-const {initSdk} = require("./src/config/config");
-const MarketplaceViewer = require("./src/models/marketplaceViewer");
+const MarketplaceViewer = require("./src/models/marketplaceViewer")
 const Resources = require("./src/models/resources")
 const Encryption = require("./src/utils/encryption");
 const EventHandler = require("./src/models/eventsHandler");
 const Blockchain = require("./src/utils/blockchain");
+const Helper = require("./src/models/helper")
 
 module.exports = {
     initSdk,
@@ -14,4 +15,5 @@ module.exports = {
     Encryption,
     EventHandler,
     Blockchain,
+    Helper
 }

@@ -1,0 +1,645 @@
+{
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_routerAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_factoryAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_marketplaceAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_mediaAddress",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "minTokenA",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "minTokenB",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "lpTokens",
+          "type": "uint256"
+        }
+      ],
+      "name": "AddedLiquidity",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "msg",
+          "type": "string"
+        }
+      ],
+      "name": "Log",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "msg",
+          "type": "uint256"
+        }
+      ],
+      "name": "LogUint",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_marketplaceId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_currentStake",
+          "type": "uint256"
+        }
+      ],
+      "name": "StakeUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "_inputToken",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_inputAmount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_outputAmount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256[]",
+          "name": "_actualAmountsOut",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "SwappedTokensforWeth",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "factory",
+      "outputs": [
+        {
+          "internalType": "contract IUniswapV2Factory",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [],
+      "name": "marketplace",
+      "outputs": [
+        {
+          "internalType": "contract Marketplace",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [],
+      "name": "mediaToken",
+      "outputs": [
+        {
+          "internalType": "contract IERC20",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [],
+      "name": "recoverNative",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "renounceOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "router",
+      "outputs": [
+        {
+          "internalType": "contract IUniswapV2Router02",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "marketplaceId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "label",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "publicKey",
+          "type": "string"
+        }
+      ],
+      "name": "addLiquidityAndRegisterWithETH",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "lpTokens",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "payable",
+      "type": "function",
+      "payable": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "marketplaceId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "contract IERC20",
+          "name": "inputToken",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "inputAmount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "label",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "publicKey",
+          "type": "string"
+        }
+      ],
+      "name": "addLiquidityAndRegister",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "lpTokens",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "marketplaceId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "minMediaAmount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "minWethAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "unregisterRemoveLiquidityAndSwap",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "marketplaceId",
+          "type": "uint256"
+        }
+      ],
+      "name": "addLiquidityAndStakeWithETH",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "lpTokens",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "payable",
+      "type": "function",
+      "payable": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "marketplaceId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "contract IERC20",
+          "name": "inputToken",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "inputAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "addLiquidityAndStake",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "lpTokens",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "marketplaceId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "contract IERC20",
+          "name": "inputToken",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "inputAmount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "resourceId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "offerId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "sharedKeyCopy",
+          "type": "string"
+        }
+      ],
+      "name": "swapAndCreateDeal",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "mediaAmount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "dealId",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "marketplaceId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "resourceId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "offerId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "sharedKeyCopy",
+          "type": "string"
+        }
+      ],
+      "name": "swapAndCreateDealWithETH",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "mediaAmount",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "payable",
+      "type": "function",
+      "payable": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "marketplaceId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "contract IERC20",
+          "name": "inputToken",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "inputAmount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "resourceId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "offerIds",
+          "type": "uint256[]"
+        },
+        {
+          "internalType": "string[]",
+          "name": "sharedKeyCopies",
+          "type": "string[]"
+        }
+      ],
+      "name": "swapAndCreateDeals",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "mediaAmount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "dealsId",
+          "type": "uint256[]"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "marketplaceId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "resourceId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "offerIds",
+          "type": "uint256[]"
+        },
+        {
+          "internalType": "string[]",
+          "name": "sharedKeyCopies",
+          "type": "string[]"
+        }
+      ],
+      "name": "swapAndCreateDealsWithETH",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "mediaAmount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "dealsId",
+          "type": "uint256[]"
+        }
+      ],
+      "stateMutability": "payable",
+      "type": "function",
+      "payable": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "marketplaceId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "contract IERC20",
+          "name": "inputToken",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "inputAmount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "dealId",
+          "type": "uint256"
+        }
+      ],
+      "name": "swapAndAddBalance",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "mediaAmount",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "marketplaceId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "dealId",
+          "type": "uint256"
+        }
+      ],
+      "name": "swapAndAddBalanceWithETH",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "mediaAmount",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "payable",
+      "type": "function",
+      "payable": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract IERC20",
+          "name": "_token",
+          "type": "address"
+        }
+      ],
+      "name": "recoverTokens",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ]
+}
