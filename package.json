@@ -9,5 +9,10 @@
   "dependencies": {
     "@metamask/eth-sig-util": "^7.0.0",
     "viem": "^1.11.0"
+  },
+  "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "semantic-release": "^22.0.8"
   }
 }
