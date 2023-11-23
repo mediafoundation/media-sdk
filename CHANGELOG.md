@@ -1,3 +1,12 @@
+## [1.1.2](https://github.com/mediafoundation/media-sdk/compare/v1.1.1...v1.1.2) (2023-11-23)
+
+
+### Bug Fixes
+
+* author and email for automatic commits using semantic-release ([64c6020](https://github.com/mediafoundation/media-sdk/commit/64c6020944da2d3ff17d85b7f2a245a0cabdd479))
+* author of automatic commits ([775840d](https://github.com/mediafoundation/media-sdk/commit/775840d439f07becd677aeabf7f51648469621ac))
+* github action script ([002a3b1](https://github.com/mediafoundation/media-sdk/commit/002a3b187bebd5c8c03e5fbf81136af5c5f13fe7))
+
 ## [1.1.1](https://github.com/mediafoundation/media-sdk/compare/v1.1.0...v1.1.1) (2023-11-23)
 
 
