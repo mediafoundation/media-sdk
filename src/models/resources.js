@@ -1,20 +1,21 @@
 const addresses = require("./../../contractAddresses.json")
 const ResourcesAbi = require("./../../abis/Resources.json")
 const {getConfig} = require("../config/config");
+
 class Resources {
 
     constructor() {
         this.config = getConfig()
 
-        if (addresses.Resources.networks[this.config.networkId] === undefined) {
-            throw new Error('MarketplaceViewer address not found for network id: ' + this.config.networkId)
+        if (addresses.Resources.networks[this.config.publicClient.chain.id] === undefined) {
+            throw new Error('MarketplaceViewer address not found for network id: ' + this.config.publicClient.chain.id)
         }
     }
 
     async view(functionName, args) {
         try {
             return await this.config.publicClient.readContract({
-                address: addresses.Resources.networks[this.config.networkId].address,
+                address: addresses.Resources.networks[this.config.publicClient.chain.id].address,
                 abi: ResourcesAbi.abi,
                 functionName: functionName,
                 args: args
@@ -27,7 +28,7 @@ class Resources {
     async execute(functionName, args) {
         try {
             return await this.config.walletClient.writeContract({
-                address: addresses.Resources.networks[this.config.networkId].address,
+                address: addresses.Resources.networks[this.config.publicClient.chain.id].address,
                 abi: ResourcesAbi.abi,
                 functionName: functionName,
                 args: args
@@ -49,23 +50,28 @@ class Resources {
         return await this.execute('removeResource', [id, ownerKeys])
     }
 
-    async getResources(userAddress, start, count) {
+    async getPaginatedResources(userAddress, start = 0, steps = 20) {
+        return await this.view('getPaginatedResources', [userAddress, start, steps])
+    }
+
+    async getAllResourcesPaginating(userAddress, start = 0, steps = 20) {
         let resources = []
 
-        let steps = count
+        let _steps = BigInt(steps)
+        let _start = BigInt(start)
 
-        let result = await this.view('getPaginatedResources', [userAddress, start, steps])
+        let result = await this.view('getPaginatedResources', [userAddress, _start, _steps])
         resources.push(...result[0])
 
         if (result[1] > resources.length) {
             let totalResources = result[1]
-            for (let i = 1; i * steps < totalResources; i++) {
-                let result = await this.view('getPaginatedResources', [userAddress, start + i * steps, steps])
+            for (let i = BigInt(1); i * _steps < totalResources; i++) {
+                let result = await this.view('getPaginatedResources', [userAddress, _start + i * _steps, _steps])
                 resources.push(...result[0])
             }
 
             if (totalResources > resources.length) {
-                let result = await this.view('getPaginatedResources', [userAddress, start + totalResources, totalResources - resources.length])
+                let result = await this.view('getPaginatedResources', [userAddress, _start + totalResources, totalResources - BigInt(resources.length)])
                 resources.push(...result[0])
             }
         }

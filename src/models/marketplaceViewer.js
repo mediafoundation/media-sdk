@@ -5,18 +5,18 @@ const addresses = require("./../../contractAddresses.json")
 class MarketplaceViewer {
 
     constructor() {
+
         this.config = getConfig()
 
-        if (addresses.MarketplaceViewer.networks[this.config.networkId] === undefined) {
-            throw new Error('MarketplaceViewer address not found for network id: ' + this.config.networkId)
+        if (addresses.MarketplaceViewer.networks[this.config.publicClient.chain.id] === undefined) {
+            throw new Error('MarketplaceViewer address not found for network id: ' + this.config.publicClient.chain.id)
         }
     }
 
     async view(functionName, args) {
         try {
-            console.log(MarketplaceViewerAbi)
             return await this.config.publicClient.readContract({
-                address: addresses.MarketplaceViewer.networks[this.config.networkId].address,
+                address: addresses.MarketplaceViewer.networks[this.config.publicClient.chain.id].address,
                 abi: MarketplaceViewerAbi.abi,
                 functionName: functionName,
                 args: args
@@ -24,6 +24,10 @@ class MarketplaceViewer {
         } catch (error) {
             throw error
         }
+    }
+    
+    async getOffers(marketPlaceId, start, count) {
+        return await this.view('getAllOffers', [marketPlaceId, start, count])
     }
 
     async getDeals(marketPlaceId, start, count, isProvider) {

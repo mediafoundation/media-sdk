@@ -8,15 +8,28 @@ class Marketplace {
 
         this.config = getConfig()
 
-        if (addresses.Marketplace.networks[this.config.networkId] === undefined) {
-            throw new Error('MarketplaceViewer address not found for network id: ' + this.config.networkId)
+        if (addresses.Marketplace.networks[this.config.publicClient.chain.id] === undefined) {
+            throw new Error('MarketplaceViewer address not found for network id: ' + this.config.publicClient.chain.id)
+        }
+    }
+    
+    async view(functionName, args) {
+        try {
+            return await this.config.publicClient.readContract({
+                address: addresses.Marketplace.networks[this.config.publicClient.chain.id].address,
+                abi: MarketplaceAbi.abi,
+                functionName: functionName,
+                args: args
+            })
+        } catch (error) {
+            throw error
         }
     }
 
     async execute(functionName, args) {
         try {
             return await this.config.walletClient.writeContract({
-                address: addresses.Marketplace.networks[this.config.networkId].address,
+                address: addresses.Marketplace.networks[this.config.publicClient.chain.id].address,
                 abi: MarketplaceAbi.abi,
                 functionName: functionName,
                 args: args
