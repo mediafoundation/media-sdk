@@ -1,50 +1,26 @@
 {
   "MarketplaceViewer": {
-    "networks": {
-      "5": {
-        "address": "0x1Ee5f0CF5F010F8c2E3f4Ab75C353A4C930B0a0c"
-      },
-      "222": {
-        "address": "0x53e4b81aA979489dfC9A05cac317Ef58690804D1"
-      },
-      "418": {
-        "address": "0xDb9fD53f224a21edC6b38A1dFd5709B32C9FB820"
-      },
-      "84531": {
-        "address": "0xd10FE2475bE0FC7f935C7D536CF114C7b3489000"
-      }
-    }
+      "5": "0xD0161B0DfdEBb50bd75541f447832823452eC537",
+      "222": "0x53e4b81aA979489dfC9A05cac317Ef58690804D1",
+      "418": "0x7d0981AED62a96e1c1AE6abF99bA5db3182dC183",
+      "84531": "0x34FeE2a19C299a864bBF52c97f5114bF505bee56"
   },
   "Marketplace": {
-    "networks": {
-      "5": {
-        "address": "0x95B817309f11969FD95eC6d83C9B1358Edb59af9"
-      },
-      "222": {
-        "address": "0xe9403631a858521262761467Cbf5d7037784a899"
-      },
-      "418": {
-        "address": "0xe71979074310B23a049aA384fC9a3d8369fe97AA"
-      },
-      "84531": {
-        "address": "0x09F09BeeC44213EF4607Baf8b222bf3bb370CbAd"
-      }
-    }
+      "5": "0x95B817309f11969FD95eC6d83C9B1358Edb59af9",
+      "222": "0xe9403631a858521262761467Cbf5d7037784a899",
+      "418": "0xe71979074310B23a049aA384fC9a3d8369fe97AA",
+      "84531": "0x09F09BeeC44213EF4607Baf8b222bf3bb370CbAd"
   },
   "Resources": {
-    "networks": {
-      "5": {
-        "address": "0xe27056D8994d1E7F4E978eFDE3279A278ea578F8"
-      },
-      "222": {
-        "address": "0xEa9E787170F15cC070E901468a6b3Da69a56b9bb"
-      },
-      "418": {
-        "address": "0x883891580084F90E8A39172755f9b3080C9Cc5b6"
-      },
-      "84531": {
-        "address": "0x50E28E2496CD74C872B6Ca32b649B174F50143db"
-      }
-    }
+      "5": "0xe27056D8994d1E7F4E978eFDE3279A278ea578F8",
+      "222": "0xEa9E787170F15cC070E901468a6b3Da69a56b9bb",
+      "418": "0x883891580084F90E8A39172755f9b3080C9Cc5b6",
+      "84531": "0x50E28E2496CD74C872B6Ca32b649B174F50143db"
+  },
+  "Helper": {
+      "5": "0xF2bD67A2451726f0CB3D7A25d2Ce629e9A1c662c",
+      "222": "0x6ef9e5df83072ec8C69514663117e6Ff7bAA2324",
+      "418": "0xc7593D6E6e3BE3Fa08362350a1F8CAD7A51A630C",
+      "84531": "0xf74D4a71a3a5bD040a960fff79e5f3513a579F4d"
   }
 }
