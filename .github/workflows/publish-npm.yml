@@ -22,8 +22,8 @@ jobs:
 
       - name: setup git
         run: |
-          git config --global user.name semantic-release-bot
-          git config --global user.email semantic-release-bot
+          git config --global user.name media-releaser
+          git config --global user.email media-releaser
 
       - name: Setup Node.js
         uses: actions/setup-node@v2
