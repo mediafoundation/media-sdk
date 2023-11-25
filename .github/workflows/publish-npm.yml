@@ -1,11 +1,11 @@
 name: Release
 on:
-  push:
+  pull_request:
     branches:
-      - workflow-for-a-pre-release-branch
+      - "*"
 
 jobs:
-  release:
+  semantic-release:
     permissions:
       contents: write
       issues: write
