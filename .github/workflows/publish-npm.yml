@@ -2,7 +2,7 @@ name: Release
 on:
   push:
     branches:
-      - main
+      - workflow-for-a-pre-release-branch
 
 jobs:
   release:
@@ -20,6 +20,11 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: setup git
+        run: |
+          git config --global user.name "semantic-release-bot"
+          git config --global user.email "
+
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
@@ -31,5 +36,4 @@ jobs:
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
