@@ -1,3 +1,17 @@
+## [1.1.4](https://github.com/mediafoundation/media-sdk/compare/v1.1.3...v1.1.4) (2023-11-25)
+
+
+### Bug Fixes
+
+* testing new author ([2c8eddb](https://github.com/mediafoundation/media-sdk/commit/2c8eddbdd5745beece0b2038eac928108312eab1))
+
+## [1.1.3](https://github.com/mediafoundation/media-sdk/compare/v1.1.2...v1.1.3) (2023-11-25)
+
+
+### Bug Fixes
+
+* testing semantic release with specific user name ([ed9eef6](https://github.com/mediafoundation/media-sdk/commit/ed9eef64bb50ce90952ff8a158b2086f274edc5b))
+
 ## [1.1.2](https://github.com/mediafoundation/media-sdk/compare/v1.1.1...v1.1.2) (2023-11-23)
 
 
