@@ -1,8 +1,8 @@
 name: Release
 on:
-  pull_request:
+  push:
     branches:
-      - "*"
+      - main
 
 jobs:
   semantic-release:
@@ -22,13 +22,20 @@ jobs:
 
       - name: setup git
         run: |
-          git config --global user.name media-releaser
-          git config --global user.email media-releaser
+          git config --global user.name "mediafoundation"
+          git config --global user.email "mediafoundation"
+
+      - name: Display Git Config
+        run: |
+          echo "Git user name:"
+          git config --global user.name
+          echo "Git user email:"
+          git config --global user.email
 
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "18"
+          node-version: "18.x"
 
       - name: Install dependencies
         run: npm install
@@ -36,4 +43,5 @@ jobs:
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
