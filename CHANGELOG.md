@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/mediafoundation/media-sdk/compare/v1.1.6...v1.2.0) (2023-11-27)
+
+
+### Features
+
+* **package.json:** adding commitizen tool ([7e7174f](https://github.com/mediafoundation/media-sdk/commit/7e7174fe8b5dd0ed00fdb6465fbc1db74e38d07b))
+
 ## [1.1.6](https://github.com/mediafoundation/media-sdk/compare/v1.1.5...v1.1.6) (2023-11-27)
 
 
