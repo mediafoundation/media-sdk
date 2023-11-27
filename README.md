@@ -130,5 +130,7 @@ This project is licensed under the MIT License.
 
 ## 📢 Stay Connected!
 
-- Twitter: [@Media_FDN](https://twitter.com/Media_FDN)
-- Website: [media.network](https://media.network)
+- [Twitter](https://twitter.com/Media_FDN)
+- [Website](https://www.mediaprotocol.net)
+- [NPMJS](https://www.npmjs.com/package/media-sdk)
+- [GitHub](https://github.com/mediafoundation/media-sdk)
