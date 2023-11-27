@@ -1,3 +1,12 @@
+## [1.1.5](https://github.com/mediafoundation/media-sdk/compare/v1.1.4...v1.1.5) (2023-11-27)
+
+
+### Bug Fixes
+
+* changing when semantic release is triggered ([291a08f](https://github.com/mediafoundation/media-sdk/commit/291a08f06e180db9f92f2002f332985ceea119c5))
+* testing with others permissions ([605f773](https://github.com/mediafoundation/media-sdk/commit/605f77306e43f4354362c09dd557e5ece14852f2))
+* updating publish-npm.yml and test if user can bypass protection of branches ([5efc145](https://github.com/mediafoundation/media-sdk/commit/5efc145786a75f0bef40d4656ead3289bc5a02d9))
+
 ## [1.1.4](https://github.com/mediafoundation/media-sdk/compare/v1.1.3...v1.1.4) (2023-11-25)
 
 
