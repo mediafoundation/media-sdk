@@ -1,4 +1,4 @@
-const {getConfig} = require("../config/config");
+const {getConfig} = require("../config/config")
 
 class Blockchain {
     constructor(){
