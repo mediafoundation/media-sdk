@@ -1,3 +1,10 @@
+## [1.1.6](https://github.com/mediafoundation/media-sdk/compare/v1.1.5...v1.1.6) (2023-11-27)
+
+
+### Bug Fixes
+
+* **pencil:** Replaced links in README ([2599292](https://github.com/mediafoundation/media-sdk/commit/259929212f182c8ab7475f31a7bafb2c91481fc8))
+
 ## [1.1.5](https://github.com/mediafoundation/media-sdk/compare/v1.1.4...v1.1.5) (2023-11-27)
 
 
