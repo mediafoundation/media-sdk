@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/mediafoundation/media-sdk/compare/v1.2.0...v1.2.1) (2023-11-27)
+
+
+### Bug Fixes
+
+* **package.json .releaserc.json:** execute semantic-release/exec when running semantic-release ([b54e45e](https://github.com/mediafoundation/media-sdk/commit/b54e45e2b4f72c405b6d90b5f338b6afd4bd4b96))
+
 # [1.2.0](https://github.com/mediafoundation/media-sdk/compare/v1.1.6...v1.2.0) (2023-11-27)
 
 
