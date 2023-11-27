@@ -1,3 +1,10 @@
+## [1.2.4](https://github.com/mediafoundation/media-sdk/compare/v1.2.3...v1.2.4) (2023-11-27)
+
+
+### Bug Fixes
+
+* fixing publish-npm.yml action to only publish to npm ([e8803a6](https://github.com/mediafoundation/media-sdk/commit/e8803a6d10544bdc08d6f716b39c12ce1a1a794f))
+
 ## [1.2.3](https://github.com/mediafoundation/media-sdk/compare/v1.2.2...v1.2.3) (2023-11-27)
 
 
