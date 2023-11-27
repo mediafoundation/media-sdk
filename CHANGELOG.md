@@ -1,3 +1,10 @@
+## [1.2.3](https://github.com/mediafoundation/media-sdk/compare/v1.2.2...v1.2.3) (2023-11-27)
+
+
+### Bug Fixes
+
+* running semantic release with fix commit label ([2dd4aee](https://github.com/mediafoundation/media-sdk/commit/2dd4aee89636861725b17542ed062fd0bb1fbc00))
+
 ## [1.2.1](https://github.com/mediafoundation/media-sdk/compare/v1.2.0...v1.2.1) (2023-11-27)
 
 
