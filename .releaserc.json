@@ -10,7 +10,10 @@
       }
     ],
     [
-      "@semantic-release/exec"
+      "@semantic-release/exec",
+      {
+        "publishCmd": "./publish.sh"
+      }
     ]
   ]
 }
