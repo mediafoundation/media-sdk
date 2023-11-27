@@ -1,3 +1,31 @@
+## [1.2.4](https://github.com/mediafoundation/media-sdk/compare/v1.2.3...v1.2.4) (2023-11-27)
+
+
+### Bug Fixes
+
+* fixing publish-npm.yml action to only publish to npm ([e8803a6](https://github.com/mediafoundation/media-sdk/commit/e8803a6d10544bdc08d6f716b39c12ce1a1a794f))
+
+## [1.2.3](https://github.com/mediafoundation/media-sdk/compare/v1.2.2...v1.2.3) (2023-11-27)
+
+
+### Bug Fixes
+
+* running semantic release with fix commit label ([2dd4aee](https://github.com/mediafoundation/media-sdk/commit/2dd4aee89636861725b17542ed062fd0bb1fbc00))
+
+## [1.2.1](https://github.com/mediafoundation/media-sdk/compare/v1.2.0...v1.2.1) (2023-11-27)
+
+
+### Bug Fixes
+
+* **package.json .releaserc.json:** execute semantic-release/exec when running semantic-release ([b54e45e](https://github.com/mediafoundation/media-sdk/commit/b54e45e2b4f72c405b6d90b5f338b6afd4bd4b96))
+
+# [1.2.0](https://github.com/mediafoundation/media-sdk/compare/v1.1.6...v1.2.0) (2023-11-27)
+
+
+### Features
+
+* **package.json:** adding commitizen tool ([7e7174f](https://github.com/mediafoundation/media-sdk/commit/7e7174fe8b5dd0ed00fdb6465fbc1db74e38d07b))
+
 ## [1.1.6](https://github.com/mediafoundation/media-sdk/compare/v1.1.5...v1.1.6) (2023-11-27)
 
 

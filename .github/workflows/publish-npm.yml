@@ -1,47 +1,27 @@
-name: Release
+name: Publish to npm
+
 on:
   push:
     branches:
       - main
 
 jobs:
-  semantic-release:
-    permissions:
-      contents: write
-      issues: write
-      pull-requests: write
-
-    name: Release
-    runs-on: [ubuntu-20.04]
-
+  build-and-publish:
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Check out code
         uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
 
-      - name: setup git
-        run: |
-          git config --global user.name "mediafoundation"
-          git config --global user.email "mediafoundation"
-
-      - name: Display Git Config
-        run: |
-          echo "Git user name:"
-          git config --global user.name
-          echo "Git user email:"
-          git config --global user.email
-
-      - name: Setup Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "18.x"
+          node-version: '18'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
         run: npm install
 
-      - name: Release
+      - name: Publish to npm
+        run: npm publish
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npx semantic-release
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
