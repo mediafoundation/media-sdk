@@ -1,3 +1,19 @@
+# [2.0.0](https://github.com/mediafoundation/media-sdk/compare/v1.2.4...v2.0.0) (2023-11-29)
+
+
+### Performance Improvements
+
+* Most functions now take an object as parameter ([a343606](https://github.com/mediafoundation/media-sdk/commit/a3436068c05a7630712e7328a4e04c58a0276445))
+
+
+### BREAKING CHANGES
+
+* Refactored config
+Added exports for walletClient, publicClient and config.
+Updated README
+Reformatted all files to use 2 spaces
+Added an optional mnemonic parameter to initSdk
+
 ## [1.2.4](https://github.com/mediafoundation/media-sdk/compare/v1.2.3...v1.2.4) (2023-11-27)
 
 
