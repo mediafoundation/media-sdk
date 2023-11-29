@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/mediafoundation/media-sdk/compare/v2.0.0...v2.0.1) (2023-11-29)
+
+
+### Bug Fixes
+
+* removed exports that were hardcoded, use config() instead. ([aab8504](https://github.com/mediafoundation/media-sdk/commit/aab8504a4f5a9d22f9a9038fd4ea01da5ddc2c20))
+
 # [2.0.0](https://github.com/mediafoundation/media-sdk/compare/v1.2.4...v2.0.0) (2023-11-29)
 
 
