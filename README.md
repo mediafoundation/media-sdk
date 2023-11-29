@@ -6,23 +6,32 @@ The Media SDK is a comprehensive toolkit designed for seamless interaction with 
 
 ## 📥 Installation
 
+### From GitHub
+
 ```bash
-git clone git@github.com:mediafoundation/media-sdk.git # Clone the repository
-cd media-sdk # Navigate to the repository
-npm install # Install the necessary dependencies
+git clone git@github.com:mediafoundation/media-sdk.git
+cd media-sdk
+npm install
+```
+
+### From NPM
+
+```bash
+npm install media-sdk
 ```
 
 ## 🛠️ Usage
 
-## 🔑 Initializing the SDK
+## Initializing the SDK
 
 To initialize an instance of the Media SDK, use the `initSdk` function. This function takes in an object with the following **optional** parameters:
 
 - `chain`: A chain object. See [Viem's Chains](https://viem.sh/docs/clients/chains.html#utilities) for more details. If nothing is provided, the default chain will be used, which is Ethereum Goerli until mainnet launch.
 - `privateKey`: A ECP256K1 private key as a hex string to create a wallet client. Example: 'afdfd9c3d2095ef696594f6cedcae59e72dcd697e2a7521b1578140422a4f890'.
-- `walletClient`: A wallet client. See [Viem's Wallet Client](https://viem.sh/docs/clients/wallet.html) for more details. If absent, a client will be created using the `privateKey` parameter. 
+- `mnemonic`: A BIP39 mnemonic phrase to create a wallet client. Example: 'degree tackle suggest window test behind mesh extra cover prepare oak script'.
+- `walletClient`: A wallet client. See [Viem's Wallet Client](https://viem.sh/docs/clients/wallet.html) for more details.
 
-All parameters are optional. If both `privateKey` and `walletClient` are absent, only view functions will be available.
+All parameters are optional. If all three `privateKey`, `mnemonic`, and `walletClient` are absent, only view functions will be available.
 
 ## Examples
 
@@ -31,88 +40,92 @@ Using a private key. (Useful for backend applications)
 ```javascript
 import { initSdk, MarketplaceViewer, Marketplace, Resources, Helper } from 'media-sdk'
 
-initSdk({ privateKey: "YOUR_PRIVATE_KEY" })
+// initialize the sdk using a private key.
+initSdk({ privateKey: 'afdfd9c3d2095ef696594f6cedcae59e72dcd697e2a7521b1578140422a4f890' })
 ```
 
 Using a browser wallet and Ethereum Goerli:
 
 ```javascript
-import {createWalletClient, http} from 'viem'
-import {goerli} from 'viem/chains'
+import { initSdk } from 'media-sdk'
+import { createWalletClient, http } from 'viem'
+import { goerli } from 'viem/chains'
 
 const [account] = await window.ethereum.request({method: 'eth_requestAccounts'})
 
 const walletClient = createWalletClient({
-    account,
+    account: account,
     chain: goerli,
     transport: custom(window.ethereum)
 })
 
-// Creating an instance of the Media SDK using the wallet client. 
-initSdk({ walletClient: walletClient });
+// initialize the SDK using a Viem walletClient. 
+initSdk({ chain: goerli, walletClient: walletClient });
 ```
 
-Using it just for view functions with a custom chain:
+Using it without signer just for view functions with a custom chain:
 
 ```javascript
+import { initSdk, MarketplaceViewer } from 'media-sdk'
 import { baseGoerli } from 'viem/chains'
 
 initSdk({ chain: baseGoerli })
 
 const marketplaceViewer = new MarketplaceViewer()
 
-const marketplaceId = 1
-const start = 1
-const count = 100
-
-const result = await marketplaceViewer.getPaginatedOffers(
-  marketplaceId, 
-  start, 
-  count
-)
+const result = await marketplaceViewer.getPaginatedOffers({
+  marketplaceId: 1, 
+  start: 0, 
+  count: 100
+})
 console.log(result)
 
 ```
 
-### 🛒 Initializing a Marketplace
+### Initializing a new Marketplace
 
-After setting up the Media SDK, you can initialize a marketplace with the `initializeMarketplace` function.
+Anybody can initialize a new marketplace. The marketplace will be initialized with the address of the caller as the owner. The owner can then transfer ownership to another address.
 
 ```javascript 
-const requiredStake = 100 // replace with your required stake 
-const marketFeeTo = '0x...'  // replace with your market fee recipient address 
-const marketFeeRate = 5 // replace with your market fee rate %
+import { initSdk, Marketplace, publicClient, walletClient } from 'media-sdk'
 
-const marketplace = new Marketplace(); 
-const hash = await marketplace.initializeMarketplace(
-  requiredStake, 
-  marketFeeTo, 
-  marketFeeRate
-)
+// initialize the sdk using your mnemonic
+initSdk({ mnemonic: 'degree tackle suggest window test behind mesh extra cover prepare oak script' })
 
-const publicClient = createPublicClient({
-  transport: http(currentChain.rpcUrls.default.http as any),
-  chain: currentChain
+// instanciate the marketplace contract
+const marketplace = new Marketplace()
+
+//initialize a new marketplace
+const hash = await marketplace.initializeMarketplace({
+  requiredStake: 100,  // replace with your required stake 
+  marketFeeTo: walletClient.account.address, // replace with your market fee recipient address 
+  marketFeeRate: 5 // replace with your market fee rate %
 })
 
+// wait for the transaction to be mined
 const transaction = await publicClient.waitForTransactionReceipt( 
   { hash: hash }
 )
-console.log(transaction);
+
+//get the id of the new marketplace from the transaction logs
+console.log(transaction.logs[0].topics[1])
+
 ```
 
-### Fetching Offers
+### Fetching Resources
 
 ```javascript
-const marketplaceViewer = new MarketplaceViewer()
-const marketplaceId = 1
-const start = 1
-const count = 100
-const result = await marketplaceViewer.getPaginatedOffers(
-  marketplaceId, 
-  start, 
-  count
-)
+// import the sdk
+import { initSdk, Resources, walletClient } from 'media-sdk'
+
+// initialize the sdk using your mnemonic
+initSdk({ mnemonic: 'degree tackle suggest window test behind mesh extra cover prepare oak script' })
+const resources = new Resources()
+const result = await resources.getPaginatedResources({
+   userAddress: walletClient.account.address, 
+   start: 0, 
+   steps: 20 
+})
 console.log(result)
 ```
 
