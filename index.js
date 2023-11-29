@@ -7,15 +7,11 @@ const EventHandler = require("./src/models/eventsHandler");
 const Blockchain = require("./src/utils/blockchain");
 const Helper = require("./src/models/helper");
 
-const config = getConfig();
-const publicClient = getConfig().publicClient;
-const walletClient = getConfig().walletClient;
+const config = getConfig;
 
 module.exports = {
   initSdk,
   config,
-  publicClient,
-  walletClient,
   Marketplace,
   MarketplaceViewer,
   Resources,
