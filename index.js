@@ -5,7 +5,7 @@ const Resources = require("./src/models/resources");
 const Encryption = require("./src/utils/encryption");
 const EventHandler = require("./src/models/eventsHandler");
 const Blockchain = require("./src/utils/blockchain");
-const Helper = require("./src/models/helper");
+const MarketplaceHelper = require("./src/models/marketplaceHelper");
 
 const config = getConfig;
 
@@ -18,5 +18,5 @@ module.exports = {
   Encryption,
   EventHandler,
   Blockchain,
-  Helper,
+  MarketplaceHelper,
 };

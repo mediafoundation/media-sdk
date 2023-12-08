@@ -1,8 +1,8 @@
-const addresses = require("./../../contractAddresses.json");
-const HelperAbi = require("./../../abis/Helper.json");
+const addresses = require("../../contractAddresses.json");
+const MarketplaceHelperAbi = require("./../../abis/MarketplaceHelper.json").abi;
 const { getConfig } = require("../config/config");
 
-class Helper {
+class MarketplaceHelper {
   constructor() {
     this.config = getConfig();
 
@@ -18,7 +18,7 @@ class Helper {
     try {
       return await this.config.publicClient.readContract({
         address: addresses.Helper[this.config.publicClient.chain.id],
-        abi: HelperAbi.abi,
+        abi: MarketplaceHelperAbi,
         functionName: functionName,
         args: args,
       });
@@ -30,7 +30,7 @@ class Helper {
     try {
       const { request } = await this.config.publicClient.simulateContract({
         address: addresses.Helper[this.config.publicClient.chain.id],
-        abi: HelperAbi.abi,
+        abi: MarketplaceHelperAbi,
         functionName: functionName,
         args: args,
         account: this.config.walletClient.account,
@@ -44,4 +44,4 @@ class Helper {
   }
 }
 
-module.exports = Helper;
+module.exports = MarketplaceHelper;

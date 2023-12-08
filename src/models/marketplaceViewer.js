@@ -30,56 +30,50 @@ class MarketplaceViewer {
     }
   }
 
-  async getPaginatedOffers({ marketPlaceId, start = 0, steps = 20 }) {
-    return await this.view("getAllOffers", [marketPlaceId, start, steps]);
+  async getPaginatedOffers({ marketplaceId, start = 0, steps = 20 }) {
+    return await this.view("getPaginatedOffers", [marketplaceId, start, steps]);
   }
 
-  async getAllOffersPaginating({ marketPlaceId, start = 0, steps = 20 }) {
+  async getAllOffersPaginating({ marketplaceId, start = 0, steps = 20 }) {
     let offers = [];
-
     let _steps = BigInt(steps);
     let _start = BigInt(start);
-
-    let result = await this.view("getAllOffers", [
-      marketPlaceId,
-      _start,
-      _steps,
-    ]);
-    offers.push(...result[0]);
-
-    if (result[1] > offers.length) {
-      let totalOffers = result[1];
-      for (let i = BigInt(1); i * _steps < totalOffers; i++) {
-        let result = await this.view("getAllOffers", [
-          marketPlaceId,
-          _start + i * _steps,
-          _steps,
-        ]);
-        offers.push(...result[0]);
+  
+    while (true) {
+      let result = await this.view("getPaginatedOffers", [
+        marketplaceId,
+        _start,
+        _steps,
+      ]);
+  
+      let fetchedOffers = result[0];
+      let lastAccessedId = BigInt(result[1]);
+      let totalItems = BigInt(result[3]);
+  
+      offers.push(...fetchedOffers);
+  
+      // Check if all offers have been fetched
+      if (lastAccessedId >= totalItems - BigInt(1) || fetchedOffers.length === 0) {
+        break;
       }
-
-      if (totalOffers > offers.length) {
-        let result = await this.view("getAllOffers", [
-          marketPlaceId,
-          _start + totalOffers,
-          totalOffers - BigInt(offers.length),
-        ]);
-        offers.push(...result[0]);
-      }
+  
+      // Update _start for the next iteration
+      _start = lastAccessedId + BigInt(1);
     }
-
+  
     return offers;
   }
+  
 
   async getPaginatedDeals({
-    marketPlaceId,
+    marketplaceId,
     address,
     isProvider = false,
     start = 0,
     steps = 20,
   }) {
     return await this.view("getPaginatedDeals", [
-      marketPlaceId,
+      marketplaceId,
       address,
       isProvider,
       start,
@@ -88,7 +82,7 @@ class MarketplaceViewer {
   }
 
   async getAllDealsPaginating({
-    marketPlaceId,
+    marketplaceId,
     address,
     isProvider = false,
     start = 0,
@@ -100,7 +94,7 @@ class MarketplaceViewer {
     let _start = BigInt(start);
 
     let result = await this.view("getPaginatedDeals", [
-      marketPlaceId,
+      marketplaceId,
       address,
       isProvider,
       _start,
@@ -112,7 +106,7 @@ class MarketplaceViewer {
       let totalDeals = result[1];
       for (let i = BigInt(1); i * _steps < totalDeals; i++) {
         let result = await this.view("getPaginatedDeals", [
-          marketPlaceId,
+          marketplaceId,
           address,
           isProvider,
           _start + i * _steps,
@@ -123,7 +117,7 @@ class MarketplaceViewer {
 
       if (totalDeals > deals.length) {
         let result = await this.view("getPaginatedDeals", [
-          marketPlaceId,
+          marketplaceId,
           address,
           isProvider,
           _start + totalDeals,

@@ -18,10 +18,6 @@ class Marketplace {
 
   async view(functionName, args) {
     try {
-      console.log(
-        "addresses.Marketplace[this.config.publicClient.chain.id]",
-        addresses.Marketplace[this.config.publicClient.chain.id]
-      );
       return await this.config.publicClient.readContract({
         address: addresses.Marketplace[this.config.publicClient.chain.id],
         abi: MarketplaceAbi.abi,
@@ -50,7 +46,7 @@ class Marketplace {
   }
 
   async createOffer({
-    marketPlaceId,
+    marketplaceId,
     maximumDeals,
     autoAccept,
     pricePerSecond,
@@ -60,7 +56,7 @@ class Marketplace {
     metadata,
   }) {
     return await this.execute("createOffer", [
-      marketPlaceId,
+      marketplaceId,
       maximumDeals,
       autoAccept,
       pricePerSecond,
@@ -72,7 +68,7 @@ class Marketplace {
   }
 
   async updateOffer({
-    marketPlaceId,
+    marketplaceId,
     offerId,
     maximumDeals,
     autoAccept,
@@ -83,7 +79,7 @@ class Marketplace {
     metadata,
   }) {
     return await this.execute("updateOffer", [
-      marketPlaceId,
+      marketplaceId,
       offerId,
       maximumDeals,
       autoAccept,
@@ -95,19 +91,19 @@ class Marketplace {
     ]);
   }
 
-  async deleteOffer({ marketPlaceId, offerId }) {
-    return await this.execute("deleteOffer", [marketPlaceId, offerId]);
+  async deleteOffer({ marketplaceId, offerId }) {
+    return await this.execute("deleteOffer", [marketplaceId, offerId]);
   }
 
   async createDeal({
-    marketPlaceId,
+    marketplaceId,
     resourceId,
     offerId,
     blockedBalance,
     sharedKeyCopy,
   }) {
     return await this.execute("createDeal", [
-      marketPlaceId,
+      marketplaceId,
       resourceId,
       offerId,
       blockedBalance,
@@ -116,35 +112,35 @@ class Marketplace {
   }
 
   async createDeals({
-    marketPlaceId,
+    marketplaceId,
     resourceId,
     offersId,
     blockedBalance,
-    sharedKeyCopy,
+    sharedKeyCopies,
   }) {
     return await this.execute("createDeals", [
-      marketPlaceId,
+      marketplaceId,
       resourceId,
       offersId,
       blockedBalance,
-      sharedKeyCopy,
+      sharedKeyCopies,
     ]);
   }
 
-  async acceptDeal({ marketPlaceId, dealId }) {
-    return await this.execute("acceptDeal", [marketPlaceId, dealId]);
+  async acceptDeal({ marketplaceId, dealId }) {
+    return await this.execute("acceptDeal", [marketplaceId, dealId]);
   }
 
-  async rejectDeal({ marketPlaceId, dealId }) {
-    return await this.execute("rejectDeal", [marketPlaceId, dealId]);
+  async rejectDeal({ marketplaceId, dealId }) {
+    return await this.execute("rejectDeal", [marketplaceId, dealId]);
   }
 
-  async cancelDeal({ marketPlaceId, dealId }) {
-    return await this.execute("cancelDeal", [marketPlaceId, dealId]);
+  async cancelDeal({ marketplaceId, dealId }) {
+    return await this.execute("cancelDeal", [marketplaceId, dealId]);
   }
 
-  async cancelAllDeals({ marketPlaceId, resourceId }) {
-    return await this.execute("cancelAllDeals", [marketPlaceId, resourceId]);
+  async cancelAllDeals({ marketplaceId, resourceId }) {
+    return await this.execute("cancelAllDeals", [marketplaceId, resourceId]);
   }
 
   async initializeMarketplace({ requiredStake, marketFeeTo, marketFeeRate }) {
