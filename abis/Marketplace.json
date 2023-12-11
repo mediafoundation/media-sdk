@@ -406,26 +406,6 @@
           "type": "uint256"
         }
       ],
-      "name": "dealCounter",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
       "name": "marketFeeRate",
       "outputs": [
         {
@@ -1298,6 +1278,44 @@
     {
       "inputs": [
         {
+          "internalType": "address",
+          "name": "feeTo",
+          "type": "address"
+        }
+      ],
+      "name": "setProtocolFeeTo",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "feeRate",
+          "type": "uint256"
+        }
+      ],
+      "name": "setProtocolFeeRate",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
           "internalType": "uint256",
           "name": "marketplaceId",
           "type": "uint256"
@@ -1322,31 +1340,17 @@
     {
       "inputs": [
         {
+          "internalType": "uint256",
+          "name": "marketplaceId",
+          "type": "uint256"
+        },
+        {
           "internalType": "address",
-          "name": "_feeTo",
+          "name": "newOwner",
           "type": "address"
         }
       ],
-      "name": "setProtocolFeeTo",
-      "outputs": [
-        {
-          "internalType": "bool",
-          "name": "",
-          "type": "bool"
-        }
-      ],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "_feeRate",
-          "type": "uint256"
-        }
-      ],
-      "name": "setProtocolFeeRate",
+      "name": "transferMarketplaceOwnership",
       "outputs": [
         {
           "internalType": "bool",
@@ -1366,7 +1370,7 @@
         },
         {
           "internalType": "uint256",
-          "name": "_feeRate",
+          "name": "feeRate",
           "type": "uint256"
         }
       ],
@@ -1390,7 +1394,7 @@
         },
         {
           "internalType": "address",
-          "name": "_feeTo",
+          "name": "feeTo",
           "type": "address"
         }
       ],
