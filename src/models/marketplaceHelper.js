@@ -6,7 +6,7 @@ class MarketplaceHelper {
   constructor() {
     this.config = getConfig();
 
-    if (addresses.Helper[this.config.publicClient.chain.id] === undefined) {
+    if (addresses.MarketplaceHelper[this.config.publicClient.chain.id] === undefined) {
       throw new Error(
         "MarketplaceViewer address not found for network id: " +
           this.config.publicClient.chain.id
@@ -17,7 +17,7 @@ class MarketplaceHelper {
   async view(functionName, args) {
     try {
       return await this.config.publicClient.readContract({
-        address: addresses.Helper[this.config.publicClient.chain.id],
+        address: addresses.MarketplaceHelper[this.config.publicClient.chain.id],
         abi: MarketplaceHelperAbi,
         functionName: functionName,
         args: args,
@@ -29,7 +29,7 @@ class MarketplaceHelper {
   async execute(functionName, args, value = 0) {
     try {
       const { request } = await this.config.publicClient.simulateContract({
-        address: addresses.Helper[this.config.publicClient.chain.id],
+        address: addresses.MarketplaceHelper[this.config.publicClient.chain.id],
         abi: MarketplaceHelperAbi,
         functionName: functionName,
         args: args,

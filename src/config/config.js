@@ -46,3 +46,7 @@ module.exports.initSdk = ({
 };
 
 module.exports.getConfig = () => _config;
+
+module.exports.validChains = {
+  5: "Goerli",
+}
