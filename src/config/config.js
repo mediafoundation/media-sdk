@@ -4,49 +4,58 @@ const accounts = require("viem/accounts");
 
 const defaultChain = chains.goerli;
 
-const generatePublicClient = (chain = defaultChain) =>
+module.exports.validChains = {
+  5: "Goerli",
+}
+
+const generatePublicClient = ({
+  chain,
+  transport,
+}) =>
   viem.createPublicClient({
-    transport: viem.http(chain.rpcUrls.default.http),
     chain: chain,
+    transport: viem.http(transport),
   });
 
 const generateWalletClient = ({
+  chain,
+  transport,
   privateKey,
   mnemonic,
-  chain = defaultChain,
 }) => {
   let account = privateKey
     ? accounts.privateKeyToAccount(`0x${privateKey}`)
     : accounts.mnemonicToAccount(mnemonic);
   return viem.createWalletClient({
     account: account,
-    transport: viem.http(chain.rpcUrls.default.http),
     chain: chain,
+    transport: viem.http(transport),
   });
 };
 
 let _config = {
   walletClient: undefined,
-  publicClient: generatePublicClient(),
+  publicClient: generatePublicClient({ 
+    chain: defaultChain,
+    transport: defaultChain.rpcUrls.default.http
+  }),
 };
 
 module.exports.initSdk = ({
   chain = defaultChain,
+  transport = undefined,
   privateKey = undefined,
   mnemonic = undefined,
   walletClient = undefined,
 }) => {
+  transport = transport || chain.rpcUrls.default.http;
   if (privateKey || mnemonic) {
-    walletClient = generateWalletClient({ privateKey, mnemonic, chain });
+    walletClient = generateWalletClient({ chain, transport, privateKey, mnemonic });
   }
   _config = {
     walletClient: walletClient,
-    publicClient: generatePublicClient(chain),
+    publicClient: generatePublicClient({ chain, transport }),
   };
 };
 
 module.exports.getConfig = () => _config;
-
-module.exports.validChains = {
-  5: "Goerli",
-}
