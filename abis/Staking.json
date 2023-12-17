@@ -338,12 +338,12 @@
         },
         {
           "internalType": "uint256",
-          "name": "amountAdd0",
+          "name": "amountWETH",
           "type": "uint256"
         },
         {
           "internalType": "uint256",
-          "name": "amountAdd1",
+          "name": "amountMediaToken",
           "type": "uint256"
         },
         {
@@ -387,12 +387,12 @@
         },
         {
           "internalType": "uint256",
-          "name": "amount0Min",
+          "name": "amountWETH",
           "type": "uint256"
         },
         {
           "internalType": "uint256",
-          "name": "amount1Min",
+          "name": "amountMediaToken",
           "type": "uint256"
         }
       ],

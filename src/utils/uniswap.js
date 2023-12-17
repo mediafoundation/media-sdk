@@ -1,9 +1,10 @@
+const viem = require("viem");
+const bn = require("bignumber.js");
+
 const ADDR_SIZE = 20;
 const FEE_SIZE = 3;
 const OFFSET = ADDR_SIZE + FEE_SIZE;
 const DATA_SIZE = OFFSET + ADDR_SIZE;
-const viem = require("viem");
-const bn = require("bignumber.js");
 
 class Uniswap {
   static calculateSqrtPriceX96(reserveA, reserveB){
@@ -38,15 +39,15 @@ class Uniswap {
     const tokenB = viem.getAddress('0x' + this.arrayBufferToHex(tokenBBuf));
   
     return [[tokenA, tokenB], fee];
-}
+  }
 
-static readBigEndian(buffer, size) {
+  static readBigEndian(buffer, size) {
     let value = 0;
     for (let i = 0; i < size; i++) {
         value = (value << 8) | buffer[i];
     }
     return value;
-}
+  }
 
 
   static arrayBufferToHex(buffer) {

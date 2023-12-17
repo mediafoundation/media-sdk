@@ -81,6 +81,25 @@
       "anonymous": false,
       "inputs": [
         {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "marketplaceId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "dealId",
+          "type": "uint256"
+        }
+      ],
+      "name": "BillingStartExtended",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
           "indexed": true,
           "internalType": "uint256",
           "name": "_marketplaceId",
@@ -756,12 +775,12 @@
         },
         {
           "internalType": "uint256",
-          "name": "amountAdd0",
+          "name": "amountAddWeth",
           "type": "uint256"
         },
         {
           "internalType": "uint256",
-          "name": "amountAdd1",
+          "name": "amountAddMedia",
           "type": "uint256"
         },
         {
@@ -805,12 +824,12 @@
         },
         {
           "internalType": "uint256",
-          "name": "amount0Min",
+          "name": "amountAddWeth",
           "type": "uint256"
         },
         {
           "internalType": "uint256",
-          "name": "amount1Min",
+          "name": "amountAddMedia",
           "type": "uint256"
         }
       ],
@@ -1208,6 +1227,35 @@
         }
       ],
       "name": "collectAllDeals",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "marketplaceId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "dealId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "extension",
+          "type": "uint256"
+        }
+      ],
+      "name": "extendBillingStart",
       "outputs": [
         {
           "internalType": "bool",
