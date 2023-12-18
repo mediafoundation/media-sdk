@@ -75,6 +75,7 @@ class Uniswap {
   
     return [tokens, fees];
   }
+
 }
 
 module.exports = Uniswap

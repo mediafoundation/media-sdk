@@ -60,11 +60,16 @@ class Resources {
   }
 
   async getPaginatedResources({ address, start = 0, steps = 20 }) {
-    return await this.view("getPaginatedResources", [
+    try {
+      return await this.view("getPaginatedResources", [
       address,
       start,
       steps,
     ]);
+    } catch (_) {
+      return [];
+    }
+     
   }
 
   async getAllResourcesPaginating({ address, start = 0, steps = 20 }) {

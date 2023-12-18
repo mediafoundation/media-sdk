@@ -6,6 +6,7 @@ const defaultChain = chains.goerli;
 
 module.exports.validChains = {
   5: "Goerli",
+  84531: "Base Goerli"
 }
 
 const generatePublicClient = ({

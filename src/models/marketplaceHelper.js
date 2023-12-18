@@ -7,13 +7,23 @@ class MarketplaceHelper {
   constructor() {
     this.config = getConfig();
 
-    if (addresses.MarketplaceHelper[this.config.publicClient.chain.id] === undefined) {
+    if (
+      addresses.MarketplaceHelper[this.config.publicClient.chain.id] ===
+      undefined
+    ) {
       throw new Error(
         "MarketplaceViewer address not found for network id: " +
           this.config.publicClient.chain.id
       );
     }
   }
+
+  wethToMedia() {
+    return Uniswap.encodePath([
+      addresses.WETH9[this.config.publicClient.chain.id], 
+      addresses.MediaERC20[this.config.publicClient.chain.id]
+    ], [500]);
+  } 
 
   async view(functionName, args) {
     try {
@@ -43,32 +53,42 @@ class MarketplaceHelper {
       throw error;
     }
   }
-    /*     
-solidity function
-
-    function addLiquidityAndRegisterWithETH(
-        uint256 marketplaceId,
-        string memory label,
-        string memory publicKey,
-        uint256 minMediaAmountOut,
-        bytes memory path,
-        uint256 slippage // 500 = 0.5%
-    ) external payable returns (
-        uint nftId, 
-        uint128 liquidity, 
-        uint amount0, 
-        uint amount1
-	  ) { */
-  async addLiquidityAndRegisterWithETH({ marketplaceId, label, publicKey, minMediaAmountOut, slippage, amount }) {
-
-    let path = Uniswap.encodePath([
-      addresses.WETH9[this.config.publicClient.chain.id], 
-      addresses.MediaERC20[this.config.publicClient.chain.id]
-    ], [500]);
-
-    return await this.execute("addLiquidityAndRegisterWithETH", [marketplaceId, label, publicKey, minMediaAmountOut, path, slippage], amount);
+  async addLiquidityAndRegisterWithETH({
+    marketplaceId,
+    label,
+    publicKey,
+    minMediaAmountOut,
+    slippage,
+    amount,
+  }) {
+    return await this.execute(
+      "addLiquidityAndRegisterWithETH",
+      [marketplaceId, label, publicKey, minMediaAmountOut, this.wethToMedia(), slippage],
+      amount
+    );
   }
 
+  async swapAndCreateDealWithETH({
+    marketplaceId,
+    resourceId,
+    offerId,
+    sharedKeyCopy,
+    minMediaAmountOut,
+    amount,
+  }) {
+    return await this.execute(
+      "swapAndCreateDealWithETH",
+      [
+        marketplaceId,
+        resourceId,
+        offerId,
+        sharedKeyCopy,
+        minMediaAmountOut,
+        this.wethToMedia(),
+      ],
+      amount
+    );
+  }
 }
 
 module.exports = MarketplaceHelper;
