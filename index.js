@@ -7,6 +7,7 @@ const EventHandler = require("./src/models/eventsHandler");
 const Blockchain = require("./src/utils/blockchain");
 const MarketplaceHelper = require("./src/models/marketplaceHelper");
 const Uniswap = require("./src/utils/uniswap");
+const Quoter = require("./src/models/quoter");
 
 const config = getConfig;
 
@@ -21,5 +22,6 @@ module.exports = {
   EventHandler,
   Blockchain,
   MarketplaceHelper,
-  Uniswap
+  Uniswap,
+  Quoter
 };
