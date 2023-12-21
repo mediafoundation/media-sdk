@@ -1,12 +1,13 @@
 const viem = require("viem");
 const chains = require("viem/chains");
 const accounts = require("viem/accounts");
+const {goerli, baseGoerli} = require("viem/chains");
 
 const defaultChain = chains.goerli;
 
 module.exports.validChains = {
-  5: "Goerli",
-  84531: "Base Goerli"
+  5: goerli,
+  84531: baseGoerli
 }
 
 const generatePublicClient = ({
