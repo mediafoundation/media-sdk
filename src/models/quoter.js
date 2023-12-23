@@ -19,14 +19,6 @@ class Quoter {
     }
   }
 
-  fromReadableAmount(amount, decimals) {
-    return parseUnits(amount.toString(), decimals)
-  }
-  
-  toReadableAmount(rawAmount, decimals) {
-    return formatUnits(rawAmount, decimals)
-  }
-
   async view(functionName, args) {
     try {
       return await this.config.publicClient.readContract({
@@ -44,7 +36,7 @@ class Quoter {
     const quotedAmountOut = await this.view("quoteExactInputSingle", [{
       tokenIn: tokens.in.address,
       tokenOut: tokens.out.address,
-      amountIn: this.fromReadableAmount(
+      amountIn: parseUnits(
         tokens.amountIn,
         tokens.in.decimals
       ).toString(),
@@ -52,7 +44,7 @@ class Quoter {
       sqrtPriceLimitX96: 0,
     }]);
     console.log(quotedAmountOut);
-    return this.toReadableAmount(quotedAmountOut[0], tokens.out.decimals)
+    return formatUnits(quotedAmountOut[0], tokens.out.decimals)
   }
   
 }

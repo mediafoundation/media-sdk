@@ -8,6 +8,7 @@ const Blockchain = require("./src/utils/blockchain");
 const MarketplaceHelper = require("./src/models/marketplaceHelper");
 const Uniswap = require("./src/utils/uniswap");
 const Quoter = require("./src/models/quoter");
+const Pool = require("./src/models/pool");
 
 const config = getConfig;
 
@@ -23,5 +24,6 @@ module.exports = {
   Blockchain,
   MarketplaceHelper,
   Uniswap,
-  Quoter
+  Quoter,
+  Pool
 };
