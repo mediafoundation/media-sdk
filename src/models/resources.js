@@ -42,6 +42,13 @@ class Resources {
       throw error;
     }
   }
+  async getResource({ id }) {
+    try {
+      return await this.view("getResource", [id, this.config.walletClient.account.address]);
+    } catch (error) {
+      throw error;
+    }
+  }
 
   async addResource({ encryptedData, sharedKeyCopy, ownerKeys }) {
     return await this.execute("addResource", [
