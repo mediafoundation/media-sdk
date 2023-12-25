@@ -1,10 +1,10 @@
-const addresses = require("./../../contractAddresses.json");
-const MarketplaceAbi = require("./../../abis/Marketplace.json");
-const { getConfig } = require("../config/config");
+const addresses = require("./../../contractAddresses.json")
+const MarketplaceAbi = require("./../../abis/Marketplace.json")
+const { getConfig } = require("../config/config")
 
 class Marketplace {
   constructor() {
-    this.config = getConfig();
+    this.config = getConfig()
 
     if (
       addresses.Marketplace[this.config.publicClient.chain.id] === undefined
@@ -12,7 +12,7 @@ class Marketplace {
       throw new Error(
         "MarketplaceViewer address not found for network id: " +
           this.config.publicClient.chain.id
-      );
+      )
     }
   }
 
@@ -23,9 +23,9 @@ class Marketplace {
         abi: MarketplaceAbi.abi,
         functionName: functionName,
         args: args,
-      });
+      })
     } catch (error) {
-      throw error;
+      throw error
     }
   }
 
@@ -37,11 +37,11 @@ class Marketplace {
         functionName: functionName,
         args: args,
         account: this.config.walletClient.account,
-      });
-      const hash = await this.config.walletClient.writeContract(request);
-      return hash;
+      })
+      const hash = await this.config.walletClient.writeContract(request)
+      return hash
     } catch (error) {
-      throw error;
+      throw error
     }
   }
 
@@ -64,7 +64,7 @@ class Marketplace {
       billFullPeriods,
       singlePeriodOnly,
       metadata,
-    ]);
+    ])
   }
 
   async updateOffer({
@@ -88,11 +88,11 @@ class Marketplace {
       billFullPeriod,
       singlePeriodOnly,
       metadata,
-    ]);
+    ])
   }
 
   async deleteOffer({ marketplaceId, offerId }) {
-    return await this.execute("deleteOffer", [marketplaceId, offerId]);
+    return await this.execute("deleteOffer", [marketplaceId, offerId])
   }
 
   async createDeal({
@@ -108,7 +108,7 @@ class Marketplace {
       offerId,
       blockedBalance,
       sharedKeyCopy,
-    ]);
+    ])
   }
 
   async createDeals({
@@ -124,23 +124,23 @@ class Marketplace {
       offersId,
       blockedBalance,
       sharedKeyCopies,
-    ]);
+    ])
   }
 
   async acceptDeal({ marketplaceId, dealId }) {
-    return await this.execute("acceptDeal", [marketplaceId, dealId]);
+    return await this.execute("acceptDeal", [marketplaceId, dealId])
   }
 
   async rejectDeal({ marketplaceId, dealId }) {
-    return await this.execute("rejectDeal", [marketplaceId, dealId]);
+    return await this.execute("rejectDeal", [marketplaceId, dealId])
   }
 
   async cancelDeal({ marketplaceId, dealId }) {
-    return await this.execute("cancelDeal", [marketplaceId, dealId]);
+    return await this.execute("cancelDeal", [marketplaceId, dealId])
   }
 
   async cancelAllDeals({ marketplaceId, resourceId }) {
-    return await this.execute("cancelAllDeals", [marketplaceId, resourceId]);
+    return await this.execute("cancelAllDeals", [marketplaceId, resourceId])
   }
 
   async initializeMarketplace({ requiredStake, marketFeeTo, marketFeeRate }) {
@@ -148,8 +148,8 @@ class Marketplace {
       requiredStake,
       marketFeeTo,
       marketFeeRate,
-    ]);
+    ])
   }
 }
 
-module.exports = Marketplace;
+module.exports = Marketplace

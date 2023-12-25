@@ -1,13 +1,13 @@
-const { getConfig } = require("../config/config");
+const { getConfig } = require("../config/config")
 
 class Blockchain {
   constructor() {
-    this.config = getConfig();
+    this.config = getConfig()
   }
 
   async getBlockNumber() {
-    return await this.config.publicClient.getBlockNumber();
+    return await this.config.publicClient.getBlockNumber()
   }
 }
 
-module.exports = Blockchain;
+module.exports = Blockchain

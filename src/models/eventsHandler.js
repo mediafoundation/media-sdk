@@ -1,12 +1,12 @@
-const { getConfig } = require("../config/config");
-const addresses = require("../../contractAddresses.json");
-const MarketplaceAbi = require("./../../abis/Marketplace.json").abi;
-const MarketplaceViewerAbi = require("../../abis/MarketplaceViewer.json").abi;
-const ResourcesAbi = require("./../../abis/Resources.json").abi;
+const { getConfig } = require("../config/config")
+const addresses = require("../../contractAddresses.json")
+const MarketplaceAbi = require("./../../abis/Marketplace.json").abi
+const MarketplaceViewerAbi = require("../../abis/MarketplaceViewer.json").abi
+const ResourcesAbi = require("./../../abis/Resources.json").abi
 
 class EventsHandler {
   constructor() {
-    this.config = getConfig();
+    this.config = getConfig()
   }
 
   async getPastEvents({
@@ -21,7 +21,7 @@ class EventsHandler {
         contractName +
           " address not found for network id: " +
           this.config.networkId
-      );
+      )
     }
     return await this.config.publicClient.getContractEvents({
       address: addresses[contractName][this.config.networkId],
@@ -29,7 +29,7 @@ class EventsHandler {
       eventName: eventName,
       fromBlock: fromBlock,
       toBlock: toBlock,
-    });
+    })
   }
 
   async listenForContractEvent({
@@ -44,7 +44,7 @@ class EventsHandler {
         contractName +
           " address not found for network id: " +
           this.config.networkId
-      );
+      )
     }
     await this.config.publicClient.watchContractEvent({
       address: addresses[contractName][this.config.networkId],
@@ -52,7 +52,7 @@ class EventsHandler {
       eventName: eventName,
       onLogs: (logs) => callback(logs),
       onError: (error) => onError(error),
-    });
+    })
   }
 
   async getMarketplacePastEvents({ eventName, fromBlock, toBlock }) {
@@ -62,7 +62,7 @@ class EventsHandler {
       eventName,
       fromBlock,
       toBlock,
-    });
+    })
   }
 
   async getMarketplaceViewerPastEvents({ eventName, fromBlock, toBlock }) {
@@ -72,7 +72,7 @@ class EventsHandler {
       eventName,
       fromBlock,
       toBlock,
-    });
+    })
   }
 
   async getResourcesPastEvents({ eventName, fromBlock, toBlock }) {
@@ -82,7 +82,7 @@ class EventsHandler {
       eventName,
       fromBlock,
       toBlock,
-    });
+    })
   }
 
   async listenForMarketplaceEvent({ eventName, callback, onError }) {
@@ -92,7 +92,7 @@ class EventsHandler {
       eventName,
       callback,
       onError,
-    });
+    })
   }
 
   async listenForMarketplaceViewerEvent({ eventName, callback, onError }) {
@@ -102,7 +102,7 @@ class EventsHandler {
       eventName,
       callback,
       onError,
-    });
+    })
   }
 
   async listenForResourcesEvent({ eventName, callback, onError }) {
@@ -112,8 +112,8 @@ class EventsHandler {
       eventName,
       callback,
       onError,
-    });
+    })
   }
 }
 
-module.exports = EventsHandler;
+module.exports = EventsHandler

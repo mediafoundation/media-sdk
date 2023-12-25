@@ -1,10 +1,10 @@
-const addresses = require("./../../contractAddresses.json");
-const MarketplaceViewerAbi = require("../../abis/MarketplaceViewer.json");
-const { getConfig } = require("../config/config");
+const addresses = require("./../../contractAddresses.json")
+const MarketplaceViewerAbi = require("../../abis/MarketplaceViewer.json")
+const { getConfig } = require("../config/config")
 
 class MarketplaceViewer {
   constructor() {
-    this.config = getConfig();
+    this.config = getConfig()
 
     if (
       addresses.MarketplaceViewer[this.config.publicClient.chain.id] ===
@@ -13,7 +13,7 @@ class MarketplaceViewer {
       throw new Error(
         "MarketplaceViewer address not found for network id: " +
           this.config.publicClient.chain.id
-      );
+      )
     }
   }
 
@@ -24,46 +24,48 @@ class MarketplaceViewer {
         abi: MarketplaceViewerAbi.abi,
         functionName: functionName,
         args: args,
-      });
+      })
     } catch (error) {
-      throw error;
+      throw error
     }
   }
 
   async getPaginatedOffers({ marketplaceId, start = 0, steps = 20 }) {
-    return await this.view("getPaginatedOffers", [marketplaceId, start, steps]);
+    return await this.view("getPaginatedOffers", [marketplaceId, start, steps])
   }
 
   async getAllOffersPaginating({ marketplaceId, start = 0, steps = 20 }) {
-    let offers = [];
-    let _steps = BigInt(steps);
-    let _start = BigInt(start);
-  
+    let offers = []
+    let _steps = BigInt(steps)
+    let _start = BigInt(start)
+
     while (true) {
       let result = await this.view("getPaginatedOffers", [
         marketplaceId,
         _start,
         _steps,
-      ]);
-  
-      let fetchedOffers = result[0];
-      let lastAccessedId = BigInt(result[1]);
-      let totalItems = BigInt(result[3]);
-  
-      offers.push(...fetchedOffers);
-  
+      ])
+
+      let fetchedOffers = result[0]
+      let lastAccessedId = BigInt(result[1])
+      let totalItems = BigInt(result[3])
+
+      offers.push(...fetchedOffers)
+
       // Check if all offers have been fetched
-      if (lastAccessedId >= totalItems - BigInt(1) || fetchedOffers.length === 0) {
-        break;
+      if (
+        lastAccessedId >= totalItems - BigInt(1) ||
+        fetchedOffers.length === 0
+      ) {
+        break
       }
-  
+
       // Update _start for the next iteration
-      _start = lastAccessedId + BigInt(1);
+      _start = lastAccessedId + BigInt(1)
     }
-  
-    return offers;
+
+    return offers
   }
-  
 
   async getPaginatedDeals({
     marketplaceId,
@@ -78,7 +80,7 @@ class MarketplaceViewer {
       isProvider,
       start,
       steps,
-    ]);
+    ])
   }
 
   async getAllDealsPaginating({
@@ -88,10 +90,10 @@ class MarketplaceViewer {
     start = 0,
     steps = 20,
   }) {
-    let deals = [];
+    let deals = []
 
-    let _steps = BigInt(steps);
-    let _start = BigInt(start);
+    let _steps = BigInt(steps)
+    let _start = BigInt(start)
 
     let result = await this.view("getPaginatedDeals", [
       marketplaceId,
@@ -99,11 +101,11 @@ class MarketplaceViewer {
       isProvider,
       _start,
       _steps,
-    ]);
-    deals.push(...result[0]);
+    ])
+    deals.push(...result[0])
 
     if (result[1] > deals.length) {
-      let totalDeals = result[1];
+      let totalDeals = result[1]
       for (let i = BigInt(1); i * _steps < totalDeals; i++) {
         let result = await this.view("getPaginatedDeals", [
           marketplaceId,
@@ -111,8 +113,8 @@ class MarketplaceViewer {
           isProvider,
           _start + i * _steps,
           _steps,
-        ]);
-        deals.push(...result[0]);
+        ])
+        deals.push(...result[0])
       }
 
       if (totalDeals > deals.length) {
@@ -122,13 +124,13 @@ class MarketplaceViewer {
           isProvider,
           _start + totalDeals,
           totalDeals - BigInt(deals.length),
-        ]);
-        deals.push(...result[0]);
+        ])
+        deals.push(...result[0])
       }
     }
 
-    return deals;
+    return deals
   }
 }
 
-module.exports = MarketplaceViewer;
+module.exports = MarketplaceViewer

@@ -169,7 +169,7 @@ class Quoter {
     return best;
   }
 
-  async uniswapCalculator(
+  async mintAmounts(
     liquidity,
     token0,
     token1,

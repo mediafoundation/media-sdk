@@ -1,11 +1,11 @@
-const addresses = require("../../contractAddresses.json");
-const MarketplaceHelperAbi = require("./../../abis/MarketplaceHelper.json").abi;
-const { getConfig } = require("../config/config");
-const Uniswap = require("../utils/uniswap");
+const addresses = require("../../contractAddresses.json")
+const MarketplaceHelperAbi = require("./../../abis/MarketplaceHelper.json").abi
+const { getConfig } = require("../config/config")
+const Uniswap = require("../utils/uniswap")
 
 class MarketplaceHelper {
   constructor() {
-    this.config = getConfig();
+    this.config = getConfig()
 
     if (
       addresses.MarketplaceHelper[this.config.publicClient.chain.id] ===
@@ -14,21 +14,27 @@ class MarketplaceHelper {
       throw new Error(
         "MarketplaceViewer address not found for network id: " +
           this.config.publicClient.chain.id
-      );
+      )
     }
   }
 
   wethToMedia(fee) {
-    return Uniswap.encodePath([
-      addresses.WETH9[this.config.publicClient.chain.id], 
-      addresses.MediaERC20[this.config.publicClient.chain.id]
-    ], [fee]);
-  } 
+    return Uniswap.encodePath(
+      [
+        addresses.WETH9[this.config.publicClient.chain.id],
+        addresses.MediaERC20[this.config.publicClient.chain.id],
+      ],
+      [fee]
+    )
+  }
   mediaToWeth(fee) {
-    return Uniswap.encodePath([
-      addresses.MediaERC20[this.config.publicClient.chain.id],
-      addresses.WETH9[this.config.publicClient.chain.id],
-    ], [fee]);
+    return Uniswap.encodePath(
+      [
+        addresses.MediaERC20[this.config.publicClient.chain.id],
+        addresses.WETH9[this.config.publicClient.chain.id],
+      ],
+      [fee]
+    )
   }
 
   async view(functionName, args) {
@@ -38,9 +44,9 @@ class MarketplaceHelper {
         abi: MarketplaceHelperAbi,
         functionName: functionName,
         args: args,
-      });
+      })
     } catch (error) {
-      throw error;
+      throw error
     }
   }
   async execute(functionName, args, value = 0) {
@@ -52,11 +58,11 @@ class MarketplaceHelper {
         args: args,
         account: this.config.walletClient.account,
         value: value,
-      });
-      const hash = await this.config.walletClient.writeContract(request);
-      return hash;
+      })
+      const hash = await this.config.walletClient.writeContract(request)
+      return hash
     } catch (error) {
-      throw error;
+      throw error
     }
   }
 
@@ -67,13 +73,20 @@ class MarketplaceHelper {
     minMediaAmountOut,
     slippage,
     amount,
-    pairFee = 500
+    pairFee = 500,
   }) {
     return await this.execute(
       "addLiquidityAndRegisterWithETH",
-      [marketplaceId, label, publicKey, minMediaAmountOut, this.wethToMedia(pairFee), slippage],
+      [
+        marketplaceId,
+        label,
+        publicKey,
+        minMediaAmountOut,
+        this.wethToMedia(pairFee),
+        slippage,
+      ],
       amount
-    );
+    )
   }
 
   async addLiquidityAndRegister({
@@ -83,40 +96,38 @@ class MarketplaceHelper {
     label,
     publicKey,
     slippage,
-    pairFee = 500
+    pairFee = 500,
   }) {
+    let minWethAmountOut = 0
+    let minMediaAmountOut = 0
 
-    let minWethAmountOut = 0;
-    let minMediaAmountOut = 0;
+    let inputToWeth = Uniswap.encodePath(
+      [inputToken, addresses.WETH9[this.config.publicClient.chain.id]],
+      [pairFee]
+    )
 
-    let inputToWeth = Uniswap.encodePath([
-      inputToken,
-      addresses.WETH9[this.config.publicClient.chain.id],
-    ], [pairFee]);
-
-    let inputToWethToMediaPath = Uniswap.encodePath([
-      inputToken,
-      addresses.WETH9[this.config.publicClient.chain.id],
-      addresses.MediaERC20[this.config.publicClient.chain.id],
-    ], [pairFee, pairFee]
-    );
-
-    let paths = [inputToWeth, inputToWethToMediaPath];
-
-    return await this.execute(
-      "addLiquidityAndRegister",
+    let inputToWethToMediaPath = Uniswap.encodePath(
       [
-        marketplaceId,
         inputToken,
-        inputAmount,
-        label,
-        publicKey,
-        minWethAmountOut,
-        minMediaAmountOut,
-        paths,
-        slippage,
-      ]
-    );
+        addresses.WETH9[this.config.publicClient.chain.id],
+        addresses.MediaERC20[this.config.publicClient.chain.id],
+      ],
+      [pairFee, pairFee]
+    )
+
+    let paths = [inputToWeth, inputToWethToMediaPath]
+
+    return await this.execute("addLiquidityAndRegister", [
+      marketplaceId,
+      inputToken,
+      inputAmount,
+      label,
+      publicKey,
+      minWethAmountOut,
+      minMediaAmountOut,
+      paths,
+      slippage,
+    ])
   }
 
   async swapAndCreateDealWithETH({
@@ -126,7 +137,7 @@ class MarketplaceHelper {
     sharedKeyCopy,
     minMediaAmountOut,
     amount,
-    pairFee = 500
+    pairFee = 500,
   }) {
     return await this.execute(
       "swapAndCreateDealWithETH",
@@ -139,12 +150,11 @@ class MarketplaceHelper {
         this.wethToMedia(pairFee),
       ],
       amount
-    );
+    )
   }
 }
 
-module.exports = MarketplaceHelper;
-
+module.exports = MarketplaceHelper
 
 /* // SPDX-License-Identifier: UNLICENSED
 pragma solidity >=0.8.17;
