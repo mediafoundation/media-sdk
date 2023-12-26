@@ -1,5 +1,5 @@
-const addresses = require("./../../contractAddresses.json")
-const MarketplaceAbi = require("./../../abis/Marketplace.json")
+const Addresses = require("./../../contractAddresses.json")
+const MarketplaceABI = require("./../../abis/Marketplace.json").abi
 const { getConfig } = require("../config/config")
 
 class Marketplace {
@@ -7,7 +7,7 @@ class Marketplace {
     this.config = getConfig()
 
     if (
-      addresses.Marketplace[this.config.publicClient.chain.id] === undefined
+      Addresses.Marketplace[this.config.publicClient.chain.id] === undefined
     ) {
       throw new Error(
         "MarketplaceViewer address not found for network id: " +
@@ -19,8 +19,8 @@ class Marketplace {
   async view(functionName, args) {
     try {
       return await this.config.publicClient.readContract({
-        address: addresses.Marketplace[this.config.publicClient.chain.id],
-        abi: MarketplaceAbi.abi,
+        address: Addresses.Marketplace[this.config.publicClient.chain.id],
+        abi: MarketplaceABI,
         functionName: functionName,
         args: args,
       })
@@ -32,8 +32,8 @@ class Marketplace {
   async execute(functionName, args) {
     try {
       const { request } = await this.config.publicClient.simulateContract({
-        address: addresses.Marketplace[this.config.publicClient.chain.id],
-        abi: MarketplaceAbi.abi,
+        address: Addresses.Marketplace[this.config.publicClient.chain.id],
+        abi: MarketplaceABI,
         functionName: functionName,
         args: args,
         account: this.config.walletClient.account,

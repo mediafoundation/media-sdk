@@ -2,7 +2,7 @@ const crypto = require("crypto")
 const ethSigUtil = require("@metamask/eth-sig-util")
 
 class Encryption {
-  static async ethSigDecrypt(encryptedData, privateKey) {
+  static ethSigDecrypt(encryptedData, privateKey) {
     let decrypt = ethSigUtil.decrypt({
       encryptedData: JSON.parse(
         Buffer.from(encryptedData.slice(2), "hex").toString("utf8")
@@ -12,8 +12,8 @@ class Encryption {
     return decrypt
   }
 
-  static ethSigEncrypt = async (publicKey, data) => {
-    let encrypted = await ethSigUtil.encrypt({
+  static ethSigEncrypt(publicKey, data) {
+    let encrypted = ethSigUtil.encrypt({
       publicKey: publicKey,
       data: data,
       version: "x25519-xsalsa20-poly1305",

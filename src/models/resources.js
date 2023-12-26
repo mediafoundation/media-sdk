@@ -1,12 +1,12 @@
-const addresses = require("./../../contractAddresses.json")
-const ResourcesAbi = require("./../../abis/Resources.json")
+const Addresses = require("./../../contractAddresses.json")
+const ResourcesABI = require("./../../abis/Resources.json").abi
 const { getConfig } = require("../config/config")
 
 class Resources {
   constructor() {
     this.config = getConfig()
 
-    if (addresses.Resources[this.config.publicClient.chain.id] === undefined) {
+    if (Addresses.Resources[this.config.publicClient.chain.id] === undefined) {
       throw new Error(
         "MarketplaceViewer address not found for network id: " +
           this.config.publicClient.chain.id
@@ -17,8 +17,8 @@ class Resources {
   async view(functionName, args) {
     try {
       return await this.config.publicClient.readContract({
-        address: addresses.Resources[this.config.publicClient.chain.id],
-        abi: ResourcesAbi.abi,
+        address: Addresses.Resources[this.config.publicClient.chain.id],
+        abi: ResourcesABI,
         functionName: functionName,
         args: args,
       })
@@ -30,8 +30,8 @@ class Resources {
   async execute(functionName, args) {
     try {
       const { request } = await this.config.publicClient.simulateContract({
-        address: addresses.Resources[this.config.publicClient.chain.id],
-        abi: ResourcesAbi.abi,
+        address: Addresses.Resources[this.config.publicClient.chain.id],
+        abi: ResourcesABI,
         functionName: functionName,
         args: args,
         account: this.config.walletClient.account,
@@ -42,12 +42,10 @@ class Resources {
       throw error
     }
   }
-  async getResource({ id }) {
+
+  async getResource({ id, address }) {
     try {
-      return await this.view("getResource", [
-        id,
-        this.config.walletClient.account.address,
-      ])
+      return await this.view("getResource", [id, address])
     } catch (error) {
       throw error
     }
@@ -112,14 +110,6 @@ class Resources {
     }
 
     return resources
-  }
-
-  async getResourceById({id, address}) {
-    try {
-      return await this.view("getResource", [id, address])
-    } catch (_) {
-      return null
-    }
   }
 }
 

@@ -1,5 +1,5 @@
-const addresses = require("./../../contractAddresses.json")
-const MarketplaceViewerAbi = require("../../abis/MarketplaceViewer.json")
+const Addresses = require("./../../contractAddresses.json")
+const MarketplaceViewerABI = require("../../abis/MarketplaceViewer.json").abi
 const { getConfig } = require("../config/config")
 
 class MarketplaceViewer {
@@ -7,7 +7,7 @@ class MarketplaceViewer {
     this.config = getConfig()
 
     if (
-      addresses.MarketplaceViewer[this.config.publicClient.chain.id] ===
+      Addresses.MarketplaceViewer[this.config.publicClient.chain.id] ===
       undefined
     ) {
       throw new Error(
@@ -20,8 +20,8 @@ class MarketplaceViewer {
   async view(functionName, args) {
     try {
       return await this.config.publicClient.readContract({
-        address: addresses.MarketplaceViewer[this.config.publicClient.chain.id],
-        abi: MarketplaceViewerAbi.abi,
+        address: Addresses.MarketplaceViewer[this.config.publicClient.chain.id],
+        abi: MarketplaceViewerABI,
         functionName: functionName,
         args: args,
       })

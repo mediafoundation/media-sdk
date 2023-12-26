@@ -1,8 +1,7 @@
 const { getConfig } = require("../config/config")
-const addresses = require("../../contractAddresses.json")
-const MarketplaceAbi = require("./../../abis/Marketplace.json").abi
-const MarketplaceViewerAbi = require("../../abis/MarketplaceViewer.json").abi
-const ResourcesAbi = require("./../../abis/Resources.json").abi
+const MarketplaceABI = require("./../../abis/Marketplace.json").abi
+const MarketplaceViewerABI = require("../../abis/MarketplaceViewer.json").abi
+const ResourcesABI = require("./../../abis/Resources.json").abi
 
 class EventsHandler {
   constructor() {
@@ -16,7 +15,9 @@ class EventsHandler {
     fromBlock,
     toBlock,
   }) {
-    if (addresses[contractName][this.config.publicClient.chain.id] === undefined) {
+    if (
+      addresses[contractName][this.config.publicClient.chain.id] === undefined
+    ) {
       throw new Error(
         contractName +
           " address not found for network id: " +
@@ -39,7 +40,9 @@ class EventsHandler {
     callback,
     onError,
   }) {
-    if (addresses[contractName][this.config.publicClient.chain.id] === undefined) {
+    if (
+      addresses[contractName][this.config.publicClient.chain.id] === undefined
+    ) {
       throw new Error(
         contractName +
           " address not found for network id: " +
@@ -58,7 +61,7 @@ class EventsHandler {
   async getMarketplacePastEvents({ eventName, fromBlock, toBlock }) {
     return await this.getPastEvents({
       contractName: "Marketplace",
-      contractAbi: MarketplaceAbi,
+      contractAbi: MarketplaceABI,
       eventName,
       fromBlock,
       toBlock,
@@ -68,7 +71,7 @@ class EventsHandler {
   async getMarketplaceViewerPastEvents({ eventName, fromBlock, toBlock }) {
     return await this.getPastEvents({
       contractName: "MarketplaceViewer",
-      contractAbi: MarketplaceViewerAbi,
+      contractAbi: MarketplaceViewerABI,
       eventName,
       fromBlock,
       toBlock,
@@ -78,7 +81,7 @@ class EventsHandler {
   async getResourcesPastEvents({ eventName, fromBlock, toBlock }) {
     return await this.getPastEvents({
       contractName: "Resources",
-      contractAbi: ResourcesAbi,
+      contractAbi: ResourcesABI,
       eventName,
       fromBlock,
       toBlock,
@@ -88,7 +91,7 @@ class EventsHandler {
   async listenForMarketplaceEvent({ eventName, callback, onError }) {
     await this.listenForContractEvent({
       contractName: "Marketplace",
-      contractAbi: MarketplaceAbi,
+      contractAbi: MarketplaceABI,
       eventName,
       callback,
       onError,
@@ -98,7 +101,7 @@ class EventsHandler {
   async listenForMarketplaceViewerEvent({ eventName, callback, onError }) {
     await this.listenForContractEvent({
       contractName: "MarketplaceViewer",
-      contractAbi: MarketplaceViewerAbi,
+      contractAbi: MarketplaceViewerABI,
       eventName,
       callback,
       onError,
@@ -108,7 +111,7 @@ class EventsHandler {
   async listenForResourcesEvent({ eventName, callback, onError }) {
     await this.listenForContractEvent({
       contractName: "Resources",
-      contractAbi: ResourcesAbi,
+      contractAbi: ResourcesABI,
       eventName,
       callback,
       onError,
