@@ -16,15 +16,15 @@ class EventsHandler {
     fromBlock,
     toBlock,
   }) {
-    if (addresses[contractName][this.config.networkId] === undefined) {
+    if (addresses[contractName][this.config.publicClient.chain.id] === undefined) {
       throw new Error(
         contractName +
           " address not found for network id: " +
-          this.config.networkId
+          this.config.publicClient.chain.id
       )
     }
     return await this.config.publicClient.getContractEvents({
-      address: addresses[contractName][this.config.networkId],
+      address: addresses[contractName][this.config.publicClient.chain.id],
       abi: contractAbi,
       eventName: eventName,
       fromBlock: fromBlock,
@@ -39,15 +39,15 @@ class EventsHandler {
     callback,
     onError,
   }) {
-    if (addresses[contractName][this.config.networkId] === undefined) {
+    if (addresses[contractName][this.config.publicClient.chain.id] === undefined) {
       throw new Error(
         contractName +
           " address not found for network id: " +
-          this.config.networkId
+          this.config.publicClient.chain.id
       )
     }
     await this.config.publicClient.watchContractEvent({
-      address: addresses[contractName][this.config.networkId],
+      address: addresses[contractName][this.config.publicClient.chain.id],
       abi: contractAbi,
       eventName: eventName,
       onLogs: (logs) => callback(logs),
