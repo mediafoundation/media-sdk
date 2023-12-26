@@ -1,12 +1,11 @@
-const { getConfig } = require("../config/config");
-const addresses = require("../../contractAddresses.json");
-const MarketplaceAbi = require("./../../abis/Marketplace.json").abi;
-const MarketplaceViewerAbi = require("../../abis/MarketplaceViewer.json").abi;
-const ResourcesAbi = require("./../../abis/Resources.json").abi;
+const { getConfig } = require("../config/config")
+const MarketplaceABI = require("./../../abis/Marketplace.json").abi
+const MarketplaceViewerABI = require("../../abis/MarketplaceViewer.json").abi
+const ResourcesABI = require("./../../abis/Resources.json").abi
 
 class EventsHandler {
   constructor() {
-    this.config = getConfig();
+    this.config = getConfig()
   }
 
   async getPastEvents({
@@ -16,20 +15,22 @@ class EventsHandler {
     fromBlock,
     toBlock,
   }) {
-    if (addresses[contractName][this.config.networkId] === undefined) {
+    if (
+      addresses[contractName][this.config.publicClient.chain.id] === undefined
+    ) {
       throw new Error(
         contractName +
           " address not found for network id: " +
-          this.config.networkId
-      );
+          this.config.publicClient.chain.id
+      )
     }
     return await this.config.publicClient.getContractEvents({
-      address: addresses[contractName][this.config.networkId],
+      address: addresses[contractName][this.config.publicClient.chain.id],
       abi: contractAbi,
       eventName: eventName,
       fromBlock: fromBlock,
       toBlock: toBlock,
-    });
+    })
   }
 
   async listenForContractEvent({
@@ -39,81 +40,83 @@ class EventsHandler {
     callback,
     onError,
   }) {
-    if (addresses[contractName][this.config.networkId] === undefined) {
+    if (
+      addresses[contractName][this.config.publicClient.chain.id] === undefined
+    ) {
       throw new Error(
         contractName +
           " address not found for network id: " +
-          this.config.networkId
-      );
+          this.config.publicClient.chain.id
+      )
     }
     await this.config.publicClient.watchContractEvent({
-      address: addresses[contractName][this.config.networkId],
+      address: addresses[contractName][this.config.publicClient.chain.id],
       abi: contractAbi,
       eventName: eventName,
       onLogs: (logs) => callback(logs),
       onError: (error) => onError(error),
-    });
+    })
   }
 
   async getMarketplacePastEvents({ eventName, fromBlock, toBlock }) {
     return await this.getPastEvents({
       contractName: "Marketplace",
-      contractAbi: MarketplaceAbi,
+      contractAbi: MarketplaceABI,
       eventName,
       fromBlock,
       toBlock,
-    });
+    })
   }
 
   async getMarketplaceViewerPastEvents({ eventName, fromBlock, toBlock }) {
     return await this.getPastEvents({
       contractName: "MarketplaceViewer",
-      contractAbi: MarketplaceViewerAbi,
+      contractAbi: MarketplaceViewerABI,
       eventName,
       fromBlock,
       toBlock,
-    });
+    })
   }
 
   async getResourcesPastEvents({ eventName, fromBlock, toBlock }) {
     return await this.getPastEvents({
       contractName: "Resources",
-      contractAbi: ResourcesAbi,
+      contractAbi: ResourcesABI,
       eventName,
       fromBlock,
       toBlock,
-    });
+    })
   }
 
   async listenForMarketplaceEvent({ eventName, callback, onError }) {
     await this.listenForContractEvent({
       contractName: "Marketplace",
-      contractAbi: MarketplaceAbi,
+      contractAbi: MarketplaceABI,
       eventName,
       callback,
       onError,
-    });
+    })
   }
 
   async listenForMarketplaceViewerEvent({ eventName, callback, onError }) {
     await this.listenForContractEvent({
       contractName: "MarketplaceViewer",
-      contractAbi: MarketplaceViewerAbi,
+      contractAbi: MarketplaceViewerABI,
       eventName,
       callback,
       onError,
-    });
+    })
   }
 
   async listenForResourcesEvent({ eventName, callback, onError }) {
     await this.listenForContractEvent({
       contractName: "Resources",
-      contractAbi: ResourcesAbi,
+      contractAbi: ResourcesABI,
       eventName,
       callback,
       onError,
-    });
+    })
   }
 }
 
-module.exports = EventsHandler;
+module.exports = EventsHandler

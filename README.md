@@ -97,9 +97,9 @@ const marketplace = new Marketplace()
 
 //initialize a new marketplace
 const hash = await marketplace.initializeMarketplace({
-  requiredStake: 100,  // replace with your required stake 
-  marketFeeTo: config().walletClient.account.address, // replace with your market fee recipient address 
-  marketFeeRate: 5 // replace with your market fee rate %
+  requiredStake: 100,  // marketplace min required staked liquidity 
+  marketFeeTo: config().walletClient.account.address, // market fee recipient address 
+  marketFeeRate: 5000 // market fee rate %
 })
 
 // wait for the transaction to be mined

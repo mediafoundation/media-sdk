@@ -1,56 +1,52 @@
-const addresses = require("./../../contractAddresses.json");
-const MarketplaceAbi = require("./../../abis/Marketplace.json");
-const { getConfig } = require("../config/config");
+const Addresses = require("./../../contractAddresses.json")
+const MarketplaceABI = require("./../../abis/Marketplace.json").abi
+const { getConfig } = require("../config/config")
 
 class Marketplace {
   constructor() {
-    this.config = getConfig();
+    this.config = getConfig()
 
     if (
-      addresses.Marketplace[this.config.publicClient.chain.id] === undefined
+      Addresses.Marketplace[this.config.publicClient.chain.id] === undefined
     ) {
       throw new Error(
         "MarketplaceViewer address not found for network id: " +
           this.config.publicClient.chain.id
-      );
+      )
     }
   }
 
   async view(functionName, args) {
     try {
-      console.log(
-        "addresses.Marketplace[this.config.publicClient.chain.id]",
-        addresses.Marketplace[this.config.publicClient.chain.id]
-      );
       return await this.config.publicClient.readContract({
-        address: addresses.Marketplace[this.config.publicClient.chain.id],
-        abi: MarketplaceAbi.abi,
+        address: Addresses.Marketplace[this.config.publicClient.chain.id],
+        abi: MarketplaceABI,
         functionName: functionName,
         args: args,
-      });
+      })
     } catch (error) {
-      throw error;
+      throw error
     }
   }
 
   async execute(functionName, args) {
     try {
       const { request } = await this.config.publicClient.simulateContract({
-        address: addresses.Marketplace[this.config.publicClient.chain.id],
-        abi: MarketplaceAbi.abi,
+        address: Addresses.Marketplace[this.config.publicClient.chain.id],
+        abi: MarketplaceABI,
         functionName: functionName,
         args: args,
         account: this.config.walletClient.account,
-      });
-      const hash = await this.config.walletClient.writeContract(request);
-      return hash;
+      })
+      const hash = await this.config.walletClient.writeContract(request)
+      return hash
     } catch (error) {
-      throw error;
+      throw error
     }
   }
 
   async createOffer({
-    marketPlaceId,
+    marketplaceId,
     maximumDeals,
     autoAccept,
     pricePerSecond,
@@ -60,7 +56,7 @@ class Marketplace {
     metadata,
   }) {
     return await this.execute("createOffer", [
-      marketPlaceId,
+      marketplaceId,
       maximumDeals,
       autoAccept,
       pricePerSecond,
@@ -68,11 +64,11 @@ class Marketplace {
       billFullPeriods,
       singlePeriodOnly,
       metadata,
-    ]);
+    ])
   }
 
   async updateOffer({
-    marketPlaceId,
+    marketplaceId,
     offerId,
     maximumDeals,
     autoAccept,
@@ -83,7 +79,7 @@ class Marketplace {
     metadata,
   }) {
     return await this.execute("updateOffer", [
-      marketPlaceId,
+      marketplaceId,
       offerId,
       maximumDeals,
       autoAccept,
@@ -92,59 +88,63 @@ class Marketplace {
       billFullPeriod,
       singlePeriodOnly,
       metadata,
-    ]);
+    ])
   }
 
-  async deleteOffer({ marketPlaceId, offerId }) {
-    return await this.execute("deleteOffer", [marketPlaceId, offerId]);
+  async deleteOffer({ marketplaceId, offerId }) {
+    return await this.execute("deleteOffer", [marketplaceId, offerId])
   }
 
   async createDeal({
-    marketPlaceId,
+    marketplaceId,
     resourceId,
     offerId,
     blockedBalance,
     sharedKeyCopy,
   }) {
     return await this.execute("createDeal", [
-      marketPlaceId,
+      marketplaceId,
       resourceId,
       offerId,
       blockedBalance,
       sharedKeyCopy,
-    ]);
+    ])
   }
 
   async createDeals({
-    marketPlaceId,
+    marketplaceId,
     resourceId,
     offersId,
     blockedBalance,
-    sharedKeyCopy,
+    sharedKeyCopies,
   }) {
     return await this.execute("createDeals", [
-      marketPlaceId,
+      marketplaceId,
       resourceId,
       offersId,
       blockedBalance,
-      sharedKeyCopy,
-    ]);
+      sharedKeyCopies,
+    ])
   }
 
-  async acceptDeal({ marketPlaceId, dealId }) {
-    return await this.execute("acceptDeal", [marketPlaceId, dealId]);
+  async acceptDeal({ marketplaceId, dealId }) {
+    return await this.execute("acceptDeal", [marketplaceId, dealId])
   }
 
-  async rejectDeal({ marketPlaceId, dealId }) {
-    return await this.execute("rejectDeal", [marketPlaceId, dealId]);
+  async rejectDeal({ marketplaceId, dealId }) {
+    return await this.execute("rejectDeal", [marketplaceId, dealId])
   }
 
-  async cancelDeal({ marketPlaceId, dealId }) {
-    return await this.execute("cancelDeal", [marketPlaceId, dealId]);
+  async cancelDeal({ marketplaceId, dealId }) {
+    return await this.execute("cancelDeal", [marketplaceId, dealId])
   }
 
-  async cancelAllDeals({ marketPlaceId, resourceId }) {
-    return await this.execute("cancelAllDeals", [marketPlaceId, resourceId]);
+  async cancelAllDeals({ marketplaceId, resourceId }) {
+    return await this.execute("cancelAllDeals", [marketplaceId, resourceId])
+  }
+
+  async getDealById({ marketplaceId, dealId }) {
+    return await this.view("getDeal", [marketplaceId, dealId])
   }
 
   async initializeMarketplace({ requiredStake, marketFeeTo, marketFeeRate }) {
@@ -152,8 +152,8 @@ class Marketplace {
       requiredStake,
       marketFeeTo,
       marketFeeRate,
-    ]);
+    ])
   }
 }
 
-module.exports = Marketplace;
+module.exports = Marketplace

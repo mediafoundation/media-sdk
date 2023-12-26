@@ -3,13 +3,8 @@
     {
       "inputs": [
         {
-          "internalType": "address",
+          "internalType": "contract IERC20",
           "name": "_tokenAddress",
-          "type": "address"
-        },
-        {
-          "internalType": "address",
-          "name": "_lpTokenAddress",
           "type": "address"
         },
         {
@@ -20,6 +15,11 @@
         {
           "internalType": "contract Staking",
           "name": "_staking",
+          "type": "address"
+        },
+        {
+          "internalType": "contract INonfungiblePositionManager",
+          "name": "_positionManagerAddress",
           "type": "address"
         }
       ],
@@ -75,6 +75,25 @@
         }
       ],
       "name": "AddressDeauthorized",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "marketplaceId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "dealId",
+          "type": "uint256"
+        }
+      ],
+      "name": "BillingStartExtended",
       "type": "event"
     },
     {
@@ -170,19 +189,6 @@
         }
       ],
       "name": "DealRejected",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "internalType": "string",
-          "name": "message",
-          "type": "string"
-        }
-      ],
-      "name": "LogMessage",
       "type": "event"
     },
     {
@@ -326,12 +332,6 @@
           "internalType": "address",
           "name": "_provider",
           "type": "address"
-        },
-        {
-          "indexed": false,
-          "internalType": "uint256",
-          "name": "_stake",
-          "type": "uint256"
         }
       ],
       "name": "ProviderUpdated",
@@ -406,26 +406,6 @@
         }
       ],
       "name": "dealAutoIncrement",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "name": "dealCounter",
       "outputs": [
         {
           "internalType": "uint256",
@@ -567,6 +547,20 @@
     },
     {
       "inputs": [],
+      "name": "positionManager",
+      "outputs": [
+        {
+          "internalType": "contract INonfungiblePositionManager",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [],
       "name": "protocolFeeRate",
       "outputs": [
         {
@@ -629,6 +623,41 @@
     {
       "inputs": [
         {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes",
+          "name": "",
+          "type": "bytes"
+        }
+      ],
+      "name": "onERC721Received",
+      "outputs": [
+        {
+          "internalType": "bytes4",
+          "name": "",
+          "type": "bytes4"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [
+        {
           "internalType": "uint256",
           "name": "requiredStake",
           "type": "uint256"
@@ -674,7 +703,7 @@
         },
         {
           "internalType": "uint256",
-          "name": "stakeAmount",
+          "name": "nftId",
           "type": "uint256"
         }
       ],
@@ -701,7 +730,7 @@
       "outputs": [
         {
           "internalType": "uint256",
-          "name": "removedStake",
+          "name": "nftId",
           "type": "uint256"
         }
       ],
@@ -724,11 +753,6 @@
           "internalType": "string",
           "name": "publicKey",
           "type": "string"
-        },
-        {
-          "internalType": "uint256",
-          "name": "stakeAmount",
-          "type": "uint256"
         }
       ],
       "name": "updateProvider",
@@ -751,11 +775,65 @@
         },
         {
           "internalType": "uint256",
-          "name": "stakeAmount",
+          "name": "amountAddWeth",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amountAddMedia",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "slippage",
           "type": "uint256"
         }
       ],
-      "name": "updateProviderStake",
+      "name": "increaseProviderStake",
+      "outputs": [
+        {
+          "internalType": "uint128",
+          "name": "liquidity",
+          "type": "uint128"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount0",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount1",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "marketplaceId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint128",
+          "name": "newLiquidity",
+          "type": "uint128"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amountAddWeth",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amountAddMedia",
+          "type": "uint256"
+        }
+      ],
+      "name": "decreaseProviderStake",
       "outputs": [
         {
           "internalType": "bool",
@@ -1162,6 +1240,35 @@
     {
       "inputs": [
         {
+          "internalType": "uint256",
+          "name": "marketplaceId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "dealId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "extension",
+          "type": "uint256"
+        }
+      ],
+      "name": "extendBillingStart",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
           "internalType": "address",
           "name": "_addr",
           "type": "address"
@@ -1220,11 +1327,30 @@
       "inputs": [
         {
           "internalType": "address",
-          "name": "_tokenAddress",
+          "name": "feeTo",
           "type": "address"
         }
       ],
-      "name": "setLPToken",
+      "name": "setProtocolFeeTo",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "feeRate",
+          "type": "uint256"
+        }
+      ],
+      "name": "setProtocolFeeRate",
       "outputs": [
         {
           "internalType": "bool",
@@ -1262,31 +1388,17 @@
     {
       "inputs": [
         {
+          "internalType": "uint256",
+          "name": "marketplaceId",
+          "type": "uint256"
+        },
+        {
           "internalType": "address",
-          "name": "_feeTo",
+          "name": "newOwner",
           "type": "address"
         }
       ],
-      "name": "setProtocolFeeTo",
-      "outputs": [
-        {
-          "internalType": "bool",
-          "name": "",
-          "type": "bool"
-        }
-      ],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "_feeRate",
-          "type": "uint256"
-        }
-      ],
-      "name": "setProtocolFeeRate",
+      "name": "transferMarketplaceOwnership",
       "outputs": [
         {
           "internalType": "bool",
@@ -1306,7 +1418,7 @@
         },
         {
           "internalType": "uint256",
-          "name": "_feeRate",
+          "name": "feeRate",
           "type": "uint256"
         }
       ],
@@ -1330,7 +1442,7 @@
         },
         {
           "internalType": "address",
-          "name": "_feeTo",
+          "name": "feeTo",
           "type": "address"
         }
       ],
@@ -1686,6 +1798,11 @@
               "type": "address"
             },
             {
+              "internalType": "string",
+              "name": "publicKey",
+              "type": "string"
+            },
+            {
               "internalType": "uint256",
               "name": "maximumDeals",
               "type": "uint256"
@@ -1696,34 +1813,36 @@
               "type": "bool"
             },
             {
-              "internalType": "uint256",
-              "name": "pricePerSecond",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "minDealDuration",
-              "type": "uint256"
-            },
-            {
-              "internalType": "bool",
-              "name": "billFullPeriods",
-              "type": "bool"
-            },
-            {
-              "internalType": "bool",
-              "name": "singlePeriodOnly",
-              "type": "bool"
-            },
-            {
-              "internalType": "string",
-              "name": "publicKey",
-              "type": "string"
-            },
-            {
-              "internalType": "string",
-              "name": "metadata",
-              "type": "string"
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "pricePerSecond",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "minDealDuration",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "billFullPeriods",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "singlePeriodOnly",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "string",
+                  "name": "metadata",
+                  "type": "string"
+                }
+              ],
+              "internalType": "struct Marketplace.OfferTerms",
+              "name": "terms",
+              "type": "tuple"
             }
           ],
           "internalType": "struct Marketplace.Offer",
@@ -1788,29 +1907,36 @@
               "type": "uint256"
             },
             {
-              "internalType": "uint256",
-              "name": "pricePerSecond",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "minDuration",
-              "type": "uint256"
-            },
-            {
-              "internalType": "bool",
-              "name": "billFullPeriods",
-              "type": "bool"
-            },
-            {
-              "internalType": "bool",
-              "name": "singlePeriodOnly",
-              "type": "bool"
-            },
-            {
-              "internalType": "string",
-              "name": "metadata",
-              "type": "string"
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "pricePerSecond",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "minDealDuration",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "billFullPeriods",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "singlePeriodOnly",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "string",
+                  "name": "metadata",
+                  "type": "string"
+                }
+              ],
+              "internalType": "struct Marketplace.OfferTerms",
+              "name": "terms",
+              "type": "tuple"
             },
             {
               "components": [

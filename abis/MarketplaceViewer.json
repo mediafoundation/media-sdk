@@ -12,20 +12,6 @@
       "type": "constructor"
     },
     {
-      "inputs": [],
-      "name": "marketplace",
-      "outputs": [
-        {
-          "internalType": "contract Marketplace",
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
-    },
-    {
       "inputs": [
         {
           "internalType": "uint256",
@@ -43,7 +29,7 @@
           "type": "uint256"
         }
       ],
-      "name": "getAllOffers",
+      "name": "getPaginatedOffers",
       "outputs": [
         {
           "components": [
@@ -58,6 +44,11 @@
               "type": "address"
             },
             {
+              "internalType": "string",
+              "name": "publicKey",
+              "type": "string"
+            },
+            {
               "internalType": "uint256",
               "name": "maximumDeals",
               "type": "uint256"
@@ -68,34 +59,36 @@
               "type": "bool"
             },
             {
-              "internalType": "uint256",
-              "name": "pricePerSecond",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "minDealDuration",
-              "type": "uint256"
-            },
-            {
-              "internalType": "bool",
-              "name": "billFullPeriods",
-              "type": "bool"
-            },
-            {
-              "internalType": "bool",
-              "name": "singlePeriodOnly",
-              "type": "bool"
-            },
-            {
-              "internalType": "string",
-              "name": "publicKey",
-              "type": "string"
-            },
-            {
-              "internalType": "string",
-              "name": "metadata",
-              "type": "string"
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "pricePerSecond",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "minDealDuration",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "billFullPeriods",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "singlePeriodOnly",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "string",
+                  "name": "metadata",
+                  "type": "string"
+                }
+              ],
+              "internalType": "struct Marketplace.OfferTerms",
+              "name": "terms",
+              "type": "tuple"
             }
           ],
           "internalType": "struct Marketplace.Offer[]",
@@ -141,12 +134,12 @@
         },
         {
           "internalType": "uint256",
-          "name": "_start",
+          "name": "start",
           "type": "uint256"
         },
         {
           "internalType": "uint256",
-          "name": "_count",
+          "name": "pageSize",
           "type": "uint256"
         }
       ],
@@ -190,29 +183,36 @@
               "type": "uint256"
             },
             {
-              "internalType": "uint256",
-              "name": "pricePerSecond",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "minDuration",
-              "type": "uint256"
-            },
-            {
-              "internalType": "bool",
-              "name": "billFullPeriods",
-              "type": "bool"
-            },
-            {
-              "internalType": "bool",
-              "name": "singlePeriodOnly",
-              "type": "bool"
-            },
-            {
-              "internalType": "string",
-              "name": "metadata",
-              "type": "string"
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "pricePerSecond",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "minDealDuration",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "billFullPeriods",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "singlePeriodOnly",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "string",
+                  "name": "metadata",
+                  "type": "string"
+                }
+              ],
+              "internalType": "struct Marketplace.OfferTerms",
+              "name": "terms",
+              "type": "tuple"
             },
             {
               "components": [
@@ -253,12 +253,12 @@
             }
           ],
           "internalType": "struct Marketplace.Deal[]",
-          "name": "_deals",
+          "name": "results",
           "type": "tuple[]"
         },
         {
           "internalType": "uint256",
-          "name": "_totalDeals",
+          "name": "totalItems",
           "type": "uint256"
         }
       ],
