@@ -113,6 +113,14 @@ class Resources {
 
     return resources
   }
+
+  async getResourceById({id, address}) {
+    try {
+      return await this.view("getResource", [id, address])
+    } catch (_) {
+      return null
+    }
+  }
 }
 
 module.exports = Resources

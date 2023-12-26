@@ -143,6 +143,10 @@ class Marketplace {
     return await this.execute("cancelAllDeals", [marketplaceId, resourceId])
   }
 
+  async getDealById({ marketplaceId, dealId }) {
+    return await this.view("getDeal", [marketplaceId, dealId])
+  }
+
   async initializeMarketplace({ requiredStake, marketFeeTo, marketFeeRate }) {
     return await this.execute("initializeMarketplace", [
       requiredStake,
