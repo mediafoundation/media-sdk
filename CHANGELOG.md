@@ -1,3 +1,10 @@
+# [3.0.0-alpha](https://github.com/mediafoundation/media-sdk/compare/v2.0.1...v3.0.0-alpha) (2023-12-26)
+
+### BREAKING CHANGES
+
+* Uniswap v3 integration, ditching v2.
+
+
 ## [2.0.1](https://github.com/mediafoundation/media-sdk/compare/v2.0.0...v2.0.1) (2023-11-29)
 
 
