@@ -111,6 +111,15 @@ class Resources {
 
     return resources
   }
+
+  async getOwnerKeys({ address }) {
+    try {
+      return await this.view("getOwnerKeys", [address])
+    } catch (_) {
+      return []
+    }
+  }
+
 }
 
 module.exports = Resources
