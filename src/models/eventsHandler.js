@@ -2,6 +2,7 @@ const { getConfig } = require("../config/config")
 const MarketplaceABI = require("./../../abis/Marketplace.json").abi
 const MarketplaceViewerABI = require("../../abis/MarketplaceViewer.json").abi
 const ResourcesABI = require("./../../abis/Resources.json").abi
+const Addresses = require("./../../contractAddresses.json")
 
 class EventsHandler {
   constructor() {
@@ -16,7 +17,7 @@ class EventsHandler {
     toBlock,
   }) {
     if (
-      addresses[contractName][this.config.publicClient.chain.id] === undefined
+      Addresses[contractName][this.config.publicClient.chain.id] === undefined
     ) {
       throw new Error(
         contractName +
@@ -25,7 +26,7 @@ class EventsHandler {
       )
     }
     return await this.config.publicClient.getContractEvents({
-      address: addresses[contractName][this.config.publicClient.chain.id],
+      address: Addresses[contractName][this.config.publicClient.chain.id],
       abi: contractAbi,
       eventName: eventName,
       fromBlock: fromBlock,
@@ -41,7 +42,7 @@ class EventsHandler {
     onError,
   }) {
     if (
-      addresses[contractName][this.config.publicClient.chain.id] === undefined
+      Addresses[contractName][this.config.publicClient.chain.id] === undefined
     ) {
       throw new Error(
         contractName +
@@ -50,7 +51,7 @@ class EventsHandler {
       )
     }
     await this.config.publicClient.watchContractEvent({
-      address: addresses[contractName][this.config.publicClient.chain.id],
+      address: Addresses[contractName][this.config.publicClient.chain.id],
       abi: contractAbi,
       eventName: eventName,
       onLogs: (logs) => callback(logs),
