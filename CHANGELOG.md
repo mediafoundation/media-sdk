@@ -1,3 +1,13 @@
+# [3.1.0-alpha](https://github.com/mediafoundation/media-sdk/compare/v3.0.0-alpha...v3.1.0-alpha) (2023-12-28)
+
+### Features
+* **signer.js** a Signer class that provides methods to sign messages and verify signatures ([ed75c15](https://github.com/mediafoundation/media-sdk/commit/ed75c15e738b2045663d9c7d1a6d75954aa44ee9))
+
+### Bug Fixes
+* **eventsHandler.js** adding missing import for Addresses ([7f34ef2](https://github.com/mediafoundation/media-sdk/commit/7f34ef24c214b5a518c4efc2221825010bc163e4))
+
+
+
 # [3.0.0-alpha](https://github.com/mediafoundation/media-sdk/compare/v2.0.1...v3.0.0-alpha) (2023-12-26)
 
 ### BREAKING CHANGES
