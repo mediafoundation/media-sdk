@@ -9,6 +9,7 @@ const MarketplaceHelper = require("./src/models/marketplaceHelper");
 const Uniswap = require("./src/utils/uniswap");
 const Quoter = require("./src/models/quoter");
 const Addresses = require("./contractAddresses.json");
+const Signer = require("./src/utils/signer");
 
 const config = getConfig;
 
@@ -25,5 +26,6 @@ module.exports = {
   MarketplaceHelper,
   Uniswap,
   Quoter,
-  Addresses
+  Addresses,
+  Signer
 };
