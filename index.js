@@ -10,6 +10,7 @@ const Uniswap = require("./src/utils/uniswap");
 const Quoter = require("./src/models/quoter");
 const Addresses = require("./contractAddresses.json");
 const Signer = require("./src/utils/signer");
+const ERC20 = require("./src/models/erc20");
 
 const config = getConfig;
 
@@ -27,5 +28,6 @@ module.exports = {
   Uniswap,
   Quoter,
   Addresses,
-  Signer
+  Signer,
+  ERC20,
 };
