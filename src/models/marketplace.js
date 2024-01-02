@@ -154,6 +154,54 @@ class Marketplace {
       marketFeeRate,
     ])
   }
+
+  static getDealDetails(deal) {
+    const unixTime = BigInt(Math.floor(Date.now() / 1000))
+    let metadata
+    try {
+      metadata = JSON.parse(deal.metadata)
+    } catch (e) {
+      console.log("Error parsing metadata: ", e)
+      metadata = {}
+    }
+    const elapsedTime = unixTime - deal.status.billingStart
+    const totalTime = BigInt(deal.blockedBalance / deal.terms.pricePerSecond)
+    const remainingTime = totalTime - elapsedTime
+    const remainingBalance = remainingTime / deal.terms.pricePerSecond
+    const pendingPayment =
+      elapsedTime * deal.terms.pricePerSecond > deal.blockedBalance
+        ? deal.blockedBalance
+        : elapsedTime * deal.terms.pricePerSecond
+
+    const calculatedEnd = Number(deal.status.billingStart + totalTime) * 1000
+    const maxDate = 8640000000000000
+
+    const d = new Date(calculatedEnd > maxDate ? maxDate : calculatedEnd)
+    const pad2 = (n) => {
+      return (n < 10 ? "0" : "") + n
+    }
+    const formattedCalculatedEnd =
+      pad2(d.getDate()) +
+      "/" +
+      pad2(d.getMonth() + 1) +
+      "/" +
+      pad2(d.getFullYear()) +
+      " · " +
+      pad2(d.getHours()) +
+      ":" +
+      pad2(d.getMinutes())
+
+    return {
+      metadata,
+      elapsedTime,
+      totalTime,
+      remainingTime,
+      remainingBalance,
+      pendingPayment,
+      calculatedEnd,
+      formattedCalculatedEnd,
+    }
+  }
 }
 
 module.exports = Marketplace

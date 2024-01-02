@@ -1,3 +1,10 @@
+# [3.1.1-alpha](https://github.com/mediafoundation/media-sdk/compare/v3.1.0...v3.1.1) (2024-01-02)
+
+
+### Features
+
+* add erc20 model ([d83fd8e](https://github.com/mediafoundation/media-sdk/commit/d83fd8ea2188fdffbed117976edba755312a09e7))
+
 # [3.1.0-alpha](https://github.com/mediafoundation/media-sdk/compare/v3.0.0-alpha...v3.1.0-alpha) (2023-12-28)
 
 ### Features

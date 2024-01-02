@@ -184,6 +184,29 @@ class MarketplaceHelper {
       inputToWethToMediaPath,
     ])
   }
+
+  async swapAndCreateDealsWithETH({
+    marketplaceId,
+    resourceId,
+    offerIds,
+    sharedKeyCopies,
+    minMediaAmountOut,
+    amount,
+    pairFee = 500,
+  }) {
+    return await this.execute(
+      "swapAndCreateDealsWithETH",
+      [
+        marketplaceId,
+        resourceId,
+        offerIds,
+        sharedKeyCopies,
+        minMediaAmountOut,
+        this.wethToMedia(pairFee),
+      ],
+      amount
+    )
+  }
 }
 
 module.exports = MarketplaceHelper

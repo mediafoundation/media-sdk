@@ -7,6 +7,8 @@ const { Pool, Position, FeeAmount } = require("@uniswap/v3-sdk")
 const Addresses = require("./../../contractAddresses.json")
 const { getConfig } = require("../config/config")
 
+const { formatUnits } = require("viem")
+
 class Quoter {
   constructor() {
     this.config = getConfig()
@@ -237,6 +239,29 @@ class Quoter {
       }
     }
   }
+
+  //abstract calculate so it can be reused
+  async calculate(liquidity, inputToken, fee = FeeAmount.LOW) {
+    let { token0, token1, amount0, amount1 } = await this.mintAmounts(
+      liquidity,
+      this.MEDIA_TOKEN,
+      this.WETH_TOKEN(),
+      fee
+    )
+    let required0Half = await this.getQuote(token0, amount0, inputToken)
+    let required1Half = await this.getQuote(token1, amount1, inputToken)
+
+    return {
+      requiredAmounts: {
+        amount0: formatUnits(amount0.toString(), token0.decimals),
+        amount1: formatUnits(amount1.toString(), token1.decimals),
+        token0: token0.symbol,
+        token1: token1.symbol
+      },
+      totalRequired: required0Half.quote + required1Half.quote,
+    }
+  }
+
 }
 
 module.exports = Quoter
