@@ -55,7 +55,6 @@ class Quoter {
 
   async viewPool(address, functionName, args) {
     try {
-      console.log(this.config.publicClient)
       return await this.config.publicClient.readContract({
         address: address,
         abi: IUniswapV3PoolABI,
@@ -92,7 +91,6 @@ class Quoter {
         sqrtPriceLimitX96: 0,
       },
     ])
-    console.log(quotedAmountOut)
     return quotedAmountOut[0]
   }
 
@@ -116,10 +114,8 @@ class Quoter {
       out: outputToken,
       poolFee: poolFee,
     })
-    console.log("inputToken.address", inputToken.address)
-    console.log("outputToken.address", outputToken.address)
     if (!amountIn || inputToken.address === outputToken.address) {
-      return { quote: BigInt(amountIn), fee: 0, route: "None" }
+      return { quote: BigInt(amountIn), fee: 0, route: "None", path: [], fees: [] }
     }
 
     let best = { ...initialState }
@@ -204,9 +200,7 @@ class Quoter {
         undefined,
         Addresses.UniswapV3Factory[this.chainId]
       )
-      console.log("poolAddress", token0, token1, fee, poolAddress)
       let poolData = await this.getPoolData(poolAddress)
-      console.log("poolData", poolData)
 
       const pool = new Pool(
         token0,
