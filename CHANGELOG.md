@@ -1,4 +1,10 @@
-# [3.1.1-alpha](https://github.com/mediafoundation/media-sdk/compare/v3.1.0...v3.1.1) (2024-01-02)
+# [3.1.2-alpha](https://github.com/mediafoundation/media-sdk/compare/v3.1.1-alpha...v3.1.2-alpha) (2024-01-07)
+
+### Bug Fixes
+
+* Fixed missing object parameters in generateTradeParams
+
+# [3.1.1-alpha](https://github.com/mediafoundation/media-sdk/compare/v3.1.0-alpha...v3.1.1-alpha) (2024-01-02)
 
 
 ### Features
