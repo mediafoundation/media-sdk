@@ -1,4 +1,5 @@
-const QuoterV2ABI = require("@uniswap/v3-periphery/artifacts/contracts/lens/QuoterV2.sol/QuoterV2.json").abi
+const QuoterV2ABI =
+  require("@uniswap/v3-periphery/artifacts/contracts/lens/QuoterV2.sol/QuoterV2.json").abi
 const IUniswapV3PoolABI =
   require("@uniswap/v3-core/artifacts/contracts/interfaces/IUniswapV3Pool.sol/IUniswapV3Pool.json").abi
 const { Token } = require("@uniswap/sdk-core")
@@ -89,43 +90,37 @@ class Quoter {
   }
 
   async getQuote(inputToken, amountIn, outputToken) {
+    if (!amountIn || !inputToken || !outputToken) return false
+    if (inputToken.address === outputToken.address) {
+      return {
+        quote: BigInt(amountIn),
+        fee: 0,
+        route: "None",
+        path: [],
+        fees: [],
+      }
+    }
+
     const initialState = {
       quote: BigInt(0),
       fee: 0,
       path: [],
       fees: [],
     }
-    const poolFees = [100, 500, 3000, 10000]
 
-    const generateTradeParams = ({
-      inputToken,
-      amountIn,
-      outputToken,
-      poolFee,
-    }) => ({
-      in: inputToken,
-      amountIn: amountIn,
-      out: outputToken,
-      poolFee: poolFee,
-    })
-    if (!amountIn) {
-      return { quote: BigInt(0), fee: 0, route: "None", path: [], fees: [] }
-    }
-    if (inputToken.address === outputToken.address) {
-      return { quote: BigInt(String(amountIn)), fee: 0, route: "None", path: [], fees: [] }
-    }
+    const poolFees = [100, 500, 3000, 10000]
 
     let best = { ...initialState }
     let bestViaWeth = { ...initialState }
 
     const getBestQuote = async (inToken, outToken, amount, updateBest) => {
       for (const fee of poolFees) {
-        const tradeParams = generateTradeParams({
-          inputToken: inToken,
+        const tradeParams = {
+          in: inToken,
           amountIn: amount,
-          outputToken: outToken,
+          out: outToken,
           poolFee: fee,
-        })
+        }
         try {
           const quote = await this.quote(tradeParams)
           if (quote > updateBest.quote) {
@@ -157,7 +152,6 @@ class Quoter {
         bestViaWeth.quote,
         bestWethToOutput
       )
-
       if (bestWethToOutput.quote > best.quote) {
         return {
           quote: bestWethToOutput.quote,
@@ -167,7 +161,6 @@ class Quoter {
         }
       }
     }
-
     return best
   }
 
@@ -175,7 +168,6 @@ class Quoter {
     if (!path.length || path.length !== fees.length + 1) {
       return ""
     }
-
     return path
       .map((token, index) => {
         return index < path.length - 1
@@ -189,7 +181,6 @@ class Quoter {
     try {
       const tickLower = -887000
       const tickUpper = 887000
-
       const poolAddress = Pool.getAddress(
         token0,
         token1,
@@ -198,7 +189,6 @@ class Quoter {
         Addresses.UniswapV3Factory[this.chainId]
       )
       let poolData = await this.getPoolData(poolAddress)
-
       const pool = new Pool(
         token0,
         token1,
@@ -214,7 +204,6 @@ class Quoter {
         tickLower: tickLower,
         tickUpper: tickUpper,
       })
-
       return {
         token0: liquidityPosition.pool.token0,
         token1: liquidityPosition.pool.token1,
@@ -233,27 +222,24 @@ class Quoter {
 
   //abstract calculate so it can be reused
   async calculate(liquidity, inputToken, fee = FeeAmount.LOW) {
-
     let { token0, token1, amount0, amount1 } = await this.mintAmounts(
       liquidity,
       this.MEDIA_TOKEN,
       this.WETH_TOKEN,
       fee
     )
-    let required0Half = await this.getQuote(token0, amount0, inputToken)
-    let required1Half = await this.getQuote(token1, amount1, inputToken)
-
+    let required0Half = await this.getQuote(token0, String(amount0), inputToken)
+    let required1Half = await this.getQuote(token1, String(amount1), inputToken)
     return {
       requiredAmounts: {
         amount0: formatUnits(amount0.toString(), token0.decimals),
         amount1: formatUnits(amount1.toString(), token1.decimals),
         token0: token0.symbol,
-        token1: token1.symbol
+        token1: token1.symbol,
       },
       totalRequired: required0Half.quote + required1Half.quote,
     }
   }
-
 }
 
 module.exports = Quoter

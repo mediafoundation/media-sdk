@@ -1,4 +1,10 @@
 
+# [3.1.5-alpha](https://github.com/mediafoundation/media-sdk/compare/v3.1.4-alpha...v3.1.5-alpha) (2024-01-08)
+
+### Bug Fixes
+
+* Fixed another bug with JSBI and BigInt mixing
+
 # [3.1.4-alpha](https://github.com/mediafoundation/media-sdk/compare/v3.1.3-alpha...v3.1.4-alpha) (2024-01-08)
 
 ### Bug Fixes
