@@ -23,6 +23,6 @@
   },
   "scripts": {
     "commit": "cz",
-    "release": "CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD) semantic-release"
+    "release": "CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD) semantic-release --no-ci"
   }
 }
