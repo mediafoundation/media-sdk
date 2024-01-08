@@ -1,5 +1,5 @@
 const { getConfig } = require("../config/config")
-const { verifyTypedData } = require("viem")
+const { verifyTypedData, verifyMessage} = require("viem")
 
 class Signer {
   constructor() {
@@ -16,6 +16,13 @@ class Signer {
     })
 
     return signature.hex
+  }
+
+  async signMessage({ account, message }) {
+    return await this.config.walletClient.signMessage({
+      account,
+      message,
+    })
   }
 
   async checkTypedSignature({
@@ -35,6 +42,15 @@ class Signer {
       signature,
     })
   }
+
+    async verifySignature({ address, message, signature }) {
+      return await verifyMessage({
+          address,
+          message,
+          signature,
+        })
+    }
+
 }
 
 module.exports = Signer
