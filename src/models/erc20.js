@@ -2,10 +2,13 @@ const ERC20ABI = require("../../abis/ERC20.json").abi
 const { getConfig } = require("../config/config")
 
 class ERC20 {
+  constructor() {
+    this.config = getConfig()
+  }
 
-  static async view(address, functionName, args) {
+  async view(address, functionName, args) {
     try {
-      return await getConfig().publicClient.readContract({
+      return await this.config.publicClient.readContract({
         address: address,
         abi: ERC20ABI,
         functionName: functionName,
@@ -16,42 +19,47 @@ class ERC20 {
     }
   }
 
-  static async execute(address, functionName, args) {
+  async execute(address, functionName, args) {
     try {
-      const { request } = await getConfig().publicClient.simulateContract({
+      const { request } = await this.config.publicClient.simulateContract({
         address: address,
         abi: ERC20ABI,
         functionName: functionName,
         args: args,
-        account: getConfig().walletClient.account.address,
+        account: this.config.walletClient.account.address,
       })
-      const hash = await getConfig().walletClient.writeContract(request)
+      const hash = await this.config.walletClient.writeContract(request)
       return hash
     } catch (error) {
       throw error
     }
   }
 
-  static async balanceOf(address) {
+  async balanceOf(address) {
     try {
-      return await this.view(address, "balanceOf", [getConfig().walletClient.account.address])
+      return await this.view(address, "balanceOf", [
+        this.config.walletClient.account.address,
+      ])
     } catch (error) {
       throw error
     }
   }
 
-  static async allowance(token, spender) {
+  async allowance(token, spender) {
     console.log("token", token)
-    console.log("owner", getConfig().walletClient.account.address)
+    console.log("owner", this.config.walletClient.account.address)
     console.log("spender", spender)
     try {
-      return await this.view(token, "allowance", [getConfig().walletClient.account.address, spender])
+      return await this.view(token, "allowance", [
+        this.config.walletClient.account.address,
+        spender,
+      ])
     } catch (error) {
       throw error
     }
   }
 
-  static async approve(address, spender, amount) {
+  async approve(address, spender, amount) {
     try {
       return await this.execute(address, "approve", [spender, amount])
     } catch (error) {
@@ -59,7 +67,7 @@ class ERC20 {
     }
   }
 
-  static async transfer(address, to, amount) {
+  async transfer(address, to, amount) {
     try {
       return await this.execute(address, "transfer", [to, amount])
     } catch (error) {
@@ -67,16 +75,13 @@ class ERC20 {
     }
   }
 
-  static async transferFrom(address, from, to, amount) {
+  async transferFrom(address, from, to, amount) {
     try {
       return await this.execute(address, "transferFrom", [from, to, amount])
     } catch (error) {
       throw error
     }
   }
-
-  
-
 }
 
 module.exports = ERC20
