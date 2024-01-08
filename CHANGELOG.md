@@ -1,3 +1,9 @@
+# [3.1.3-alpha](https://github.com/mediafoundation/media-sdk/compare/v3.1.2-alpha...v3.1.3-alpha) (2024-01-07)
+
+### Features
+
+* Added constructor to ERC20 model, because it was getting out of sync.
+
 # [3.1.2-alpha](https://github.com/mediafoundation/media-sdk/compare/v3.1.1-alpha...v3.1.2-alpha) (2024-01-07)
 
 ### Bug Fixes
