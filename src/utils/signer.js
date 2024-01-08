@@ -6,7 +6,7 @@ class Signer {
     this.config = getConfig()
   }
 
-  async signMessage({ account, domain, types, primaryType, message }) {
+  async signTypedMessage({ account, domain, types, primaryType, message }) {
     let signature = await this.config.walletClient.signTypedData({
       account,
       domain,
@@ -18,7 +18,7 @@ class Signer {
     return signature.hex
   }
 
-  async checkSignature({
+  async checkTypedSignature({
     address,
     domain,
     types,
