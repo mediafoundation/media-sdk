@@ -1,3 +1,4 @@
+console.log("Current Branch: " + process.env.CURRENT_BRANCH);
 module.exports = {
     branches: [process.env.CURRENT_BRANCH || "main"],
     plugins: [
