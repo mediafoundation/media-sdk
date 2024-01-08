@@ -1,7 +1,7 @@
 const QuoterV2ABI = require("@uniswap/v3-periphery/artifacts/contracts/lens/QuoterV2.sol/QuoterV2.json").abi
 const IUniswapV3PoolABI =
   require("@uniswap/v3-core/artifacts/contracts/interfaces/IUniswapV3Pool.sol/IUniswapV3Pool.json").abi
-const { Token, WETH9 } = require("@uniswap/sdk-core")
+const { Token } = require("@uniswap/sdk-core")
 const { Pool, Position, FeeAmount } = require("@uniswap/v3-sdk")
 
 const Addresses = require("./../../contractAddresses.json")
@@ -20,19 +20,13 @@ class Quoter {
       "MEDIA",
       "Media Token"
     )
-    this.WETH_TOKEN = () => {
-      if (this.chainId == 84531) {
-        return new Token(
-          84531,
-          Addresses.WETH9["84531"],
-          18,
-          "WETH",
-          "Wrapped Ether"
-        )
-      } else {
-        return WETH9[this.chainId]
-      }
-    }
+    this.WETH_TOKEN = new Token(
+      this.chainId,
+      Addresses.WETH9[this.chainId],
+      18,
+      "WETH",
+      "Wrapped Ether"
+    )
     if (Addresses.QuoterV2[this.chainId] === undefined) {
       throw new Error(
         "Quoter address not found for network id: " + this.chainId
@@ -96,7 +90,7 @@ class Quoter {
 
   async getQuote(inputToken, amountIn, outputToken) {
     const initialState = {
-      quote: 0,
+      quote: BigInt(0),
       fee: 0,
       path: [],
       fees: [],
@@ -110,12 +104,15 @@ class Quoter {
       poolFee,
     }) => ({
       in: inputToken,
-      amountIn: BigInt(amountIn),
+      amountIn: amountIn,
       out: outputToken,
       poolFee: poolFee,
     })
-    if (!amountIn || inputToken.address === outputToken.address) {
-      return { quote: BigInt(amountIn), fee: 0, route: "None", path: [], fees: [] }
+    if (!amountIn) {
+      return { quote: BigInt(0), fee: 0, route: "None", path: [], fees: [] }
+    }
+    if (inputToken.address === outputToken.address) {
+      return { quote: BigInt(String(amountIn)), fee: 0, route: "None", path: [], fees: [] }
     }
 
     let best = { ...initialState }
@@ -149,13 +146,13 @@ class Quoter {
     await getBestQuote(inputToken, outputToken, amountIn, best)
 
     // Quote from inputToken to WETH
-    await getBestQuote(inputToken, this.WETH_TOKEN(), amountIn, bestViaWeth)
+    await getBestQuote(inputToken, this.WETH_TOKEN, amountIn, bestViaWeth)
 
     // If quote via WETH is possible, check for a quote from WETH to outputToken
     if (bestViaWeth.quote > 0) {
       let bestWethToOutput = { ...initialState }
       await getBestQuote(
-        this.WETH_TOKEN(),
+        this.WETH_TOKEN,
         outputToken,
         bestViaWeth.quote,
         bestWethToOutput
@@ -165,7 +162,7 @@ class Quoter {
         return {
           quote: bestWethToOutput.quote,
           fee: bestViaWeth.fee, // Fee for inputToken to WETH
-          path: [inputToken, this.WETH_TOKEN(), outputToken],
+          path: [inputToken, this.WETH_TOKEN, outputToken],
           fees: [bestViaWeth.fee, bestWethToOutput.fee],
         }
       }
@@ -236,10 +233,11 @@ class Quoter {
 
   //abstract calculate so it can be reused
   async calculate(liquidity, inputToken, fee = FeeAmount.LOW) {
+
     let { token0, token1, amount0, amount1 } = await this.mintAmounts(
       liquidity,
       this.MEDIA_TOKEN,
-      this.WETH_TOKEN(),
+      this.WETH_TOKEN,
       fee
     )
     let required0Half = await this.getQuote(token0, amount0, inputToken)

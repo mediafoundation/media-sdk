@@ -46,9 +46,6 @@ class ERC20 {
   }
 
   async allowance(token, spender) {
-    console.log("token", token)
-    console.log("owner", this.config.walletClient.account.address)
-    console.log("spender", spender)
     try {
       return await this.view(token, "allowance", [
         this.config.walletClient.account.address,
