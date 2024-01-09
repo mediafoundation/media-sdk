@@ -1,3 +1,9 @@
+# [3.2.0](https://github.com/mediafoundation/media-sdk/compare/v3.1.5...v3.2.0) (2024-01-08)
+
+
+### Features
+
+* **signer.js:** add a simplified way to sign and verify signatures ([6317da4](https://github.com/mediafoundation/media-sdk/commit/6317da4da651e18b90be92316ccfa7bb089fbf4d))
 
 # [3.1.5-alpha](https://github.com/mediafoundation/media-sdk/compare/v3.1.4-alpha...v3.1.5-alpha) (2024-01-08)
 

@@ -1,12 +1,12 @@
 const { getConfig } = require("../config/config")
-const { verifyTypedData } = require("viem")
+const { verifyTypedData, verifyMessage} = require("viem")
 
 class Signer {
   constructor() {
     this.config = getConfig()
   }
 
-  async signMessage({ account, domain, types, primaryType, message }) {
+  async signTypedMessage({ account, domain, types, primaryType, message }) {
     let signature = await this.config.walletClient.signTypedData({
       account,
       domain,
@@ -18,7 +18,14 @@ class Signer {
     return signature.hex
   }
 
-  async checkSignature({
+  async signMessage({ account, message }) {
+    return await this.config.walletClient.signMessage({
+      account,
+      message,
+    })
+  }
+
+  async checkTypedSignature({
     address,
     domain,
     types,
@@ -35,6 +42,15 @@ class Signer {
       signature,
     })
   }
+
+    async verifySignature({ address, message, signature }) {
+      return await verifyMessage({
+          address,
+          message,
+          signature,
+        })
+    }
+
 }
 
 module.exports = Signer

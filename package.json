@@ -1,6 +1,6 @@
 {
   "name": "media-sdk",
-  "version": "3.1.5-alpha",
+  "version": "3.2.0",
   "main": "index.js",
   "repository": "git@github.com:mediafoundation/media-sdk.git",
   "author": "Media Foundation <hello@media.foundation>",
@@ -22,6 +22,7 @@
     "semantic-release": "^22.0.8"
   },
   "scripts": {
-    "commit": "cz"
+    "commit": "cz",
+    "release": "CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD) semantic-release --no-ci"
   }
 }
