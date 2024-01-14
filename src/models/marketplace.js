@@ -167,7 +167,7 @@ class Marketplace {
     const elapsedTime = unixTime - deal.status.billingStart
     const totalTime = BigInt(deal.blockedBalance / deal.terms.pricePerSecond)
     const remainingTime = totalTime - elapsedTime
-    const remainingBalance = remainingTime / deal.terms.pricePerSecond
+    const remainingBalance = remainingTime * deal.terms.pricePerSecond
     const pendingPayment =
       elapsedTime * deal.terms.pricePerSecond > deal.blockedBalance
         ? deal.blockedBalance
