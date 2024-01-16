@@ -159,7 +159,7 @@ class Marketplace {
     const unixTime = BigInt(Math.floor(Date.now() / 1000))
     let metadata
     try {
-      metadata = JSON.parse(deal.metadata)
+      metadata = JSON.parse(deal.terms.metadata)
     } catch (e) {
       console.log("Error parsing metadata: ", e)
       metadata = {}
