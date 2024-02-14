@@ -26,7 +26,7 @@ npm install media-sdk
 
 To initialize an instance of the Media SDK, use the `initSdk` function. This function takes in an object with the following **optional** parameters:
 
-- `chain`: A chain object. See [Viem's Chains](https://viem.sh/docs/clients/chains.html#utilities) for more details. If nothing is provided, the default chain will be used, which is Ethereum Goerli until mainnet launch.
+- `chain`: A chain object. See [Viem's Chains](https://viem.sh/docs/chains/introduction#chains) for more details. If nothing is provided, the default chain will be used, which is Ethereum Goerli until mainnet launch.
 - `privateKey`: A ECP256K1 private key as a hex string to create a wallet client. Example: 'afdfd9c3d2095ef696594f6cedcae59e72dcd697e2a7521b1578140422a4f890'.
 - `mnemonic`: A BIP39 mnemonic phrase to create a wallet client. Example: 'degree tackle suggest window test behind mesh extra cover prepare oak script'.
 - `walletClient`: A wallet client. See [Viem's Wallet Client](https://viem.sh/docs/clients/wallet.html) for more details.
