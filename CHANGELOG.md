@@ -1,5 +1,11 @@
 
 
+# [3.2.3](https://github.com/mediafoundation/media-sdk/compare/v3.2.2...v3.2.3) (2024-02-14)
+
+### Updates
+
+Added contract addresses for Ethereum Sepolia and Base Sepolia.
+
 # [3.2.2](https://github.com/mediafoundation/media-sdk/compare/v3.2.1...v3.2.2) (2024-01-16)
 
 ### Bug Fixes
