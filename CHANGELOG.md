@@ -1,3 +1,9 @@
+# [3.2.5](https://github.com/mediafoundation/media-sdk/compare/v3.2.4...v3.2.5) (2024-02-15)
+
+### Bug Fixes
+
+Missing file change.
+
 # [3.2.4](https://github.com/mediafoundation/media-sdk/compare/v3.2.3...v3.2.4) (2024-02-15)
 
 ### Bug Fixes
