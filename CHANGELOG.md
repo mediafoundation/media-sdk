@@ -1,4 +1,8 @@
+# [3.2.4](https://github.com/mediafoundation/media-sdk/compare/v3.2.3...v3.2.4) (2024-02-15)
 
+### Bug Fixes
+
+Removed Goerli and Base Goerli and added Sepolia and Base Sepolia in the config. Also removed contract addresses that are not longer supported.
 
 # [3.2.3](https://github.com/mediafoundation/media-sdk/compare/v3.2.2...v3.2.3) (2024-02-14)
 
