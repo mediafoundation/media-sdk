@@ -1,3 +1,9 @@
+# [3.2.6](https://github.com/mediafoundation/media-sdk/compare/v3.2.5...v3.2.6) (2024-02-15)
+
+### Bug Fixes
+
+Missing new abis.
+
 # [3.2.5](https://github.com/mediafoundation/media-sdk/compare/v3.2.4...v3.2.5) (2024-02-15)
 
 ### Bug Fixes

@@ -30,21 +30,21 @@
       "anonymous": false,
       "inputs": [
         {
-          "indexed": true,
+          "indexed": false,
           "internalType": "uint256",
           "name": "_marketplaceId",
           "type": "uint256"
         },
         {
-          "indexed": true,
+          "indexed": false,
           "internalType": "uint256",
-          "name": "_blockedBalance",
+          "name": "_dealId",
           "type": "uint256"
         },
         {
-          "indexed": true,
+          "indexed": false,
           "internalType": "uint256",
-          "name": "_dealId",
+          "name": "_amount",
           "type": "uint256"
         }
       ],
@@ -55,7 +55,7 @@
       "anonymous": false,
       "inputs": [
         {
-          "indexed": true,
+          "indexed": false,
           "internalType": "address",
           "name": "_addr",
           "type": "address"
@@ -68,7 +68,7 @@
       "anonymous": false,
       "inputs": [
         {
-          "indexed": true,
+          "indexed": false,
           "internalType": "address",
           "name": "_addr",
           "type": "address"
@@ -91,6 +91,12 @@
           "internalType": "uint256",
           "name": "dealId",
           "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_extension",
+          "type": "uint256"
         }
       ],
       "name": "BillingStartExtended",
@@ -100,15 +106,21 @@
       "anonymous": false,
       "inputs": [
         {
-          "indexed": true,
+          "indexed": false,
           "internalType": "uint256",
           "name": "_marketplaceId",
           "type": "uint256"
         },
         {
-          "indexed": true,
+          "indexed": false,
           "internalType": "uint256",
           "name": "_dealId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_amount",
           "type": "uint256"
         }
       ],
@@ -119,15 +131,33 @@
       "anonymous": false,
       "inputs": [
         {
-          "indexed": true,
+          "indexed": false,
           "internalType": "uint256",
           "name": "_marketplaceId",
           "type": "uint256"
         },
         {
-          "indexed": true,
+          "indexed": false,
           "internalType": "uint256",
           "name": "_dealId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_paymentToProvider",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_totalPayment",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_clientRefund",
           "type": "uint256"
         }
       ],
@@ -138,15 +168,27 @@
       "anonymous": false,
       "inputs": [
         {
-          "indexed": true,
+          "indexed": false,
           "internalType": "uint256",
           "name": "_marketplaceId",
           "type": "uint256"
         },
         {
-          "indexed": true,
+          "indexed": false,
           "internalType": "uint256",
           "name": "_dealId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_paymentToProvider",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_totalPayment",
           "type": "uint256"
         }
       ],
@@ -157,16 +199,28 @@
       "anonymous": false,
       "inputs": [
         {
-          "indexed": true,
+          "indexed": false,
           "internalType": "uint256",
           "name": "_marketplaceId",
           "type": "uint256"
         },
         {
-          "indexed": true,
+          "indexed": false,
           "internalType": "uint256",
           "name": "_dealId",
           "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "bool",
+          "name": "_autoAccept",
+          "type": "bool"
         }
       ],
       "name": "DealCreated",
@@ -176,15 +230,21 @@
       "anonymous": false,
       "inputs": [
         {
-          "indexed": true,
+          "indexed": false,
           "internalType": "uint256",
           "name": "_marketplaceId",
           "type": "uint256"
         },
         {
-          "indexed": true,
+          "indexed": false,
           "internalType": "uint256",
           "name": "_dealId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_clientRefund",
           "type": "uint256"
         }
       ],
@@ -195,7 +255,7 @@
       "anonymous": false,
       "inputs": [
         {
-          "indexed": true,
+          "indexed": false,
           "internalType": "uint256",
           "name": "_marketplaceId",
           "type": "uint256"
@@ -208,13 +268,13 @@
       "anonymous": false,
       "inputs": [
         {
-          "indexed": true,
+          "indexed": false,
           "internalType": "uint256",
           "name": "_marketplaceId",
           "type": "uint256"
         },
         {
-          "indexed": true,
+          "indexed": false,
           "internalType": "uint256",
           "name": "_offerId",
           "type": "uint256"
@@ -227,13 +287,13 @@
       "anonymous": false,
       "inputs": [
         {
-          "indexed": true,
+          "indexed": false,
           "internalType": "uint256",
           "name": "_marketplaceId",
           "type": "uint256"
         },
         {
-          "indexed": true,
+          "indexed": false,
           "internalType": "uint256",
           "name": "_offerId",
           "type": "uint256"
@@ -246,13 +306,13 @@
       "anonymous": false,
       "inputs": [
         {
-          "indexed": true,
+          "indexed": false,
           "internalType": "uint256",
           "name": "_marketplaceId",
           "type": "uint256"
         },
         {
-          "indexed": true,
+          "indexed": false,
           "internalType": "uint256",
           "name": "_offerId",
           "type": "uint256"
@@ -284,13 +344,13 @@
       "anonymous": false,
       "inputs": [
         {
-          "indexed": true,
+          "indexed": false,
           "internalType": "uint256",
           "name": "_marketplaceId",
           "type": "uint256"
         },
         {
-          "indexed": true,
+          "indexed": false,
           "internalType": "address",
           "name": "_provider",
           "type": "address"
@@ -303,13 +363,81 @@
       "anonymous": false,
       "inputs": [
         {
-          "indexed": true,
+          "indexed": false,
           "internalType": "uint256",
           "name": "_marketplaceId",
           "type": "uint256"
         },
         {
-          "indexed": true,
+          "indexed": false,
+          "internalType": "address",
+          "name": "_provider",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_amount0",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_amount1",
+          "type": "uint256"
+        }
+      ],
+      "name": "ProviderStakeDecreased",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_marketplaceId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "_provider",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_liquidity",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_amount0",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_amount1",
+          "type": "uint256"
+        }
+      ],
+      "name": "ProviderStakeIncreased",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_marketplaceId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
           "internalType": "address",
           "name": "_provider",
           "type": "address"
@@ -322,13 +450,13 @@
       "anonymous": false,
       "inputs": [
         {
-          "indexed": true,
+          "indexed": false,
           "internalType": "uint256",
           "name": "_marketplaceId",
           "type": "uint256"
         },
         {
-          "indexed": true,
+          "indexed": false,
           "internalType": "address",
           "name": "_provider",
           "type": "address"
@@ -693,7 +821,7 @@
         },
         {
           "internalType": "string",
-          "name": "label",
+          "name": "metadata",
           "type": "string"
         },
         {
@@ -746,7 +874,7 @@
         },
         {
           "internalType": "string",
-          "name": "label",
+          "name": "metadata",
           "type": "string"
         },
         {
@@ -775,12 +903,12 @@
         },
         {
           "internalType": "uint256",
-          "name": "amountAddWeth",
+          "name": "amountWeth",
           "type": "uint256"
         },
         {
           "internalType": "uint256",
-          "name": "amountAddMedia",
+          "name": "amountMedia",
           "type": "uint256"
         },
         {
@@ -824,12 +952,12 @@
         },
         {
           "internalType": "uint256",
-          "name": "amountAddWeth",
+          "name": "amountWeth",
           "type": "uint256"
         },
         {
           "internalType": "uint256",
-          "name": "amountAddMedia",
+          "name": "amountMedia",
           "type": "uint256"
         }
       ],
@@ -837,7 +965,7 @@
       "outputs": [
         {
           "internalType": "bool",
-          "name": "updated",
+          "name": "",
           "type": "bool"
         }
       ],
@@ -1627,7 +1755,7 @@
           "components": [
             {
               "internalType": "string",
-              "name": "label",
+              "name": "metadata",
               "type": "string"
             },
             {
