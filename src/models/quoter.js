@@ -6,13 +6,12 @@ const { Token } = require("@uniswap/sdk-core")
 const { Pool, Position, FeeAmount } = require("@uniswap/v3-sdk")
 
 const Addresses = require("./../../contractAddresses.json")
-const { getConfig } = require("../config/config")
 
 const { formatUnits } = require("viem")
 
 class Quoter {
-  constructor() {
-    this.config = getConfig()
+  constructor(sdkInstance) {
+    this.config = sdkInstance.config
     this.chainId = this.config.publicClient.chain.id
     this.MEDIA_TOKEN = new Token(
       this.chainId,

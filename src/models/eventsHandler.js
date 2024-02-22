@@ -1,12 +1,11 @@
-const { getConfig } = require("../config/config")
 const MarketplaceABI = require("./../../abis/Marketplace.json").abi
 const MarketplaceViewerABI = require("../../abis/MarketplaceViewer.json").abi
 const ResourcesABI = require("./../../abis/Resources.json").abi
 const Addresses = require("./../../contractAddresses.json")
 
 class EventsHandler {
-  constructor() {
-    this.config = getConfig()
+  constructor(sdkInstance) {
+    this.config = sdkInstance.config
   }
 
   async getPastEvents({

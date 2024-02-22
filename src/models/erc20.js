@@ -1,9 +1,8 @@
 const ERC20ABI = require("../../abis/ERC20.json").abi
-const { getConfig } = require("../config/config")
 
 class ERC20 {
-  constructor() {
-    this.config = getConfig()
+  constructor(sdkInstance) {
+    this.config = sdkInstance.config
   }
 
   async view(address, functionName, args) {

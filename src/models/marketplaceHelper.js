@@ -1,11 +1,10 @@
 const Addresses = require("../../contractAddresses.json")
 const MarketplaceHelperABI = require("./../../abis/MarketplaceHelper.json").abi
-const { getConfig } = require("../config/config")
 const Uniswap = require("../utils/uniswap")
 
 class MarketplaceHelper {
-  constructor() {
-    this.config = getConfig()
+  constructor(sdkInstance) {
+    this.config = sdkInstance.config
 
     if (
       Addresses.MarketplaceHelper[this.config.publicClient.chain.id] ===

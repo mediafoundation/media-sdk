@@ -1,10 +1,9 @@
 const Addresses = require("./../../contractAddresses.json")
 const ResourcesABI = require("./../../abis/Resources.json").abi
-const { getConfig } = require("../config/config")
 
 class Resources {
-  constructor() {
-    this.config = getConfig()
+  constructor(sdkInstance) {
+    this.config = sdkInstance.config
 
     if (Addresses.Resources[this.config.publicClient.chain.id] === undefined) {
       throw new Error(
