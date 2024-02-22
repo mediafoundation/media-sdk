@@ -1,4 +1,25 @@
+# [4.0.0](https://github.com/mediafoundation/media-sdk/compare/v3.2.0...v4.0.0) (2024-02-22)
 
+
+### Bug Fixes
+
+* **marketplace.js:** wrong calculation ([0e99fcf](https://github.com/mediafoundation/media-sdk/commit/0e99fcf6d70bb1907554c5b8ee8f4693ac3955d1))
+* **marketplace.js:** wrong deal metadata ([3858f2c](https://github.com/mediafoundation/media-sdk/commit/3858f2c64b5a847b711e0e516caa0ef04a109e88))
+
+
+### Code Refactoring
+
+* **models:** implement Sdk class config on all models ([184784a](https://github.com/mediafoundation/media-sdk/commit/184784afe09b9f91b6de5bae90c756390e529a28))
+
+
+### Features
+
+* **sdk.js:** support multiple instances of the sdk ([033f536](https://github.com/mediafoundation/media-sdk/commit/033f5362f76bad3be5d22ad2801e5b4a85857f17))
+
+
+### BREAKING CHANGES
+
+* **models:** Sdk instance should be provided to constructor when instantiate a model
 
 # [3.2.2](https://github.com/mediafoundation/media-sdk/compare/v3.2.1...v3.2.2) (2024-01-16)
 
