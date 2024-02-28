@@ -1,3 +1,10 @@
+## [4.0.1](https://github.com/mediafoundation/media-sdk/compare/v4.0.0...v4.0.1) (2024-02-28)
+
+
+### Bug Fixes
+
+* **index.js:** export necessary Sdk class ([334e9a4](https://github.com/mediafoundation/media-sdk/commit/334e9a4e8e8365dcb9e158d1501aae4462598e14))
+
 # [4.0.0](https://github.com/mediafoundation/media-sdk/compare/v3.2.0...v4.0.0) (2024-02-22)
 
 
