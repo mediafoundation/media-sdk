@@ -11,6 +11,7 @@ const Quoter = require("./src/models/quoter");
 const Addresses = require("./contractAddresses.json");
 const Signer = require("./src/utils/signer");
 const ERC20 = require("./src/models/erc20");
+const {Sdk} = require("./src/config/sdk");
 
 const config = getConfig;
 
@@ -30,4 +31,5 @@ module.exports = {
   Addresses,
   Signer,
   ERC20,
+  Sdk
 };
