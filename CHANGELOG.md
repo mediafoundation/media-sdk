@@ -28,6 +28,30 @@
 
 * **models:** Sdk instance should be provided to constructor when instantiate a model
 
+# [3.2.6](https://github.com/mediafoundation/media-sdk/compare/v3.2.5...v3.2.6) (2024-02-15)
+
+### Bug Fixes
+
+Missing new abis.
+
+# [3.2.5](https://github.com/mediafoundation/media-sdk/compare/v3.2.4...v3.2.5) (2024-02-15)
+
+### Bug Fixes
+
+Missing file change.
+
+# [3.2.4](https://github.com/mediafoundation/media-sdk/compare/v3.2.3...v3.2.4) (2024-02-15)
+
+### Bug Fixes
+
+Removed Goerli and Base Goerli and added Sepolia and Base Sepolia in the config. Also removed contract addresses that are not longer supported.
+
+# [3.2.3](https://github.com/mediafoundation/media-sdk/compare/v3.2.2...v3.2.3) (2024-02-14)
+
+### Updates
+
+Added contract addresses for Ethereum Sepolia and Base Sepolia.
+
 # [3.2.2](https://github.com/mediafoundation/media-sdk/compare/v3.2.1...v3.2.2) (2024-01-16)
 
 ### Bug Fixes

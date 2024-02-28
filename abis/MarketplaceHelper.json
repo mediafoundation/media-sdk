@@ -269,7 +269,7 @@
         },
         {
           "internalType": "string",
-          "name": "label",
+          "name": "metadata",
           "type": "string"
         },
         {
@@ -339,7 +339,7 @@
         },
         {
           "internalType": "string",
-          "name": "label",
+          "name": "metadata",
           "type": "string"
         },
         {
@@ -537,6 +537,16 @@
           "internalType": "uint256",
           "name": "collectedToken1",
           "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "token0",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "token1",
+          "type": "address"
         }
       ],
       "stateMutability": "nonpayable",
@@ -551,6 +561,11 @@
         },
         {
           "internalType": "uint256",
+          "name": "minOutputMedia",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
           "name": "minMediaAmount",
           "type": "uint256"
         },
@@ -558,6 +573,11 @@
           "internalType": "uint256",
           "name": "minWethAmount",
           "type": "uint256"
+        },
+        {
+          "internalType": "uint24",
+          "name": "poolFee",
+          "type": "uint24"
         }
       ],
       "name": "unregisterRemoveLiquidityAndSwap",
