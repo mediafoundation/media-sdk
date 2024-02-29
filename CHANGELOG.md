@@ -1,3 +1,11 @@
+## [4.0.3](https://github.com/mediafoundation/media-sdk/compare/v4.0.2...v4.0.3) (2024-02-29)
+
+
+### Bug Fixes
+
+* **index.js, sdk.js:** provide correct valid chains ([809c66f](https://github.com/mediafoundation/media-sdk/commit/809c66fcb9c8aed188f86f7247f60674421596e8))
+* **utils/signer.js, utils/blockchain.js:** utilize sdk instance config in constructor ([7c19461](https://github.com/mediafoundation/media-sdk/commit/7c194616b2ccdbee63a8783aa0cafe44ad05fdb9))
+
 ## [4.0.2](https://github.com/mediafoundation/media-sdk/compare/v4.0.1...v4.0.2) (2024-02-29)
 
 
