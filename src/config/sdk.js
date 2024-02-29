@@ -1,7 +1,7 @@
 const viem = require("viem");
 const accounts = require("viem/accounts");
 const chains = require("viem/chains");
-const {goerli, baseGoerli} = require("viem/chains");
+const { sepolia, baseSepolia } = require("viem/chains")
 
 const defaultChain = chains.goerli
 
@@ -53,6 +53,6 @@ class Sdk {
 module.exports.Sdk = Sdk
 
 module.exports.validChains = {
-  5: goerli,
-  84531: baseGoerli,
+  11155111: sepolia,
+  84532: baseSepolia,
 }
