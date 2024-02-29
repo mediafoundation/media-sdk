@@ -1,3 +1,10 @@
+## [4.0.2](https://github.com/mediafoundation/media-sdk/compare/v4.0.1...v4.0.2) (2024-02-29)
+
+
+### Bug Fixes
+
+* **config:** merge changes from main into support-multiple-sdk-instances ([a25d46c](https://github.com/mediafoundation/media-sdk/commit/a25d46c90197b801d208a922e3c7c49f07d994fb))
+
 ## [4.0.1](https://github.com/mediafoundation/media-sdk/compare/v4.0.0...v4.0.1) (2024-02-28)
 
 
