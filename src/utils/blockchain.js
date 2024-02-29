@@ -1,8 +1,6 @@
-const { getConfig } = require("../config/config")
-
 class Blockchain {
-  constructor() {
-    this.config = getConfig()
+  constructor(sdkInstance) {
+    this.config = sdkInstance.config
   }
 
   async getBlockNumber() {

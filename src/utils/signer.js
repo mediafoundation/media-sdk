@@ -1,9 +1,8 @@
-const { getConfig } = require("../config/config")
 const { verifyTypedData, verifyMessage} = require("viem")
 
 class Signer {
-  constructor() {
-    this.config = getConfig()
+  constructor(sdkInstance) {
+    this.config = sdkInstance.config
   }
 
   async signTypedMessage({ account, domain, types, primaryType, message }) {
