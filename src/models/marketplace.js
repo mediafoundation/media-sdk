@@ -1,10 +1,9 @@
 const Addresses = require("./../../contractAddresses.json")
 const MarketplaceABI = require("./../../abis/Marketplace.json").abi
-const { getConfig } = require("../config/config")
 
 class Marketplace {
-  constructor() {
-    this.config = getConfig()
+  constructor(sdkInstance) {
+    this.config = sdkInstance.config
 
     if (
       Addresses.Marketplace[this.config.publicClient.chain.id] === undefined

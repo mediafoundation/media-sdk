@@ -1,10 +1,9 @@
 const Addresses = require("./../../contractAddresses.json")
 const MarketplaceViewerABI = require("../../abis/MarketplaceViewer.json").abi
-const { getConfig } = require("../config/config")
 
 class MarketplaceViewer {
-  constructor() {
-    this.config = getConfig()
+  constructor(sdkInstance) {
+    this.config = sdkInstance.config
 
     if (
       Addresses.MarketplaceViewer[this.config.publicClient.chain.id] ===
