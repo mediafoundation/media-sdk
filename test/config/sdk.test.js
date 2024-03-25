@@ -34,4 +34,10 @@ describe("Sdk", () => {
     expect(sdk.config.publicClient.transport.url).toBe("http://localhost:8545");
     expect(sdk.config.walletClient.transport.url).toBe("http://localhost:8545");
   })
+
+  test("Null mnemonic or private key should initialize with publicClient only", () =>{
+    const sdk = new Sdk();
+
+    expect(sdk.config.publicClient).not.toBe(undefined)
+  })
 });

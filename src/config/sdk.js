@@ -32,7 +32,7 @@ class Sdk {
   }
 
   generatePublicClient({chain, transport}) {
-    viem.createPublicClient({
+    return viem.createPublicClient({
       chain: chain,
       transport: viem.http(transport),
     })
