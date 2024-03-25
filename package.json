@@ -1,6 +1,6 @@
 {
   "name": "media-sdk",
-  "version": "4.0.3",
+  "version": "4.0.4",
   "main": "index.js",
   "repository": "git@github.com:mediafoundation/media-sdk.git",
   "author": "Media Foundation <hello@media.foundation>",

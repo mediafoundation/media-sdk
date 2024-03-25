@@ -1,3 +1,10 @@
+## [4.0.4](https://github.com/mediafoundation/media-sdk/compare/v4.0.3...v4.0.4) (2024-03-25)
+
+
+### Bug Fixes
+
+* **sdk.js:** return publicClient when generated if no private key or mnemonic given ([e997aec](https://github.com/mediafoundation/media-sdk/commit/e997aec509826c8f86cedafa8c76bf419bcc8c32))
+
 ## [4.0.3](https://github.com/mediafoundation/media-sdk/compare/v4.0.2...v4.0.3) (2024-02-29)
 
 
