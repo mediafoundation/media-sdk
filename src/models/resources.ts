@@ -39,8 +39,7 @@ export class Resources {
         args: args,
         account: this.config.walletClient.account,
       })
-      const hash = await this.config.walletClient.writeContract(request)
-      return hash
+      return await this.config.walletClient.writeContract(request)
     } catch (error) {
       throw error
     }
