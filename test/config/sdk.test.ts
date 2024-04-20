@@ -1,4 +1,4 @@
-import {Sdk} from "../../src/config/sdk";
+import {Sdk} from "../../src";
 
 describe("Sdk", () => {
   test("Initialize sdk with default chain and transport", () => {

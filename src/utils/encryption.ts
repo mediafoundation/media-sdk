@@ -1,6 +1,5 @@
 import crypto from "crypto"
 import ethSigUtil from "@metamask/eth-sig-util"
-import any = jasmine.any;
 
 export class Encryption {
   static ethSigDecrypt(encryptedData, privateKey) {

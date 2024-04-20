@@ -1,4 +1,4 @@
-import {Sdk} from "../../src/config/sdk";
+import {Sdk} from "../config/sdk";
 
 export class Blockchain {
   private config
