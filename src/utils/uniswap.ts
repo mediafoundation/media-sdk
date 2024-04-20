@@ -1,12 +1,13 @@
-const viem = require("viem")
-const bn = require("bignumber.js")
+import viem from "viem";
+
+import bn from "bignumber.js";
 
 const ADDR_SIZE = 20
 const FEE_SIZE = 3
 const OFFSET = ADDR_SIZE + FEE_SIZE
 const DATA_SIZE = OFFSET + ADDR_SIZE
 
-class Uniswap {
+export class Uniswap {
   static calculateSqrtPriceX96(reserveA, reserveB) {
     return bn(reserveA).div(reserveB).sqrt().multipliedBy(bn(2).pow(96))
   }
@@ -54,7 +55,8 @@ class Uniswap {
       .join("")
   }
 
-  static decodePath(path) {
+  //todo: Check inconsistencies
+  /*static decodePath(path) {
     let data = new Uint8Array(
       path
         .slice(2)
@@ -77,8 +79,6 @@ class Uniswap {
     tokens = [...tokens, finalToken]
 
     return [tokens, fees]
-  }
+  }*/
 
 }
-
-module.exports = Uniswap

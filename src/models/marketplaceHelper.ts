@@ -1,9 +1,14 @@
-const Addresses = require("../../contractAddresses.json")
-const MarketplaceHelperABI = require("./../../abis/MarketplaceHelper.json").abi
-const Uniswap = require("../utils/uniswap")
+import {Sdk} from "../config/sdk";
 
-class MarketplaceHelper {
-  constructor(sdkInstance) {
+import {Uniswap} from "../utils/uniswap";
+
+import * as Addresses from "../../contractAddresses.json";
+
+import {abi as MarketplaceHelperABI} from "../../abis/MarketplaceHelper.json"
+
+export class MarketplaceHelper {
+  private config
+  constructor(sdkInstance: Sdk) {
     this.config = sdkInstance.config
 
     if (
@@ -58,8 +63,7 @@ class MarketplaceHelper {
         account: this.config.walletClient.account,
         value: value,
       })
-      const hash = await this.config.walletClient.writeContract(request)
-      return hash
+      return await this.config.walletClient.writeContract(request)
     } catch (error) {
       throw error
     }
@@ -207,5 +211,3 @@ class MarketplaceHelper {
     )
   }
 }
-
-module.exports = MarketplaceHelper

@@ -1,8 +1,12 @@
-const Addresses = require("./../../contractAddresses.json")
-const MarketplaceViewerABI = require("../../abis/MarketplaceViewer.json").abi
+import {Sdk} from "../config/sdk";
 
-class MarketplaceViewer {
-  constructor(sdkInstance) {
+import * as Addresses from "../../contractAddresses.json";
+
+import {abi as MarketplaceViewerABI} from "../../abis/MarketplaceViewer.json"
+
+export class MarketplaceViewer {
+  private config
+  constructor(sdkInstance: Sdk) {
     this.config = sdkInstance.config
 
     if (
@@ -34,7 +38,7 @@ class MarketplaceViewer {
   }
 
   async getAllOffersPaginating({ marketplaceId, start = 0, steps = 20 }) {
-    let offers = []
+    let offers: any[] = []
     let _steps = BigInt(steps)
     let _start = BigInt(start)
 
@@ -89,7 +93,7 @@ class MarketplaceViewer {
     start = 0,
     steps = 20,
   }) {
-    let deals = []
+    let deals: any[] = []
 
     let _steps = BigInt(steps)
     let _start = BigInt(start)
@@ -131,5 +135,3 @@ class MarketplaceViewer {
     return deals
   }
 }
-
-module.exports = MarketplaceViewer

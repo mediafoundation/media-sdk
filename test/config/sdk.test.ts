@@ -1,4 +1,5 @@
-const { Sdk } = require("../../src/config/sdk");
+import {Sdk} from "../../src/config/sdk";
+
 describe("Sdk", () => {
   test("Initialize sdk with default chain and transport", () => {
 
@@ -19,20 +20,10 @@ describe("Sdk", () => {
   })
 
   test("Provide custom transport and chain", () => {
-    const sdk = new Sdk({
-      chain: {
-        rpcUrls: {
-          default: {
-            http: "http://localhost:8545"
-          }
-        }
-      },
-      transport: "http://localhost:8545",
-      mnemonic: "some mnemonic of twelve words in some mnemonic of twelve words in",
-    });
+    const sdk = new Sdk({transport: ["http://localhost:8545"], mnemonic: "some mnemonic of twelve words in some mnemonic of twelve words in"});
 
-    expect(sdk.config.publicClient.transport.url).toBe("http://localhost:8545");
-    expect(sdk.config.walletClient.transport.url).toBe("http://localhost:8545");
+    expect(sdk.config.publicClient.transport.transports[0].value.url).toBe("http://localhost:8545");
+    expect(sdk.config.walletClient.transport.transports[0].value.url).toBe("http://localhost:8545");
   })
 
   test("Null mnemonic or private key should initialize with publicClient only", () =>{

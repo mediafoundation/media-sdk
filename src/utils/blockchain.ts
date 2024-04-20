@@ -1,5 +1,8 @@
-class Blockchain {
-  constructor(sdkInstance) {
+import {Sdk} from "../../src/config/sdk";
+
+export class Blockchain {
+  private config
+  constructor(sdkInstance: Sdk) {
     this.config = sdkInstance.config
   }
 
@@ -7,5 +10,3 @@ class Blockchain {
     return await this.config.publicClient.getBlockNumber()
   }
 }
-
-module.exports = Blockchain
