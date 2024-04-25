@@ -1,6 +1,7 @@
 import viem from "viem";
 
 import bn from "bignumber.js";
+import {FeeAmount} from "@uniswap/v3-sdk";
 
 const ADDR_SIZE = 20
 const FEE_SIZE = 3
@@ -12,73 +13,72 @@ export class Uniswap {
     return bn(reserveA).div(reserveB).sqrt().multipliedBy(bn(2).pow(96))
   }
 
-  static encodePath(path, fees) {
-    if (path.length !== fees.length + 1) {
-      throw new Error("path/fee lengths do not match")
+  static encodePath(path: string[], fees: FeeAmount[]): string {
+    if (path.length != fees.length + 1) {
+      throw new Error('path/fee lengths do not match')
     }
 
-    let encoded = "0x"
+    let encoded = '0x'
     for (let i = 0; i < fees.length; i++) {
+      // 20 byte encoding of the address
       encoded += path[i].slice(2)
-      encoded += fees[i].toString(16).padStart(2 * FEE_SIZE, "0")
+      // 3 byte encoding of the fee
+      encoded += fees[i].toString(16).padStart(2 * FEE_SIZE, '0')
     }
+    // encode the final token
     encoded += path[path.length - 1].slice(2)
 
     return encoded.toLowerCase()
   }
 
-  static decodeOne(tokenFeeToken) {
-    const tokenABuf = tokenFeeToken.slice(0, ADDR_SIZE)
-    const tokenA = viem.getAddress("0x" + this.arrayBufferToHex(tokenABuf))
+  static decodeOne(tokenFeeToken: Buffer): [[string, string], number] {
+    // reads the first 20 bytes for the token address
+    const tokenABuf = tokenFeeToken.subarray(0, ADDR_SIZE)
+    const tokenA = viem.getAddress('0x' + tokenABuf.toString('hex'))
 
-    const feeBuf = tokenFeeToken.slice(ADDR_SIZE, OFFSET)
-    // Read fee as a 3-byte big-endian integer
-    const fee = this.readBigEndian(feeBuf, FEE_SIZE)
+    // reads the next 2 bytes for the fee
+    const feeBuf = tokenFeeToken.subarray(ADDR_SIZE, OFFSET)
+    const fee = feeBuf.readUIntBE(0, FEE_SIZE)
 
-    const tokenBBuf = tokenFeeToken.slice(OFFSET, DATA_SIZE)
-    const tokenB = viem.getAddress("0x" + this.arrayBufferToHex(tokenBBuf))
+    // reads the next 20 bytes for the token address
+    const tokenBBuf = tokenFeeToken.subarray(OFFSET, DATA_SIZE)
+    const tokenB = viem.getAddress('0x' + tokenBBuf.toString('hex'))
 
     return [[tokenA, tokenB], fee]
   }
 
-  static readBigEndian(buffer, size) {
+  /*static readBigEndian(buffer, size) {
     let value = 0
     for (let i = 0; i < size; i++) {
       value = (value << 8) | buffer[i]
     }
     return value
-  }
+  }*/
 
-  static arrayBufferToHex(buffer) {
+  /*static arrayBufferToHex(buffer) {
     return Array.prototype.map
       .call(new Uint8Array(buffer), (x) => x.toString(16).padStart(2, "0"))
       .join("")
-  }
+  }*/
 
-  //todo: Check inconsistencies
-  /*static decodePath(path) {
-    let data = new Uint8Array(
-      path
-        .slice(2)
-        .match(/.{1,2}/g)
-        .map((byte) => parseInt(byte, 16))
-    )
+  static decodePath(path: string): [string[], number[]] {
+    let data = Buffer.from(path.slice(2), 'hex')
 
-    let tokens = []
-    let fees = []
+    let tokens: string[] = []
+    let fees: number[] = []
     let i = 0
-    let finalToken = ""
+    let finalToken: string = ''
     while (data.length >= DATA_SIZE) {
-      const [[tokenA, tokenB], fee] = this.decodeOne(data, FEE_SIZE)
+      const [[tokenA, tokenB], fee] = this.decodeOne(data)
       finalToken = tokenB
       tokens = [...tokens, tokenA]
       fees = [...fees, fee]
-      data = data.slice((i + 1) * OFFSET)
+      data = data.subarray((i + 1) * OFFSET)
       i += 1
     }
     tokens = [...tokens, finalToken]
 
     return [tokens, fees]
-  }*/
+  }
 
 }
