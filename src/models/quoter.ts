@@ -102,7 +102,7 @@ export class Quoter {
   }
 
   async getQuote(inputToken, amountIn, outputToken) {
-    /*if (!amountIn || !inputToken || !outputToken) return false*/
+    if (!amountIn || !inputToken || !outputToken) return false
     if (inputToken.address === outputToken.address) {
       return {
         quote: BigInt(amountIn),
@@ -176,7 +176,7 @@ export class Quoter {
     return best
   }
 
-  fancyRoute = (path, fees) => {
+  fancyRoute(path, fees) {
     if (!path.length || path.length !== fees.length + 1) {
       return ""
     }
@@ -240,8 +240,8 @@ export class Quoter {
       this.WETH_TOKEN,
       fee
     )
-    let required0Half = await this.getQuote(token0, String(amount0), inputToken)
-    let required1Half = await this.getQuote(token1, String(amount1), inputToken)
+    const required0Half: any = await this.getQuote(token0, String(amount0), inputToken)
+    const required1Half: any = await this.getQuote(token1, String(amount1), inputToken)
     return {
       requiredAmounts: {
         amount0: formatUnits(BigInt(amount0.toString()), token0.decimals),
