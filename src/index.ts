@@ -24,6 +24,10 @@ export {Signer} from "./utils/signer";
 
 export {Sdk, validChains} from "./config/sdk";
 
+export {RatingSystem} from "./models/ratingSystem"
+
+export {Disputes} from "./models/disputes"
+
 
 /*module.exports = {
   validChains,
