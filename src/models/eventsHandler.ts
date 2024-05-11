@@ -17,9 +17,15 @@ export class EventsHandler {
   async getPastEvents({
     contractName,
     contractAbi,
-    eventName,
+    eventName = undefined,
     fromBlock,
     toBlock,
+  }: {
+    contractName: string,
+    contractAbi: any,
+    eventName: string[] | string | undefined,
+    fromBlock: bigint,
+    toBlock: bigint,
   }) {
     if (
       Addresses[contractName][this.config.publicClient.chain.id] === undefined
@@ -64,7 +70,7 @@ export class EventsHandler {
     })
   }
 
-  async getMarketplacePastEvents({ eventName, fromBlock, toBlock }) {
+  async getMarketplacePastEvents({ eventName, fromBlock, toBlock }: {eventName: string[] | string | undefined, fromBlock: bigint, toBlock: bigint}) {
     return await this.getPastEvents({
       contractName: "Marketplace",
       contractAbi: MarketplaceABI,
@@ -84,7 +90,7 @@ export class EventsHandler {
     })
   }
 
-  async getResourcesPastEvents({ eventName, fromBlock, toBlock }) {
+  async getResourcesPastEvents({ eventName, fromBlock, toBlock }: {eventName: string[] | string | undefined, fromBlock: bigint, toBlock: bigint}) {
     return await this.getPastEvents({
       contractName: "Resources",
       contractAbi: ResourcesABI,
