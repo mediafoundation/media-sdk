@@ -1,19 +1,31 @@
-const MarketplaceABI = require("./../../abis/Marketplace.json").abi
-const MarketplaceViewerABI = require("../../abis/MarketplaceViewer.json").abi
-const ResourcesABI = require("./../../abis/Resources.json").abi
-const Addresses = require("./../../contractAddresses.json")
+import * as Addresses from "../../contractAddresses.json";
 
-class EventsHandler {
-  constructor(sdkInstance) {
+import {abi as ResourcesABI} from "../../abis/Resources.json";
+import {abi as MarketplaceABI} from "../../abis/Marketplace.json";
+import {abi as MarketplaceViewerABI} from "../../abis/MarketplaceViewer.json";
+
+import {Sdk} from "../config/sdk";
+import {Address} from "viem";
+
+export class EventsHandler {
+  private config
+
+  constructor(sdkInstance: Sdk) {
     this.config = sdkInstance.config
   }
 
   async getPastEvents({
     contractName,
     contractAbi,
-    eventName,
+    eventName = undefined,
     fromBlock,
     toBlock,
+  }: {
+    contractName: string,
+    contractAbi: any,
+    eventName: string[] | string | undefined,
+    fromBlock: bigint,
+    toBlock: bigint,
   }) {
     if (
       Addresses[contractName][this.config.publicClient.chain.id] === undefined
@@ -25,7 +37,7 @@ class EventsHandler {
       )
     }
     return await this.config.publicClient.getContractEvents({
-      address: Addresses[contractName][this.config.publicClient.chain.id],
+      address: Addresses[contractName][this.config.publicClient.chain.id] as Address,
       abi: contractAbi,
       eventName: eventName,
       fromBlock: fromBlock,
@@ -58,7 +70,7 @@ class EventsHandler {
     })
   }
 
-  async getMarketplacePastEvents({ eventName, fromBlock, toBlock }) {
+  async getMarketplacePastEvents({ eventName, fromBlock, toBlock }: {eventName: string[] | string | undefined, fromBlock: bigint, toBlock: bigint}) {
     return await this.getPastEvents({
       contractName: "Marketplace",
       contractAbi: MarketplaceABI,
@@ -78,7 +90,7 @@ class EventsHandler {
     })
   }
 
-  async getResourcesPastEvents({ eventName, fromBlock, toBlock }) {
+  async getResourcesPastEvents({ eventName, fromBlock, toBlock }: {eventName: string[] | string | undefined, fromBlock: bigint, toBlock: bigint}) {
     return await this.getPastEvents({
       contractName: "Resources",
       contractAbi: ResourcesABI,
@@ -118,5 +130,3 @@ class EventsHandler {
     })
   }
 }
-
-module.exports = EventsHandler

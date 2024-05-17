@@ -1,8 +1,12 @@
-const Addresses = require("./../../contractAddresses.json")
-const ResourcesABI = require("./../../abis/Resources.json").abi
+import * as Addresses from "../../contractAddresses.json";
 
-class Resources {
-  constructor(sdkInstance) {
+import {abi as ResourcesABI} from "../../abis/Resources.json"
+
+import {Sdk} from "../config/sdk";
+
+export class Resources {
+  private config
+  constructor(sdkInstance: Sdk) {
     this.config = sdkInstance.config
 
     if (Addresses.Resources[this.config.publicClient.chain.id] === undefined) {
@@ -35,8 +39,7 @@ class Resources {
         args: args,
         account: this.config.walletClient.account,
       })
-      const hash = await this.config.walletClient.writeContract(request)
-      return hash
+      return await this.config.walletClient.writeContract(request)
     } catch (error) {
       throw error
     }
@@ -75,7 +78,7 @@ class Resources {
   }
 
   async getAllResourcesPaginating({ address, start = 0, steps = 20 }) {
-    let resources = []
+    let resources: any[] = []
 
     let _steps = BigInt(steps)
     let _start = BigInt(start)
@@ -120,5 +123,3 @@ class Resources {
   }
 
 }
-
-module.exports = Resources

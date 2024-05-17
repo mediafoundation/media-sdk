@@ -1,16 +1,29 @@
-const QuoterV2ABI =
+import {Token} from "@uniswap/sdk-core";
+
+import {FeeAmount, Pool, Position} from "@uniswap/v3-sdk";
+
+import * as Addresses from "../../contractAddresses.json";
+
+import {formatUnits} from "viem";
+
+import {Sdk} from "../config/sdk";
+
+/*const QuoterV2ABI =
   require("@uniswap/v3-periphery/artifacts/contracts/lens/QuoterV2.sol/QuoterV2.json").abi
 const IUniswapV3PoolABI =
-  require("@uniswap/v3-core/artifacts/contracts/interfaces/IUniswapV3Pool.sol/IUniswapV3Pool.json").abi
-const { Token } = require("@uniswap/sdk-core")
-const { Pool, Position, FeeAmount } = require("@uniswap/v3-sdk")
+  require("@uniswap/v3-core/artifacts/contracts/interfaces/IUniswapV3Pool.sol/IUniswapV3Pool.json").abi*/
 
-const Addresses = require("./../../contractAddresses.json")
+import {abi as QuoterV2ABI} from "@uniswap/v3-periphery/artifacts/contracts/lens/QuoterV2.sol/QuoterV2.json"
+import {abi as IUniswapV3PoolABI} from "@uniswap/v3-core/artifacts/contracts/interfaces/IUniswapV3Pool.sol/IUniswapV3Pool.json"
 
-const { formatUnits } = require("viem")
 
-class Quoter {
-  constructor(sdkInstance) {
+export class Quoter {
+  private config
+  private chainId
+  private MEDIA_TOKEN
+  private WETH_TOKEN
+
+  constructor(sdkInstance: Sdk) {
     this.config = sdkInstance.config
     this.chainId = this.config.publicClient.chain.id
     this.MEDIA_TOKEN = new Token(
@@ -163,7 +176,7 @@ class Quoter {
     return best
   }
 
-  fancyRoute = (path, fees) => {
+  fancyRoute(path, fees) {
     if (!path.length || path.length !== fees.length + 1) {
       return ""
     }
@@ -192,9 +205,9 @@ class Quoter {
         token0,
         token1,
         fee,
-        poolData.slot0[0].toString(),
+        poolData?.slot0[0].toString(),
         0,
-        poolData.slot0[1],
+        poolData?.slot0[1],
         []
       )
       const liquidityPosition = new Position({
@@ -227,12 +240,12 @@ class Quoter {
       this.WETH_TOKEN,
       fee
     )
-    let required0Half = await this.getQuote(token0, String(amount0), inputToken)
-    let required1Half = await this.getQuote(token1, String(amount1), inputToken)
+    const required0Half: any = await this.getQuote(token0, String(amount0), inputToken)
+    const required1Half: any = await this.getQuote(token1, String(amount1), inputToken)
     return {
       requiredAmounts: {
-        amount0: formatUnits(amount0.toString(), token0.decimals),
-        amount1: formatUnits(amount1.toString(), token1.decimals),
+        amount0: formatUnits(BigInt(amount0.toString()), token0.decimals),
+        amount1: formatUnits(BigInt(amount1.toString()), token1.decimals),
         token0: token0.symbol,
         token1: token1.symbol,
       },
@@ -240,5 +253,3 @@ class Quoter {
     }
   }
 }
-
-module.exports = Quoter

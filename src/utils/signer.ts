@@ -1,7 +1,10 @@
-const { verifyTypedData, verifyMessage} = require("viem")
+import {verifyMessage, verifyTypedData} from "viem";
+import {Sdk} from "../config/sdk";
 
-class Signer {
-  constructor(sdkInstance) {
+
+export class Signer {
+  private config
+  constructor(sdkInstance: Sdk) {
     this.config = sdkInstance.config
   }
 
@@ -51,5 +54,3 @@ class Signer {
     }
 
 }
-
-module.exports = Signer

@@ -1,15 +1,14 @@
-const crypto = require("crypto")
-const ethSigUtil = require("@metamask/eth-sig-util")
+import crypto from "crypto"
+import ethSigUtil from "@metamask/eth-sig-util"
 
-class Encryption {
+export class Encryption {
   static ethSigDecrypt(encryptedData, privateKey) {
-    let decrypt = ethSigUtil.decrypt({
+    return ethSigUtil.decrypt({
       encryptedData: JSON.parse(
-        Buffer.from(encryptedData.slice(2), "hex").toString("utf8")
+          Buffer.from(encryptedData.slice(2), "hex").toString("utf8")
       ),
       privateKey: privateKey,
     })
-    return decrypt
   }
 
   static ethSigEncrypt(publicKey, data) {
@@ -21,7 +20,7 @@ class Encryption {
     return `0x${Buffer.from(JSON.stringify(encrypted), "utf8").toString("hex")}`
   }
 
-  static encrypt(plaintext, sharedKey = false) {
+  static encrypt(plaintext, sharedKey: any = false) {
     sharedKey = !sharedKey
       ? crypto.randomBytes(32)
       : Buffer.from(sharedKey, "base64")
@@ -50,5 +49,3 @@ class Encryption {
     return decrypted
   }
 }
-
-module.exports = Encryption
