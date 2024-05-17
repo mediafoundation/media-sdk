@@ -156,6 +156,13 @@ export class Marketplace {
     ])
   }
 
+  async getProvider({marketplaceId, provider}: {marketplaceId: number, provider: string}) {
+    return await this.view("getProvider", [
+        marketplaceId,
+        provider
+    ])
+  }
+
   static getDealDetails(deal) {
     const unixTime = BigInt(Math.floor(Date.now() / 1000))
     let metadata
