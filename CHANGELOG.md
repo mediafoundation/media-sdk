@@ -1,3 +1,21 @@
+# [4.1.0](https://github.com/mediafoundation/media-sdk/compare/v4.0.4...v4.1.0) (2024-05-17)
+
+
+### Bug Fixes
+
+* **eventshandler.ts:** accept undefined as eventName ([18e0be4](https://github.com/mediafoundation/media-sdk/commit/18e0be4b86613f0c2cc585330b04163bf1275f40))
+* **imports:** Remove useless import and shorten some ([b9ae84e](https://github.com/mediafoundation/media-sdk/commit/b9ae84e59c2f4410b4e3ee0f12b5ab62b086af44))
+* **quoter.ts:** Fix types ([24444fb](https://github.com/mediafoundation/media-sdk/commit/24444fbf9d81d49878a76976c0a31d53b2c6ca31))
+* **uniswap.ts:** Fix inconsistencies on class ([1f75f4f](https://github.com/mediafoundation/media-sdk/commit/1f75f4fddeb25b55aa626db1695d6a59f42d2014))
+
+
+### Features
+
+* **blockchain.ts:** get block timestamp given a block number ([66cadc9](https://github.com/mediafoundation/media-sdk/commit/66cadc9ab7abe68e81e51fd3e28a60273fbd2bc9))
+* **disputes.ts:** Add a new disputes model with execute and view functions ([961f690](https://github.com/mediafoundation/media-sdk/commit/961f69027169cd7e36498bd7ace76655fd2291df))
+* **marketplace.ts:** add function to get provider data ([b71a010](https://github.com/mediafoundation/media-sdk/commit/b71a010a4287dddd0be2c2139c4636d9aaf781f3))
+* **ratingSystem.ts:** Add a new ratingSystem model with execute and view functions ([f1d71d4](https://github.com/mediafoundation/media-sdk/commit/f1d71d4eb247bc38f98e15465844e2cb3fe92da2))
+
 ## [4.0.4](https://github.com/mediafoundation/media-sdk/compare/v4.0.3...v4.0.4) (2024-03-25)
 
 
