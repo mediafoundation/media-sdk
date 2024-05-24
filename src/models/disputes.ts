@@ -1,9 +1,9 @@
-import {Sdk} from "../config/sdk";
+import {Sdk, SdkConfig} from "../config/sdk";
 import {abi as DisputesABI} from "../../abis/Disputes.json"
 import {Address} from "viem";
 
 export class Disputes {
-    private config
+    private config: SdkConfig
 
     constructor(sdkInstance: Sdk) {
         this.config = sdkInstance.config
@@ -29,7 +29,7 @@ export class Disputes {
                 abi: DisputesABI,
                 functionName: functionName,
                 args: args,
-                account: this.config.walletClient.account.address,
+                account: this.config.walletClient.account!.address,
             })
             return await this.config.walletClient.writeContract(request)
         } catch (error) {
