@@ -1,3 +1,5 @@
+import * as Addresses from "./../contractAddresses.json";
+
 export {Marketplace} from "./models/marketplace";
 
 export {ERC20} from "./models/erc20";
@@ -18,7 +20,7 @@ export {Uniswap} from "./utils/uniswap";
 
 export {Quoter} from "./models/quoter";
 
-/*export "./../contractAddresses.json" as Addresses;*/
+export {Addresses}
 
 export {Signer} from "./utils/signer";
 
