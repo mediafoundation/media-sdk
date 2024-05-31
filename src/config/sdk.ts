@@ -9,13 +9,27 @@ interface SdkConstructor {
     walletClient?: any | undefined,
 }
 
+export type SdkConfig = {
+    walletClient: WalletClient,
+    publicClient: PublicClient
+}
+
 const defaultChain = goerli
 
-import {Chain, createPublicClient, createWalletClient, fallback, http, publicActions, Transport} from "viem";
+import {
+    Chain,
+    createPublicClient,
+    createWalletClient,
+    fallback,
+    http,
+    publicActions, PublicClient,
+    Transport,
+    WalletClient
+} from "viem";
 import {mnemonicToAccount, privateKeyToAccount} from "viem/accounts";
 
 export class Sdk {
-    public config: any
+    public config: SdkConfig
     constructor({
         chain = defaultChain,
         transport = undefined,

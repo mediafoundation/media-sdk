@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "module": "ES6",                                /* Specify what module code is generated. */
-    "target": "ES5", /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
+    "target": "ES2020", /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
     "lib": ["ES2020", "DOM"],
     "esModuleInterop": true,
     "outDir": "./dist/lib/es6",

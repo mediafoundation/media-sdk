@@ -1,10 +1,10 @@
-import {Sdk} from "../config/sdk";
+import {Sdk, SdkConfig} from "../config/sdk";
 
 import {abi as ERC20ABI} from "../../abis/ERC20.json";
 import {Address} from "viem";
 
 export class ERC20 {
-  private config
+  private config: SdkConfig
   constructor(sdkInstance: Sdk) {
     this.config = sdkInstance.config
   }
@@ -29,7 +29,7 @@ export class ERC20 {
         abi: ERC20ABI,
         functionName: functionName,
         args: args,
-        account: this.config.walletClient.account.address,
+        account: this.config.walletClient.account!.address,
       })
       return await this.config.walletClient.writeContract(request)
     } catch (error) {
@@ -40,7 +40,7 @@ export class ERC20 {
   async balanceOf(address: Address) {
     try {
       return await this.view(address, "balanceOf", [
-        this.config.walletClient.account.address,
+        this.config.walletClient.account!.address,
       ])
     } catch (error) {
       throw error
@@ -50,7 +50,7 @@ export class ERC20 {
   async allowance(token: Address, spender: Address) {
     try {
       return await this.view(token, "allowance", [
-        this.config.walletClient.account.address,
+        this.config.walletClient.account!.address,
         spender,
       ])
     } catch (error) {

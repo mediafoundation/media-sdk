@@ -1,9 +1,9 @@
-import {Sdk} from "../config/sdk";
+import {Sdk, SdkConfig} from "../config/sdk";
 import {Address} from "viem";
 import {abi as RatingSystemABI} from "../../abis/RatingSystem.json"
 
 export class RatingSystem {
-    private config
+    private config: SdkConfig
     constructor(sdkInstance: Sdk) {
         this.config = sdkInstance.config
     }
@@ -28,7 +28,7 @@ export class RatingSystem {
                 abi: RatingSystemABI,
                 functionName: functionName,
                 args: args,
-                account: this.config.walletClient.account.address,
+                account: this.config.walletClient.account!.address,
             })
             return await this.config.walletClient.writeContract(request)
         } catch (error) {

@@ -4,11 +4,11 @@ import {abi as ResourcesABI} from "../../abis/Resources.json";
 import {abi as MarketplaceABI} from "../../abis/Marketplace.json";
 import {abi as MarketplaceViewerABI} from "../../abis/MarketplaceViewer.json";
 
-import {Sdk} from "../config/sdk";
+import {Sdk, SdkConfig} from "../config/sdk";
 import {Address} from "viem";
 
 export class EventsHandler {
-  private config
+  private config: SdkConfig
 
   constructor(sdkInstance: Sdk) {
     this.config = sdkInstance.config
@@ -28,16 +28,16 @@ export class EventsHandler {
     toBlock: bigint,
   }) {
     if (
-      Addresses[contractName][this.config.publicClient.chain.id] === undefined
+      Addresses[contractName][this.config.publicClient.chain!.id] === undefined
     ) {
       throw new Error(
         contractName +
           " address not found for network id: " +
-          this.config.publicClient.chain.id
+          this.config.publicClient.chain!.id
       )
     }
     return await this.config.publicClient.getContractEvents({
-      address: Addresses[contractName][this.config.publicClient.chain.id] as Address,
+      address: Addresses[contractName][this.config.publicClient.chain!.id] as Address,
       abi: contractAbi,
       eventName: eventName,
       fromBlock: fromBlock,
@@ -53,16 +53,16 @@ export class EventsHandler {
     onError,
   }) {
     if (
-      Addresses[contractName][this.config.publicClient.chain.id] === undefined
+      Addresses[contractName][this.config.publicClient.chain!.id] === undefined
     ) {
       throw new Error(
         contractName +
           " address not found for network id: " +
-          this.config.publicClient.chain.id
+          this.config.publicClient.chain!.id
       )
     }
-    await this.config.publicClient.watchContractEvent({
-      address: Addresses[contractName][this.config.publicClient.chain.id],
+    this.config.publicClient.watchContractEvent({
+      address: Addresses[contractName][this.config.publicClient.chain!.id],
       abi: contractAbi,
       eventName: eventName,
       onLogs: (logs) => callback(logs),

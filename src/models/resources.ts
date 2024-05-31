@@ -2,7 +2,7 @@ import * as Addresses from "../../contractAddresses.json";
 
 import {abi as ResourcesABI} from "../../abis/Resources.json"
 
-import {Sdk} from "../config/sdk";
+import {Sdk, SdkConfig} from "../config/sdk";
 
 export class Resources {
   private config

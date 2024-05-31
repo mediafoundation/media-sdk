@@ -189,7 +189,7 @@ export class Quoter {
       .join(" -> ")
   }
 
-  async mintAmounts(liquidity, token0, token1, fee = FeeAmount.LOW) {
+  async mintAmounts(liquidity, token0, token1, fee = FeeAmount.LOW): Promise<any> {
     try {
       const tickLower = -887000
       const tickUpper = 887000
