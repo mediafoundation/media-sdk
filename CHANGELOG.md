@@ -1,3 +1,10 @@
+## [4.1.2](https://github.com/mediafoundation/media-sdk/compare/v4.1.1...v4.1.2) (2024-05-31)
+
+
+### Bug Fixes
+
+* **marketplace.ts:** add needed explicit type ([ecb6046](https://github.com/mediafoundation/media-sdk/commit/ecb60460adcf215997d841985ac7c9433e9f621b))
+
 ## [4.1.1](https://github.com/mediafoundation/media-sdk/compare/v4.1.0...v4.1.1) (2024-05-31)
 
 
