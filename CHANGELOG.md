@@ -1,3 +1,10 @@
+## [4.1.1](https://github.com/mediafoundation/media-sdk/compare/v4.1.0...v4.1.1) (2024-05-31)
+
+
+### Bug Fixes
+
+* **quoter.ts:** Add return Promise<any> to function ([c609d9e](https://github.com/mediafoundation/media-sdk/commit/c609d9e64bf2525940bc27e91229eb71700a3aef))
+
 # [4.1.0](https://github.com/mediafoundation/media-sdk/compare/v4.0.4...v4.1.0) (2024-05-17)
 
 
