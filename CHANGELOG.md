@@ -1,3 +1,10 @@
+## [4.1.3](https://github.com/mediafoundation/media-sdk/compare/v4.1.2...v4.1.3) (2024-05-31)
+
+
+### Bug Fixes
+
+* **index.ts:** import and then export contractAddresses.json ([dbf61d0](https://github.com/mediafoundation/media-sdk/commit/dbf61d0e9ae9bf379ab43ead892f38e6d63412c6))
+
 ## [4.1.2](https://github.com/mediafoundation/media-sdk/compare/v4.1.1...v4.1.2) (2024-05-31)
 
 
