@@ -156,11 +156,12 @@ export class Marketplace {
     ])
   }
 
-  async getProvider({marketplaceId, provider}: {marketplaceId: number, provider: string}) {
-    return await this.view("getProvider", [
-        marketplaceId,
-        provider
-    ])
+  async getProvider({marketplaceId, provider}: {marketplaceId: number, provider: string}): Promise<{metadata: string, publicKey: string}> {
+    const providerData: {metadata: string, publicKey: string} | null = await this.view("getProvider", [
+      marketplaceId,
+      provider
+    ]) as { metadata: string, publicKey: string }
+    return providerData
   }
 
   static getDealDetails(deal) {
