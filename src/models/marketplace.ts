@@ -1,7 +1,7 @@
 import * as Addresses from "../../contractAddresses.json";
 import {Sdk, SdkConfig} from "../config/sdk";
 
-import {abi as MarketplaceABI} from "../../abis/Marketplace.json"
+import {default as MarketplaceABI} from "../../abis/Marketplace.json"
 
 export class Marketplace {
   private config: SdkConfig
@@ -22,7 +22,7 @@ export class Marketplace {
     try {
       return await this.config.publicClient.readContract({
         address: Addresses.Marketplace[this.config.publicClient.chain!.id],
-        abi: MarketplaceABI,
+        abi: MarketplaceABI.abi,
         functionName: functionName,
         args: args,
       })
@@ -35,7 +35,7 @@ export class Marketplace {
     try {
       const { request } = await this.config.publicClient.simulateContract({
         address: Addresses.Marketplace[this.config.publicClient.chain!.id],
-        abi: MarketplaceABI,
+        abi: MarketplaceABI.abi,
         functionName: functionName,
         args: args,
         account: this.config.walletClient.account,
@@ -146,6 +146,10 @@ export class Marketplace {
 
   async getDealById({ marketplaceId, dealId }) {
     return await this.view("getDeal", [marketplaceId, dealId])
+  }
+
+  async getOfferById({marketplaceId, offerId}) {
+    await this.execute("getOffer", [marketplaceId, offerId])
   }
 
   async initializeMarketplace({ requiredStake, marketFeeTo, marketFeeRate }) {
