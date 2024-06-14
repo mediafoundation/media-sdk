@@ -21,11 +21,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Install dist dependencies
-        run: npm install --prefix ./dist/
-
       - name: Build package
         run: npm run build
+
+      - name: Install dist dependencies
+        run: npm install --prefix ./dist/
 
       - name: Publish to npm
         run: npm publish ./dist
