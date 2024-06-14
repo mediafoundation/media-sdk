@@ -1,6 +1,6 @@
 {
   "name": "media-sdk",
-  "version": "4.1.4",
+  "version": "4.1.5",
   "main": "lib/es5/src/index.js",
   "types": "lib/es5/src/index.d.ts",
   "module": "lib/es6/src/index.js",
