@@ -1,8 +1,8 @@
 import * as Addresses from "../../contractAddresses.json";
 
-import {abi as ResourcesABI} from "../../abis/Resources.json"
+import ResourcesABI from "../../abis/Resources.json"
 
-import {Sdk, SdkConfig} from "../config/sdk";
+import {Sdk} from "../config/sdk";
 
 export class Resources {
   private config
@@ -21,7 +21,7 @@ export class Resources {
     try {
       return await this.config.publicClient.readContract({
         address: Addresses.Resources[this.config.publicClient.chain.id],
-        abi: ResourcesABI,
+        abi: ResourcesABI.abi,
         functionName: functionName,
         args: args,
       })
@@ -34,7 +34,7 @@ export class Resources {
     try {
       const { request } = await this.config.publicClient.simulateContract({
         address: Addresses.Resources[this.config.publicClient.chain.id],
-        abi: ResourcesABI,
+        abi: ResourcesABI.abi,
         functionName: functionName,
         args: args,
         account: this.config.walletClient.account,

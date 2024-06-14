@@ -2,7 +2,7 @@ import {Sdk} from "../config/sdk";
 
 import * as Addresses from "../../contractAddresses.json";
 
-import {abi as MarketplaceViewerABI} from "../../abis/MarketplaceViewer.json"
+import MarketplaceViewerABI from "../../abis/MarketplaceViewer.json"
 
 export class MarketplaceViewer {
   private config
@@ -24,7 +24,7 @@ export class MarketplaceViewer {
     try {
       return await this.config.publicClient.readContract({
         address: Addresses.MarketplaceViewer[this.config.publicClient.chain.id],
-        abi: MarketplaceViewerABI,
+        abi: MarketplaceViewerABI.abi,
         functionName: functionName,
         args: args,
       })

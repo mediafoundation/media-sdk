@@ -1,6 +1,6 @@
 import {Sdk, SdkConfig} from "../config/sdk";
 import {Address} from "viem";
-import {abi as RatingSystemABI} from "../../abis/RatingSystem.json"
+import RatingSystemABI from "../../abis/RatingSystem.json"
 
 export class RatingSystem {
     private config: SdkConfig
@@ -12,7 +12,7 @@ export class RatingSystem {
         try {
             return await this.config.publicClient.readContract({
                 address: address,
-                abi: RatingSystemABI,
+                abi: RatingSystemABI.abi,
                 functionName: functionName,
                 args: args
             })
@@ -25,7 +25,7 @@ export class RatingSystem {
         try {
             const { request } = await this.config.publicClient.simulateContract({
                 address: address,
-                abi: RatingSystemABI,
+                abi: RatingSystemABI.abi,
                 functionName: functionName,
                 args: args,
                 account: this.config.walletClient.account!.address,

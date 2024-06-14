@@ -1,7 +1,7 @@
 import * as Addresses from "../../contractAddresses.json";
 import {Sdk, SdkConfig} from "../config/sdk";
 
-import {default as MarketplaceABI} from "../../abis/Marketplace.json"
+import MarketplaceABI from "../../abis/Marketplace.json"
 
 export class Marketplace {
   private config: SdkConfig

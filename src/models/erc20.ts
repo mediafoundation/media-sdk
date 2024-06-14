@@ -1,6 +1,6 @@
 import {Sdk, SdkConfig} from "../config/sdk";
 
-import {abi as ERC20ABI} from "../../abis/ERC20.json";
+import ERC20ABI from "../../abis/ERC20.json";
 import {Address} from "viem";
 
 export class ERC20 {
@@ -13,7 +13,7 @@ export class ERC20 {
     try {
       return await this.config.publicClient.readContract({
         address: address,
-        abi: ERC20ABI,
+        abi: ERC20ABI.abi,
         functionName: functionName,
         args: args
       })
@@ -26,7 +26,7 @@ export class ERC20 {
     try {
       const { request } = await this.config.publicClient.simulateContract({
         address: address,
-        abi: ERC20ABI,
+        abi: ERC20ABI.abi,
         functionName: functionName,
         args: args,
         account: this.config.walletClient.account!.address,

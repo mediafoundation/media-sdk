@@ -4,7 +4,7 @@ import {Uniswap} from "../utils/uniswap";
 
 import * as Addresses from "../../contractAddresses.json";
 
-import {abi as MarketplaceHelperABI} from "../../abis/MarketplaceHelper.json"
+import MarketplaceHelperABI from "../../abis/MarketplaceHelper.json"
 
 export class MarketplaceHelper {
   private config: SdkConfig
@@ -45,7 +45,7 @@ export class MarketplaceHelper {
     try {
       return await this.config.publicClient.readContract({
         address: Addresses.MarketplaceHelper[this.config.publicClient.chain!.id],
-        abi: MarketplaceHelperABI,
+        abi: MarketplaceHelperABI.abi,
         functionName: functionName,
         args: args,
       })
@@ -57,7 +57,7 @@ export class MarketplaceHelper {
     try {
       const { request } = await this.config.publicClient.simulateContract({
         address: Addresses.MarketplaceHelper[this.config.publicClient.chain!.id],
-        abi: MarketplaceHelperABI,
+        abi: MarketplaceHelperABI.abi,
         functionName: functionName,
         args: args,
         account: this.config.walletClient.account,

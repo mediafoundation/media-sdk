@@ -1,8 +1,8 @@
 import * as Addresses from "../../contractAddresses.json";
 
-import {abi as ResourcesABI} from "../../abis/Resources.json";
-import {abi as MarketplaceABI} from "../../abis/Marketplace.json";
-import {abi as MarketplaceViewerABI} from "../../abis/MarketplaceViewer.json";
+import ResourcesABI from "../../abis/Resources.json";
+import MarketplaceABI from "../../abis/Marketplace.json";
+import MarketplaceViewerABI from "../../abis/MarketplaceViewer.json";
 
 import {Sdk, SdkConfig} from "../config/sdk";
 import {Address} from "viem";
@@ -38,7 +38,7 @@ export class EventsHandler {
     }
     return await this.config.publicClient.getContractEvents({
       address: Addresses[contractName][this.config.publicClient.chain!.id] as Address,
-      abi: contractAbi,
+      abi: contractAbi.abi,
       eventName: eventName,
       fromBlock: fromBlock,
       toBlock: toBlock,
@@ -63,7 +63,7 @@ export class EventsHandler {
     }
     this.config.publicClient.watchContractEvent({
       address: Addresses[contractName][this.config.publicClient.chain!.id],
-      abi: contractAbi,
+      abi: contractAbi.abi,
       eventName: eventName,
       onLogs: (logs) => callback(logs),
       onError: (error) => onError(error),

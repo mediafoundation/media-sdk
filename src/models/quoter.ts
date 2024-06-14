@@ -13,8 +13,8 @@ import {Sdk} from "../config/sdk";
 const IUniswapV3PoolABI =
   require("@uniswap/v3-core/artifacts/contracts/interfaces/IUniswapV3Pool.sol/IUniswapV3Pool.json").abi*/
 
-import {abi as QuoterV2ABI} from "@uniswap/v3-periphery/artifacts/contracts/lens/QuoterV2.sol/QuoterV2.json"
-import {abi as IUniswapV3PoolABI} from "@uniswap/v3-core/artifacts/contracts/interfaces/IUniswapV3Pool.sol/IUniswapV3Pool.json"
+import QuoterV2ABI from "@uniswap/v3-periphery/artifacts/contracts/lens/QuoterV2.sol/QuoterV2.json"
+import IUniswapV3PoolABI from "@uniswap/v3-core/artifacts/contracts/interfaces/IUniswapV3Pool.sol/IUniswapV3Pool.json"
 
 
 export class Quoter {
@@ -51,7 +51,7 @@ export class Quoter {
     try {
       return await this.config.publicClient.readContract({
         address: Addresses.QuoterV2[this.chainId],
-        abi: QuoterV2ABI,
+        abi: QuoterV2ABI.abi,
         functionName: functionName,
         args: args,
       })
@@ -64,7 +64,7 @@ export class Quoter {
     try {
       return await this.config.publicClient.readContract({
         address: address,
-        abi: IUniswapV3PoolABI,
+        abi: IUniswapV3PoolABI.abi,
         functionName: functionName,
         args: args,
       })
