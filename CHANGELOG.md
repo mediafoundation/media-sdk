@@ -1,3 +1,10 @@
+## [4.1.4](https://github.com/mediafoundation/media-sdk/compare/v4.1.3...v4.1.4) (2024-06-14)
+
+
+### Bug Fixes
+
+* **dependencies:** add dependencies to dist package ([58b7352](https://github.com/mediafoundation/media-sdk/commit/58b73520b04cdc97b9a14dd0bb9f59c6e45ce8b1))
+
 ## [4.1.3](https://github.com/mediafoundation/media-sdk/compare/v4.1.2...v4.1.3) (2024-05-31)
 
 
