@@ -1,3 +1,10 @@
+## [4.1.6](https://github.com/mediafoundation/media-sdk/compare/v4.1.5...v4.1.6) (2024-06-15)
+
+
+### Bug Fixes
+
+* **dependencies and distribution:** distribution packages are used correctly ([adc9f07](https://github.com/mediafoundation/media-sdk/commit/adc9f07171012d104bd1d4cf96f9c75bad87ab90))
+
 ## [4.1.5](https://github.com/mediafoundation/media-sdk/compare/v4.1.4...v4.1.5) (2024-06-14)
 
 
