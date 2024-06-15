@@ -1,4 +1,4 @@
-import crypto from "crypto"
+import {createCipheriv, createDecipheriv, randomBytes} from "crypto"
 import { decrypt, encrypt } from "@metamask/eth-sig-util"
 
 export class Encryption {
@@ -22,10 +22,10 @@ export class Encryption {
 
   static encrypt(plaintext, sharedKey: any = false) {
     sharedKey = !sharedKey
-      ? crypto.randomBytes(32)
+      ? randomBytes(32)
       : Buffer.from(sharedKey, "base64")
-    let iv = crypto.randomBytes(12)
-    let cipher = crypto.createCipheriv("aes-256-gcm", sharedKey, iv)
+    let iv = randomBytes(12)
+    let cipher = createCipheriv("aes-256-gcm", sharedKey, iv)
     let encryptedData = cipher.update(plaintext, "utf8", "hex")
     encryptedData += cipher.final("hex")
     let tag = cipher.getAuthTag()
@@ -38,7 +38,7 @@ export class Encryption {
   }
 
   static decrypt(key, iv, tag, resourceData) {
-    let decipher = crypto.createDecipheriv(
+    let decipher = createDecipheriv(
       "aes-256-gcm",
       Buffer.from(key, "base64"),
       Buffer.from(iv, "base64")
