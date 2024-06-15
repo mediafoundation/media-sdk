@@ -26,4 +26,4 @@ build/
 *.log
 
 # Include the dist/lib directory
-!dist/lib/
+!dist/lib/**/*
