@@ -1,3 +1,10 @@
+## [4.1.8](https://github.com/mediafoundation/media-sdk/compare/v4.1.7...v4.1.8) (2024-06-15)
+
+
+### Bug Fixes
+
+* **utils/encryption.ts:** update imports to correct way ([c8d4071](https://github.com/mediafoundation/media-sdk/commit/c8d4071be1e71861d5e687c9e390735fa95bdfdd))
+
 ## [4.1.7](https://github.com/mediafoundation/media-sdk/compare/v4.1.6...v4.1.7) (2024-06-15)
 
 
