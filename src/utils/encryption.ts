@@ -1,9 +1,9 @@
 import crypto from "crypto"
-import ethSigUtil from "@metamask/eth-sig-util"
+import { decrypt, encrypt } from "@metamask/eth-sig-util"
 
 export class Encryption {
   static ethSigDecrypt(encryptedData, privateKey) {
-    return ethSigUtil.decrypt({
+    return decrypt({
       encryptedData: JSON.parse(
           Buffer.from(encryptedData.slice(2), "hex").toString("utf8")
       ),
@@ -12,7 +12,7 @@ export class Encryption {
   }
 
   static ethSigEncrypt(publicKey, data) {
-    let encrypted = ethSigUtil.encrypt({
+    let encrypted = encrypt({
       publicKey: publicKey,
       data: data,
       version: "x25519-xsalsa20-poly1305",
