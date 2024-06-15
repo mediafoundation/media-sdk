@@ -1,3 +1,10 @@
+## [4.1.7](https://github.com/mediafoundation/media-sdk/compare/v4.1.6...v4.1.7) (2024-06-15)
+
+
+### Bug Fixes
+
+* **release:** include all necesary files when publish ([e70e40e](https://github.com/mediafoundation/media-sdk/commit/e70e40eea07279691a4d92d48a7be179f35bc3e5))
+
 ## [4.1.6](https://github.com/mediafoundation/media-sdk/compare/v4.1.5...v4.1.6) (2024-06-15)
 
 
