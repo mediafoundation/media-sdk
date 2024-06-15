@@ -1,0 +1,29 @@
+# Exclude source files
+src/
+test/
+node_modules/
+.github/
+abis/
+.idea/
+.vscode/
+
+# Exclude configuration files
+.czrc
+.gitignore
+.releaserc.js
+contractAddresses.json
+jest.config.js
+package-lock.json
+publish.sh
+.DS_STORE
+yarn.lock
+.npmignore
+tsconfig.json
+tsconfig.es5.json
+
+# Exclude build and log files
+build/
+*.log
+
+# Include the dist/lib directory
+!dist/lib/

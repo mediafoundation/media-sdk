@@ -24,10 +24,7 @@ jobs:
       - name: Build package
         run: npm run build
 
-      - name: Install dist dependencies
-        run: npm install --prefix ./dist/
-
       - name: Publish to npm
-        run: npm publish ./dist
+        run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
