@@ -1,3 +1,45 @@
+## [4.1.9](https://github.com/mediafoundation/media-sdk/compare/v4.1.8...v4.1.9) (2024-06-15)
+
+
+### Bug Fixes
+
+* **utils/encryption.ts:** change imports ([16ab6ef](https://github.com/mediafoundation/media-sdk/commit/16ab6ef0f6298ec20ec437b52e1024f13e77136a))
+
+## [4.1.8](https://github.com/mediafoundation/media-sdk/compare/v4.1.7...v4.1.8) (2024-06-15)
+
+
+### Bug Fixes
+
+* **utils/encryption.ts:** update imports to correct way ([c8d4071](https://github.com/mediafoundation/media-sdk/commit/c8d4071be1e71861d5e687c9e390735fa95bdfdd))
+
+## [4.1.7](https://github.com/mediafoundation/media-sdk/compare/v4.1.6...v4.1.7) (2024-06-15)
+
+
+### Bug Fixes
+
+* **release:** include all necesary files when publish ([e70e40e](https://github.com/mediafoundation/media-sdk/commit/e70e40eea07279691a4d92d48a7be179f35bc3e5))
+
+## [4.1.6](https://github.com/mediafoundation/media-sdk/compare/v4.1.5...v4.1.6) (2024-06-15)
+
+
+### Bug Fixes
+
+* **dependencies and distribution:** distribution packages are used correctly ([adc9f07](https://github.com/mediafoundation/media-sdk/commit/adc9f07171012d104bd1d4cf96f9c75bad87ab90))
+
+## [4.1.5](https://github.com/mediafoundation/media-sdk/compare/v4.1.4...v4.1.5) (2024-06-14)
+
+
+### Bug Fixes
+
+* **deployment and dependencies:** install dist dependencies after built ([c32aef2](https://github.com/mediafoundation/media-sdk/commit/c32aef2fd6ab704be8b5f53396af2b2288c27af6))
+
+## [4.1.4](https://github.com/mediafoundation/media-sdk/compare/v4.1.3...v4.1.4) (2024-06-14)
+
+
+### Bug Fixes
+
+* **dependencies:** add dependencies to dist package ([58b7352](https://github.com/mediafoundation/media-sdk/commit/58b73520b04cdc97b9a14dd0bb9f59c6e45ce8b1))
+
 ## [4.1.3](https://github.com/mediafoundation/media-sdk/compare/v4.1.2...v4.1.3) (2024-05-31)
 
 
