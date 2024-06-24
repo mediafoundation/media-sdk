@@ -1,15 +1,16 @@
-import * as Addresses from "../../contractAddresses.json";
-
-import ResourcesABI from "../../abis/Resources.json"
-
+import Addresses from "../../contractAddresses.json";
+import abi from "../../abis/Resources.json"
 import {Sdk} from "../config/sdk";
+
+const ResourcesABI: typeof abi = abi
+const ContractAddresses: typeof Addresses = Addresses
 
 export class Resources {
   private config
   constructor(sdkInstance: Sdk) {
     this.config = sdkInstance.config
 
-    if (Addresses.Resources[this.config.publicClient.chain.id] === undefined) {
+    if (ContractAddresses.Resources[this.config.publicClient.chain.id] === undefined) {
       throw new Error(
         "MarketplaceViewer address not found for network id: " +
           this.config.publicClient.chain.id
@@ -20,7 +21,7 @@ export class Resources {
   async view(functionName, args) {
     try {
       return await this.config.publicClient.readContract({
-        address: Addresses.Resources[this.config.publicClient.chain.id],
+        address: ContractAddresses.Resources[this.config.publicClient.chain.id],
         abi: ResourcesABI.abi,
         functionName: functionName,
         args: args,
@@ -33,7 +34,7 @@ export class Resources {
   async execute(functionName, args) {
     try {
       const { request } = await this.config.publicClient.simulateContract({
-        address: Addresses.Resources[this.config.publicClient.chain.id],
+        address: ContractAddresses.Resources[this.config.publicClient.chain.id],
         abi: ResourcesABI.abi,
         functionName: functionName,
         args: args,

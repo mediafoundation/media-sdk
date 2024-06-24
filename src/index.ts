@@ -1,4 +1,4 @@
-import * as Addresses from "./../contractAddresses.json";
+import * as Addresses from "../contractAddresses.json";
 
 export {Marketplace} from "./models/marketplace";
 

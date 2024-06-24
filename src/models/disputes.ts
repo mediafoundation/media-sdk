@@ -1,7 +1,8 @@
 import {Sdk, SdkConfig} from "../config/sdk";
-import DisputesABI from "../../abis/Disputes.json"
-//import * as DisputesABI from "../../abis/Disputes.json"
+import abi from "../../abis/Disputes.json"
 import {Address} from "viem";
+
+const DisputesABI: typeof abi = abi
 
 export class Disputes {
     private config: SdkConfig

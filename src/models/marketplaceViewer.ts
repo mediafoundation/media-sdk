@@ -1,8 +1,9 @@
 import {Sdk} from "../config/sdk";
+import Addresses from "../../contractAddresses.json";
+import abi from "../../abis/MarketplaceViewer.json"
 
-import * as Addresses from "../../contractAddresses.json";
-
-import MarketplaceViewerABI from "../../abis/MarketplaceViewer.json"
+const ContractAddresses: typeof Addresses = Addresses
+const MarketplaceViewerABI: typeof abi = abi
 
 export class MarketplaceViewer {
   private config
@@ -10,7 +11,7 @@ export class MarketplaceViewer {
     this.config = sdkInstance.config
 
     if (
-      Addresses.MarketplaceViewer[this.config.publicClient.chain.id] ===
+      ContractAddresses.MarketplaceViewer[this.config.publicClient.chain.id] ===
       undefined
     ) {
       throw new Error(
@@ -23,7 +24,7 @@ export class MarketplaceViewer {
   async view(functionName, args) {
     try {
       return await this.config.publicClient.readContract({
-        address: Addresses.MarketplaceViewer[this.config.publicClient.chain.id],
+        address: ContractAddresses.MarketplaceViewer[this.config.publicClient.chain.id],
         abi: MarketplaceViewerABI.abi,
         functionName: functionName,
         args: args,

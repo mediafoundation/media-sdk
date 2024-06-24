@@ -1,7 +1,8 @@
 import {Sdk, SdkConfig} from "../config/sdk";
-
-import ERC20ABI from "../../abis/ERC20.json";
+import abi from "../../abis/ERC20.json";
 import {Address} from "viem";
+
+const ERC20ABI: typeof abi = abi
 
 export class ERC20 {
   private config: SdkConfig

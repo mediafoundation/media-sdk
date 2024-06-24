@@ -1,10 +1,10 @@
 import {Sdk, SdkConfig} from "../config/sdk";
-
 import {Uniswap} from "../utils/uniswap";
+import Addresses from "../../contractAddresses.json";
+import abi from "../../abis/MarketplaceHelper.json"
 
-import * as Addresses from "../../contractAddresses.json";
-
-import MarketplaceHelperABI from "../../abis/MarketplaceHelper.json"
+const ContractAddresses: typeof Addresses = Addresses
+const MarketplaceHelperABI: typeof abi = abi
 
 export class MarketplaceHelper {
   private config: SdkConfig
@@ -12,7 +12,7 @@ export class MarketplaceHelper {
     this.config = sdkInstance.config
 
     if (
-      Addresses.MarketplaceHelper[this.config.publicClient.chain!.id] ===
+      ContractAddresses.MarketplaceHelper[this.config.publicClient.chain!.id] ===
       undefined
     ) {
       throw new Error(
@@ -25,8 +25,8 @@ export class MarketplaceHelper {
   wethToMedia(fee) {
     return Uniswap.encodePath(
       [
-        Addresses.WETH9[this.config.publicClient.chain!.id],
-        Addresses.MediaERC20[this.config.publicClient.chain!.id],
+        ContractAddresses.WETH9[this.config.publicClient.chain!.id],
+        ContractAddresses.MediaERC20[this.config.publicClient.chain!.id],
       ],
       [fee]
     )
@@ -34,8 +34,8 @@ export class MarketplaceHelper {
   mediaToWeth(fee) {
     return Uniswap.encodePath(
       [
-        Addresses.MediaERC20[this.config.publicClient.chain!.id],
-        Addresses.WETH9[this.config.publicClient.chain!.id],
+        ContractAddresses.MediaERC20[this.config.publicClient.chain!.id],
+        ContractAddresses.WETH9[this.config.publicClient.chain!.id],
       ],
       [fee]
     )
@@ -44,7 +44,7 @@ export class MarketplaceHelper {
   async view(functionName, args) {
     try {
       return await this.config.publicClient.readContract({
-        address: Addresses.MarketplaceHelper[this.config.publicClient.chain!.id],
+        address: ContractAddresses.MarketplaceHelper[this.config.publicClient.chain!.id],
         abi: MarketplaceHelperABI.abi,
         functionName: functionName,
         args: args,
@@ -56,7 +56,7 @@ export class MarketplaceHelper {
   async execute(functionName, args, value = 0n) {
     try {
       const { request } = await this.config.publicClient.simulateContract({
-        address: Addresses.MarketplaceHelper[this.config.publicClient.chain!.id],
+        address: ContractAddresses.MarketplaceHelper[this.config.publicClient.chain!.id],
         abi: MarketplaceHelperABI.abi,
         functionName: functionName,
         args: args,
@@ -105,15 +105,15 @@ export class MarketplaceHelper {
     let minMediaAmountOut = 0
 
     let inputToWeth = Uniswap.encodePath(
-      [inputToken, Addresses.WETH9[this.config.publicClient.chain!.id]],
+      [inputToken, ContractAddresses.WETH9[this.config.publicClient.chain!.id]],
       [pairFee]
     )
 
     let inputToWethToMediaPath = Uniswap.encodePath(
       [
         inputToken,
-        Addresses.WETH9[this.config.publicClient.chain!.id],
-        Addresses.MediaERC20[this.config.publicClient.chain!.id],
+        ContractAddresses.WETH9[this.config.publicClient.chain!.id],
+        ContractAddresses.MediaERC20[this.config.publicClient.chain!.id],
       ],
       [pairFee, pairFee]
     )
@@ -170,8 +170,8 @@ export class MarketplaceHelper {
     let inputToWethToMediaPath = Uniswap.encodePath(
       [
         inputToken,
-        Addresses.WETH9[this.config.publicClient.chain!.id],
-        Addresses.MediaERC20[this.config.publicClient.chain!.id],
+        ContractAddresses.WETH9[this.config.publicClient.chain!.id],
+        ContractAddresses.MediaERC20[this.config.publicClient.chain!.id],
       ],
       [pairFee, pairFee]
     )

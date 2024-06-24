@@ -1,11 +1,15 @@
-import * as Addresses from "../../contractAddresses.json";
+import Addresses from "../../contractAddresses.json";
 
-import ResourcesABI from "../../abis/Resources.json";
-import MarketplaceABI from "../../abis/Marketplace.json";
-import MarketplaceViewerABI from "../../abis/MarketplaceViewer.json";
-
+import Resources from "../../abis/Resources.json";
+import Marketplace from "../../abis/MarketplaceViewer.json";
+import MarketplaceViewer from "../../abis/MarketplaceViewer.json";
 import {Sdk, SdkConfig} from "../config/sdk";
 import {Address} from "viem";
+
+const ContractAddresses: typeof Addresses = Addresses
+const ResourcesABI: typeof Resources = Resources
+const MarketplaceABI: typeof Marketplace = Marketplace
+const MarketplaceViewerABI: typeof MarketplaceViewer = MarketplaceViewer
 
 export class EventsHandler {
   private config: SdkConfig
@@ -28,7 +32,7 @@ export class EventsHandler {
     toBlock: bigint,
   }) {
     if (
-      Addresses[contractName][this.config.publicClient.chain!.id] === undefined
+      ContractAddresses[contractName][this.config.publicClient.chain!.id] === undefined
     ) {
       throw new Error(
         contractName +
@@ -37,7 +41,7 @@ export class EventsHandler {
       )
     }
     return await this.config.publicClient.getContractEvents({
-      address: Addresses[contractName][this.config.publicClient.chain!.id] as Address,
+      address: ContractAddresses[contractName][this.config.publicClient.chain!.id] as Address,
       abi: contractAbi.abi,
       eventName: eventName,
       fromBlock: fromBlock,
@@ -53,7 +57,7 @@ export class EventsHandler {
     onError,
   }) {
     if (
-      Addresses[contractName][this.config.publicClient.chain!.id] === undefined
+      ContractAddresses[contractName][this.config.publicClient.chain!.id] === undefined
     ) {
       throw new Error(
         contractName +
@@ -62,7 +66,7 @@ export class EventsHandler {
       )
     }
     this.config.publicClient.watchContractEvent({
-      address: Addresses[contractName][this.config.publicClient.chain!.id],
+      address: ContractAddresses[contractName][this.config.publicClient.chain!.id],
       abi: contractAbi.abi,
       eventName: eventName,
       onLogs: (logs) => callback(logs),

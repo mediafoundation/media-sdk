@@ -1,6 +1,8 @@
 import {Sdk, SdkConfig} from "../config/sdk";
 import {Address} from "viem";
-import RatingSystemABI from "../../abis/RatingSystem.json"
+import abi from "../../abis/RatingSystem.json"
+
+const RatingSystemABI: typeof abi = abi
 
 export class RatingSystem {
     private config: SdkConfig
