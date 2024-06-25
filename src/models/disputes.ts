@@ -1,6 +1,8 @@
 import {Sdk, SdkConfig} from "../config/sdk";
-import {abi as DisputesABI} from "../../abis/Disputes.json"
+import abi from "../../abis/Disputes.json"
 import {Address} from "viem";
+
+const DisputesABI: typeof abi = abi
 
 export class Disputes {
     private config: SdkConfig
@@ -13,7 +15,7 @@ export class Disputes {
         try {
             return await this.config.publicClient.readContract({
                 address: address,
-                abi: DisputesABI,
+                abi: DisputesABI.abi,
                 functionName: functionName,
                 args: args
             })
@@ -26,7 +28,7 @@ export class Disputes {
         try {
             const { request } = await this.config.publicClient.simulateContract({
                 address: address,
-                abi: DisputesABI,
+                abi: DisputesABI.abi,
                 functionName: functionName,
                 args: args,
                 account: this.config.walletClient.account!.address,

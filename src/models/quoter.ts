@@ -1,20 +1,14 @@
 import {Token} from "@uniswap/sdk-core";
-
 import {FeeAmount, Pool, Position} from "@uniswap/v3-sdk";
-
-import * as Addresses from "../../contractAddresses.json";
-
+import Addresses from "../../contractAddresses.json";
 import {formatUnits} from "viem";
-
 import {Sdk} from "../config/sdk";
+import quoterAbi from "@uniswap/v3-periphery/artifacts/contracts/lens/QuoterV2.sol/QuoterV2.json"
+import uniswapPoolAbi from "@uniswap/v3-core/artifacts/contracts/interfaces/IUniswapV3Pool.sol/IUniswapV3Pool.json"
 
-/*const QuoterV2ABI =
-  require("@uniswap/v3-periphery/artifacts/contracts/lens/QuoterV2.sol/QuoterV2.json").abi
-const IUniswapV3PoolABI =
-  require("@uniswap/v3-core/artifacts/contracts/interfaces/IUniswapV3Pool.sol/IUniswapV3Pool.json").abi*/
-
-import {abi as QuoterV2ABI} from "@uniswap/v3-periphery/artifacts/contracts/lens/QuoterV2.sol/QuoterV2.json"
-import {abi as IUniswapV3PoolABI} from "@uniswap/v3-core/artifacts/contracts/interfaces/IUniswapV3Pool.sol/IUniswapV3Pool.json"
+const QuoterV2ABI: typeof quoterAbi = quoterAbi
+const IUniswapV3PoolABI: typeof uniswapPoolAbi = uniswapPoolAbi
+const ContractAddresses: typeof Addresses = Addresses
 
 
 export class Quoter {
@@ -28,19 +22,19 @@ export class Quoter {
     this.chainId = this.config.publicClient.chain.id
     this.MEDIA_TOKEN = new Token(
       this.chainId,
-      Addresses.MediaERC20[this.chainId],
+      ContractAddresses.MediaERC20[this.chainId],
       18,
       "MEDIA",
       "Media Token"
     )
     this.WETH_TOKEN = new Token(
       this.chainId,
-      Addresses.WETH9[this.chainId],
+      ContractAddresses.WETH9[this.chainId],
       18,
       "WETH",
       "Wrapped Ether"
     )
-    if (Addresses.QuoterV2[this.chainId] === undefined) {
+    if (ContractAddresses.QuoterV2[this.chainId] === undefined) {
       throw new Error(
         "Quoter address not found for network id: " + this.chainId
       )
@@ -50,8 +44,8 @@ export class Quoter {
   async view(functionName, args) {
     try {
       return await this.config.publicClient.readContract({
-        address: Addresses.QuoterV2[this.chainId],
-        abi: QuoterV2ABI,
+        address: ContractAddresses.QuoterV2[this.chainId],
+        abi: QuoterV2ABI.abi,
         functionName: functionName,
         args: args,
       })
@@ -64,7 +58,7 @@ export class Quoter {
     try {
       return await this.config.publicClient.readContract({
         address: address,
-        abi: IUniswapV3PoolABI,
+        abi: IUniswapV3PoolABI.abi,
         functionName: functionName,
         args: args,
       })
@@ -198,7 +192,7 @@ export class Quoter {
         token1,
         fee,
         undefined,
-        Addresses.UniswapV3Factory[this.chainId]
+        ContractAddresses.UniswapV3Factory[this.chainId]
       )
       let poolData = await this.getPoolData(poolAddress)
       const pool = new Pool(

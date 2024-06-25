@@ -1,3 +1,17 @@
+# [4.2.0](https://github.com/mediafoundation/media-sdk/compare/v4.1.9...v4.2.0) (2024-06-25)
+
+
+### Bug Fixes
+
+* **imports:** fix imports on models to prevent warnings ([ae4ad70](https://github.com/mediafoundation/media-sdk/commit/ae4ad70e37a2e0b48dd32d1db7f98272e5ecd7b9))
+* **models:** aBIs are imported correctly ([bc7d3a0](https://github.com/mediafoundation/media-sdk/commit/bc7d3a0530b015179f72703db552f8d9f42a04e5))
+
+
+### Features
+
+* **abis:** export contract ABIs ([9a90618](https://github.com/mediafoundation/media-sdk/commit/9a9061816686525aaa67603a57f288d810a39d6d))
+* **marketplace.ts:** get offers by id ([e98b830](https://github.com/mediafoundation/media-sdk/commit/e98b83057732dbb47bc8aec66033d341e892d155))
+
 ## [4.1.9](https://github.com/mediafoundation/media-sdk/compare/v4.1.8...v4.1.9) (2024-06-15)
 
 

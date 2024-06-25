@@ -1,5 +1,3 @@
-import * as Addresses from "./../contractAddresses.json";
-
 export {Marketplace} from "./models/marketplace";
 
 export {ERC20} from "./models/erc20";
@@ -20,8 +18,6 @@ export {Uniswap} from "./utils/uniswap";
 
 export {Quoter} from "./models/quoter";
 
-export {Addresses}
-
 export {Signer} from "./utils/signer";
 
 export {Sdk, validChains} from "./config/sdk";
@@ -29,6 +25,10 @@ export {Sdk, validChains} from "./config/sdk";
 export {RatingSystem} from "./models/ratingSystem"
 
 export {Disputes} from "./models/disputes"
+
+export {default as ContractAddresses} from "../contractAddresses.json";
+
+export {default as abis} from "../abis"
 
 
 /*module.exports = {
