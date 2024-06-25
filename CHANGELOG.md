@@ -1,3 +1,10 @@
+## [4.2.1](https://github.com/mediafoundation/media-sdk/compare/v4.2.0...v4.2.1) (2024-06-25)
+
+
+### Bug Fixes
+
+* **exports:** change name for export ContractAddresses -> Addresses ([1bcfe00](https://github.com/mediafoundation/media-sdk/commit/1bcfe00e63b748527dbaa19bc073e4b3dc093dac))
+
 # [4.2.0](https://github.com/mediafoundation/media-sdk/compare/v4.1.9...v4.2.0) (2024-06-25)
 
 
