@@ -26,7 +26,7 @@ export {RatingSystem} from "./models/ratingSystem"
 
 export {Disputes} from "./models/disputes"
 
-export {default as ContractAddresses} from "../contractAddresses.json";
+export {default as Addresses} from "../contractAddresses.json";
 
 export {default as abis} from "../abis"
 
