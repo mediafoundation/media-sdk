@@ -1,7 +1,6 @@
-import viem from "viem";
-
 import bn from "bignumber.js";
 import {FeeAmount} from "@uniswap/v3-sdk";
+import {getAddress} from "viem";
 
 const ADDR_SIZE = 20
 const FEE_SIZE = 3
@@ -34,7 +33,7 @@ export class Uniswap {
   static decodeOne(tokenFeeToken: Buffer): [[string, string], number] {
     // reads the first 20 bytes for the token address
     const tokenABuf = tokenFeeToken.subarray(0, ADDR_SIZE)
-    const tokenA = viem.getAddress('0x' + tokenABuf.toString('hex'))
+    const tokenA = getAddress('0x' + tokenABuf.toString('hex'))
 
     // reads the next 2 bytes for the fee
     const feeBuf = tokenFeeToken.subarray(ADDR_SIZE, OFFSET)
@@ -42,7 +41,7 @@ export class Uniswap {
 
     // reads the next 20 bytes for the token address
     const tokenBBuf = tokenFeeToken.subarray(OFFSET, DATA_SIZE)
-    const tokenB = viem.getAddress('0x' + tokenBBuf.toString('hex'))
+    const tokenB = getAddress('0x' + tokenBBuf.toString('hex'))
 
     return [[tokenA, tokenB], fee]
   }
