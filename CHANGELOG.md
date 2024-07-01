@@ -1,3 +1,10 @@
+## [4.2.2](https://github.com/mediafoundation/media-sdk/compare/v4.2.1...v4.2.2) (2024-06-28)
+
+
+### Bug Fixes
+
+* **utils/uniswap.ts:** fix import ([71b6c2d](https://github.com/mediafoundation/media-sdk/commit/71b6c2de50fb05cc8ed37f545766cdb7d93e3cfc))
+
 ## [4.2.1](https://github.com/mediafoundation/media-sdk/compare/v4.2.0...v4.2.1) (2024-06-25)
 
 
