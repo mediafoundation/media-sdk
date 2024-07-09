@@ -1,3 +1,11 @@
+## [4.2.3](https://github.com/mediafoundation/media-sdk/compare/v4.2.2...v4.2.3) (2024-07-09)
+
+
+### Bug Fixes
+
+* **models/eventsHandler.ts:** Import ABIs correctly ([22bb4d1](https://github.com/mediafoundation/media-sdk/commit/22bb4d1e2895e0ac6359107b98e1e45aaa894f87))
+* **models/marketplace.ts:** Change execute for view on getOfferById function ([98beb5a](https://github.com/mediafoundation/media-sdk/commit/98beb5ac2e0104161229ad4a2f85e4b2a1eed27d))
+
 ## [4.2.2](https://github.com/mediafoundation/media-sdk/compare/v4.2.1...v4.2.2) (2024-06-28)
 
 
