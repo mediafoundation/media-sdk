@@ -151,7 +151,7 @@ export class Marketplace {
   }
 
   async getOfferById({marketplaceId, offerId}) {
-    await this.execute("getOffer", [marketplaceId, offerId])
+    await this.view("getOffer", [marketplaceId, offerId])
   }
 
   async initializeMarketplace({ requiredStake, marketFeeTo, marketFeeRate }) {
