@@ -1,15 +1,9 @@
 import Addresses from "../../contractAddresses.json";
 
-import Resources from "../../abis/Resources.json";
-import Marketplace from "../../abis/MarketplaceViewer.json";
-import MarketplaceViewer from "../../abis/MarketplaceViewer.json";
 import {Sdk, SdkConfig} from "../config/sdk";
 import {Address} from "viem";
-
+import abis from "../../abis";
 const ContractAddresses: typeof Addresses = Addresses
-const ResourcesABI: typeof Resources = Resources
-const MarketplaceABI: typeof Marketplace = Marketplace
-const MarketplaceViewerABI: typeof MarketplaceViewer = MarketplaceViewer
 
 export class EventsHandler {
   private config: SdkConfig
@@ -77,7 +71,7 @@ export class EventsHandler {
   async getMarketplacePastEvents({ eventName, fromBlock, toBlock }: {eventName: string[] | string | undefined, fromBlock: bigint, toBlock: bigint}) {
     return await this.getPastEvents({
       contractName: "Marketplace",
-      contractAbi: MarketplaceABI,
+      contractAbi: abis.MarketplaceAbi,
       eventName,
       fromBlock,
       toBlock,
@@ -87,7 +81,7 @@ export class EventsHandler {
   async getMarketplaceViewerPastEvents({ eventName, fromBlock, toBlock }) {
     return await this.getPastEvents({
       contractName: "MarketplaceViewer",
-      contractAbi: MarketplaceViewerABI,
+      contractAbi: abis.MarketplaceViewerAbi,
       eventName,
       fromBlock,
       toBlock,
@@ -97,7 +91,7 @@ export class EventsHandler {
   async getResourcesPastEvents({ eventName, fromBlock, toBlock }: {eventName: string[] | string | undefined, fromBlock: bigint, toBlock: bigint}) {
     return await this.getPastEvents({
       contractName: "Resources",
-      contractAbi: ResourcesABI,
+      contractAbi: abis.ResourcesAbi,
       eventName,
       fromBlock,
       toBlock,
@@ -107,7 +101,7 @@ export class EventsHandler {
   async listenForMarketplaceEvent({ eventName, callback, onError }) {
     await this.listenForContractEvent({
       contractName: "Marketplace",
-      contractAbi: MarketplaceABI,
+      contractAbi: abis.MarketplaceAbi,
       eventName,
       callback,
       onError,
@@ -117,7 +111,7 @@ export class EventsHandler {
   async listenForMarketplaceViewerEvent({ eventName, callback, onError }) {
     await this.listenForContractEvent({
       contractName: "MarketplaceViewer",
-      contractAbi: MarketplaceViewerABI,
+      contractAbi: abis.MarketplaceViewerAbi,
       eventName,
       callback,
       onError,
@@ -127,7 +121,7 @@ export class EventsHandler {
   async listenForResourcesEvent({ eventName, callback, onError }) {
     await this.listenForContractEvent({
       contractName: "Resources",
-      contractAbi: ResourcesABI,
+      contractAbi: abis.ResourcesAbi,
       eventName,
       callback,
       onError,
