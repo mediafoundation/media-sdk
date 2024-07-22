@@ -24,7 +24,7 @@ import {
     http,
     publicActions, PublicClient,
     Transport,
-    WalletClient
+    WalletClient, webSocket
 } from "viem";
 import {mnemonicToAccount, privateKeyToAccount} from "viem/accounts";
 
@@ -37,7 +37,7 @@ export class Sdk {
         mnemonic = undefined,
         walletClient = undefined,
     }: SdkConstructor = {}) {
-        const transportForClient = transport ? transport.map((transport) => http(transport)) : [http(chain?.rpcUrls.default.http[0])]
+        const transportForClient = transport ? transport.map((transport) => this.createTransport(transport)) : [http(chain?.rpcUrls.default.http[0])]
 
         if ((privateKey || mnemonic) && !walletClient) {
             walletClient = this.generateWalletClient({
@@ -89,6 +89,14 @@ export class Sdk {
             transport: fallback(transports),
         })
     }
+
+    private createTransport = (transport: string) => {
+         // Assuming the transport string indicates the type (e.g., starts with 'ws' or 'http')
+        if (transport.startsWith('ws')) {
+            return webSocket(transport); // Replace with the actual WebSocket creation logic
+        }
+        return http(transport);
+    };
 }
 
 export const validChains = {
