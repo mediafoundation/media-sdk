@@ -1,4 +1,4 @@
-import {baseSepolia, goerli, sepolia} from "viem/chains";
+import {baseSepolia, sepolia} from "viem/chains";
 
 
 interface SdkConstructor {
@@ -14,7 +14,7 @@ export type SdkConfig = {
     publicClient: PublicClient
 }
 
-const defaultChain = goerli
+const defaultChain = sepolia
 
 import {
     Chain,
