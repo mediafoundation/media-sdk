@@ -1,3 +1,10 @@
+# [4.3.0](https://github.com/mediafoundation/media-sdk/compare/v4.2.3...v4.3.0) (2024-07-26)
+
+
+### Features
+
+* **contractAddresses.json:** add new Sepolia's addresses ([0f59dc4](https://github.com/mediafoundation/media-sdk/commit/0f59dc4451f2e3a4a4d9f6a3caf140a9cc568961))
+
 ## [4.2.3](https://github.com/mediafoundation/media-sdk/compare/v4.2.2...v4.2.3) (2024-07-09)
 
 
