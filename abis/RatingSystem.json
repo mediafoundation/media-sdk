@@ -3,8 +3,8 @@
     {
       "inputs": [
         {
-          "internalType": "address",
-          "name": "_marketplaceAddress",
+          "internalType": "contract Marketplace",
+          "name": "_marketplace",
           "type": "address"
         }
       ],
@@ -134,6 +134,39 @@
       ],
       "name": "transferOwnership",
       "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getMarketplace",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract Marketplace",
+          "name": "_marketplace",
+          "type": "address"
+        }
+      ],
+      "name": "setMarketplace",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
       "stateMutability": "nonpayable",
       "type": "function"
     },
