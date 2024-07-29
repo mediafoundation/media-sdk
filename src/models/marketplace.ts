@@ -1,9 +1,80 @@
 import Addresses from "../../contractAddresses.json";
 import {Sdk, SdkConfig} from "../config/sdk";
 import abi from "../../abis/Marketplace.json"
+import {Deal, ProviderMetadata} from "../types";
 
 const ContractAddresses: typeof Addresses = Addresses
 const MarketplaceABI: typeof abi = abi
+
+interface CreateOfferParams  {
+  marketplaceId: number
+  maximumDeals: number
+  autoAccept: boolean
+  pricePerSecond: number
+  minDealDuration: number
+  billFullPeriods: boolean
+  singlePeriodOnly: boolean
+  metadata: string
+}
+
+interface UpdateOfferParams  {
+  marketplaceId: number
+  offerId: number
+  maximumDeals: number
+  autoAccept: boolean
+  pricePerSecond: number
+  minDealDuration: number
+  billFullPeriod: boolean
+  singlePeriodOnly: boolean
+  metadata: string
+}
+
+interface DeleteOfferParams  {
+  marketplaceId: number
+  offerId: number
+}
+
+interface CreateDealParams  {
+  marketplaceId: number
+  resourceId: string
+  offerId: number
+  blockedBalance: number
+  sharedKeyCopy: string
+}
+
+interface CreateDealsParams  {
+  marketplaceId: number
+  resourceId: string
+  offersId: number[]
+  blockedBalance: number
+  sharedKeyCopies: string[]
+}
+
+interface CancelDealsParams  {
+  marketplaceId: number
+  resourceId: string
+}
+
+interface DealOperationParams  {
+  marketplaceId: number
+  dealId: number
+}
+
+interface OfferOperationParams  {
+  marketplaceId: number
+  offerId: number
+}
+
+interface InitializeMarketplaceParams  {
+  requiredStake: number
+  marketFeeTo: string
+  marketFeeRate: number
+}
+
+interface ProviderOperationParams  {
+  marketplaceId: number
+  provider: string
+}
 
 export class Marketplace {
   private config: SdkConfig
@@ -20,7 +91,7 @@ export class Marketplace {
     }
   }
 
-  async view(functionName, args) {
+  async view(functionName: string, args: any[]) {
     try {
       return await this.config.publicClient.readContract({
         address: ContractAddresses.Marketplace[this.config.publicClient.chain!.id],
@@ -33,7 +104,7 @@ export class Marketplace {
     }
   }
 
-  async execute(functionName, args) {
+  async execute(functionName: string, args: any[]) {
     try {
       const { request } = await this.config.publicClient.simulateContract({
         address: ContractAddresses.Marketplace[this.config.publicClient.chain!.id],
@@ -57,7 +128,7 @@ export class Marketplace {
     billFullPeriods,
     singlePeriodOnly,
     metadata,
-  }) {
+  }: CreateOfferParams) {
     return await this.execute("createOffer", [
       marketplaceId,
       maximumDeals,
@@ -80,7 +151,7 @@ export class Marketplace {
     billFullPeriod,
     singlePeriodOnly,
     metadata,
-  }) {
+  }: UpdateOfferParams) {
     return await this.execute("updateOffer", [
       marketplaceId,
       offerId,
@@ -94,7 +165,7 @@ export class Marketplace {
     ])
   }
 
-  async deleteOffer({ marketplaceId, offerId }) {
+  async deleteOffer({ marketplaceId, offerId }: DeleteOfferParams) {
     return await this.execute("deleteOffer", [marketplaceId, offerId])
   }
 
@@ -104,7 +175,7 @@ export class Marketplace {
     offerId,
     blockedBalance,
     sharedKeyCopy,
-  }) {
+  }: CreateDealParams) {
     return await this.execute("createDeal", [
       marketplaceId,
       resourceId,
@@ -120,7 +191,7 @@ export class Marketplace {
     offersId,
     blockedBalance,
     sharedKeyCopies,
-  }) {
+  }: CreateDealsParams) {
     return await this.execute("createDeals", [
       marketplaceId,
       resourceId,
@@ -130,31 +201,31 @@ export class Marketplace {
     ])
   }
 
-  async acceptDeal({ marketplaceId, dealId }) {
+  async acceptDeal({ marketplaceId, dealId }: DealOperationParams) {
     return await this.execute("acceptDeal", [marketplaceId, dealId])
   }
 
-  async rejectDeal({ marketplaceId, dealId }) {
+  async rejectDeal({ marketplaceId, dealId }: DealOperationParams) {
     return await this.execute("rejectDeal", [marketplaceId, dealId])
   }
 
-  async cancelDeal({ marketplaceId, dealId }) {
+  async cancelDeal({ marketplaceId, dealId }: DealOperationParams) {
     return await this.execute("cancelDeal", [marketplaceId, dealId])
   }
 
-  async cancelAllDeals({ marketplaceId, resourceId }) {
+  async cancelAllDeals({ marketplaceId, resourceId }: CancelDealsParams) {
     return await this.execute("cancelAllDeals", [marketplaceId, resourceId])
   }
 
-  async getDealById({ marketplaceId, dealId }) {
-    return await this.view("getDeal", [marketplaceId, dealId])
+  async getDealById({ marketplaceId, dealId }: DealOperationParams): Promise<Deal | null> {
+    return await this.view("getDeal", [marketplaceId, dealId]) as Deal
   }
 
-  async getOfferById({marketplaceId, offerId}) {
+  async getOfferById({marketplaceId, offerId}: OfferOperationParams) {
     await this.view("getOffer", [marketplaceId, offerId])
   }
 
-  async initializeMarketplace({ requiredStake, marketFeeTo, marketFeeRate }) {
+  async initializeMarketplace({ requiredStake, marketFeeTo, marketFeeRate }: InitializeMarketplaceParams) {
     return await this.execute("initializeMarketplace", [
       requiredStake,
       marketFeeTo,
@@ -162,17 +233,16 @@ export class Marketplace {
     ])
   }
 
-  async getProvider({marketplaceId, provider}: {marketplaceId: number, provider: string}): Promise<{metadata: string, publicKey: string}> {
-    const providerData: {metadata: string, publicKey: string} | null = await this.view("getProvider", [
+  async getProvider({marketplaceId, provider}: {marketplaceId: number, provider: string}): Promise<ProviderMetadata> {
+    return await this.view("getProvider", [
       marketplaceId,
       provider
-    ]) as { metadata: string, publicKey: string }
-    return providerData
+    ]) as ProviderMetadata
   }
 
-  static getDealDetails(deal) {
+  static getDealDetails(deal: any) {
     const unixTime = BigInt(Math.floor(Date.now() / 1000))
-    let metadata
+    let metadata: {[index: string | number | symbol]: any}
     try {
       metadata = JSON.parse(deal.terms.metadata)
     } catch (e) {

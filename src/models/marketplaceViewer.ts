@@ -5,6 +5,20 @@ import abi from "../../abis/MarketplaceViewer.json"
 const ContractAddresses: typeof Addresses = Addresses
 const MarketplaceViewerABI: typeof abi = abi
 
+type PaginationParams = {
+    marketplaceId: string
+    start?: number
+    steps?: number
+}
+
+type DealPaginationParams = {
+    marketplaceId: string
+    address: string
+    isProvider?: boolean
+    start?: number
+    steps?: number
+}
+
 export class MarketplaceViewer {
   private config
   constructor(sdkInstance: Sdk) {
@@ -21,7 +35,7 @@ export class MarketplaceViewer {
     }
   }
 
-  async view(functionName, args) {
+  async view(functionName: string, args: any[]) {
     try {
       return await this.config.publicClient.readContract({
         address: ContractAddresses.MarketplaceViewer[this.config.publicClient.chain.id],
@@ -34,11 +48,11 @@ export class MarketplaceViewer {
     }
   }
 
-  async getPaginatedOffers({ marketplaceId, start = 0, steps = 20 }) {
+  async getPaginatedOffers({ marketplaceId, start = 0, steps = 20 }: PaginationParams) {
     return await this.view("getPaginatedOffers", [marketplaceId, start, steps])
   }
 
-  async getAllOffersPaginating({ marketplaceId, start = 0, steps = 20 }) {
+  async getAllOffersPaginating({ marketplaceId, start = 0, steps = 20 }: PaginationParams) {
     let offers: any[] = []
     let _steps = BigInt(steps)
     let _start = BigInt(start)
@@ -77,7 +91,7 @@ export class MarketplaceViewer {
     isProvider = false,
     start = 0,
     steps = 20,
-  }) {
+  }: DealPaginationParams) {
     return await this.view("getPaginatedDeals", [
       marketplaceId,
       address,
@@ -93,7 +107,7 @@ export class MarketplaceViewer {
     isProvider = false,
     start = 0,
     steps = 20,
-  }) {
+  }: DealPaginationParams) {
     let deals: any[] = []
 
     let _steps = BigInt(steps)
