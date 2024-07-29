@@ -43,3 +43,17 @@ export interface ProviderMetadata {
   metadata: string,
   publicKey: string
 }
+
+export interface ContractEvent {
+  address: string;
+  blockHash: string;
+  blockNumber: bigint;
+  data: string;
+  logIndex: number;
+  removed: boolean;
+  topics: string[];
+  transactionHash: string;
+  transactionIndex: number;
+  args: {[index: string | number]: string | boolean | bigint | number};
+  eventName: string;
+}

@@ -3,7 +3,20 @@ import Addresses from "../../contractAddresses.json";
 import {Sdk, SdkConfig} from "../config/sdk";
 import {Address} from "viem";
 import abis from "../../abis";
+import {ContractEvent} from "../types/modelTypes";
 const ContractAddresses: typeof Addresses = Addresses
+
+interface GetPastEventParams {
+  eventName: string[] | string | undefined,
+  fromBlock: bigint,
+  toBlock: bigint
+}
+
+interface ListenForEventsParams {
+  eventName: string,
+  callback: (logs: any) => void,
+  onError: (error: any) => void,
+}
 
 export class EventsHandler {
   private config: SdkConfig
@@ -24,7 +37,7 @@ export class EventsHandler {
     eventName: string[] | string | undefined,
     fromBlock: bigint,
     toBlock: bigint,
-  }) {
+  }): Promise<ContractEvent[]> {
     if (
       ContractAddresses[contractName][this.config.publicClient.chain!.id] === undefined
     ) {
@@ -40,7 +53,7 @@ export class EventsHandler {
       eventName: eventName,
       fromBlock: fromBlock,
       toBlock: toBlock,
-    })
+    }) as ContractEvent[]
   }
 
   async listenForContractEvent({
@@ -49,6 +62,12 @@ export class EventsHandler {
     eventName,
     callback,
     onError,
+  }: {
+    contractName: string,
+    contractAbi: any,
+    eventName: string,
+    callback: (logs: any) => void,
+    onError: (error: any) => void,
   }) {
     if (
       ContractAddresses[contractName][this.config.publicClient.chain!.id] === undefined
@@ -68,7 +87,7 @@ export class EventsHandler {
     })
   }
 
-  async getMarketplacePastEvents({ eventName, fromBlock, toBlock }: {eventName: string[] | string | undefined, fromBlock: bigint, toBlock: bigint}) {
+  async getMarketplacePastEvents({ eventName, fromBlock, toBlock }: GetPastEventParams): Promise<ContractEvent[]> {
     return await this.getPastEvents({
       contractName: "Marketplace",
       contractAbi: abis.MarketplaceAbi,
@@ -78,7 +97,7 @@ export class EventsHandler {
     })
   }
 
-  async getMarketplaceViewerPastEvents({ eventName, fromBlock, toBlock }) {
+  async getMarketplaceViewerPastEvents({ eventName, fromBlock, toBlock }: GetPastEventParams): Promise<ContractEvent[]> {
     return await this.getPastEvents({
       contractName: "MarketplaceViewer",
       contractAbi: abis.MarketplaceViewerAbi,
@@ -88,7 +107,7 @@ export class EventsHandler {
     })
   }
 
-  async getResourcesPastEvents({ eventName, fromBlock, toBlock }: {eventName: string[] | string | undefined, fromBlock: bigint, toBlock: bigint}) {
+  async getResourcesPastEvents({ eventName, fromBlock, toBlock }: GetPastEventParams): Promise<ContractEvent[]> {
     return await this.getPastEvents({
       contractName: "Resources",
       contractAbi: abis.ResourcesAbi,
@@ -98,7 +117,7 @@ export class EventsHandler {
     })
   }
 
-  async listenForMarketplaceEvent({ eventName, callback, onError }) {
+  async listenForMarketplaceEvent({ eventName, callback, onError }: ListenForEventsParams) {
     await this.listenForContractEvent({
       contractName: "Marketplace",
       contractAbi: abis.MarketplaceAbi,
@@ -108,7 +127,7 @@ export class EventsHandler {
     })
   }
 
-  async listenForMarketplaceViewerEvent({ eventName, callback, onError }) {
+  async listenForMarketplaceViewerEvent({ eventName, callback, onError }: ListenForEventsParams) {
     await this.listenForContractEvent({
       contractName: "MarketplaceViewer",
       contractAbi: abis.MarketplaceViewerAbi,
@@ -118,7 +137,7 @@ export class EventsHandler {
     })
   }
 
-  async listenForResourcesEvent({ eventName, callback, onError }) {
+  async listenForResourcesEvent({ eventName, callback, onError }: ListenForEventsParams) {
     await this.listenForContractEvent({
       contractName: "Resources",
       contractAbi: abis.ResourcesAbi,
