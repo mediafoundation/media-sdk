@@ -28,6 +28,8 @@ export {Disputes} from "./models/disputes"
 
 export {default as Addresses} from "../contractAddresses.json";
 
+export * from "./types"
+
 export {default as abis} from "../abis"
 
 
