@@ -1,6 +1,8 @@
-import {Sdk} from "../config/sdk";
+import {Sdk, SdkConfig} from "../config/sdk";
 import Addresses from "../../contractAddresses.json";
 import abi from "../../abis/MarketplaceViewer.json"
+import {Deal} from "../types";
+import {Offer} from "../types/modelTypes";
 
 const ContractAddresses: typeof Addresses = Addresses
 const MarketplaceViewerABI: typeof abi = abi
@@ -20,17 +22,17 @@ type DealPaginationParams = {
 }
 
 export class MarketplaceViewer {
-  private config
+  private config: SdkConfig
   constructor(sdkInstance: Sdk) {
     this.config = sdkInstance.config
 
     if (
-      ContractAddresses.MarketplaceViewer[this.config.publicClient.chain.id] ===
+      ContractAddresses.MarketplaceViewer[this.config.publicClient.chain!.id] ===
       undefined
     ) {
       throw new Error(
         "MarketplaceViewer address not found for network id: " +
-          this.config.publicClient.chain.id
+          this.config.publicClient.chain!.id
       )
     }
   }
@@ -38,7 +40,7 @@ export class MarketplaceViewer {
   async view(functionName: string, args: any[]) {
     try {
       return await this.config.publicClient.readContract({
-        address: ContractAddresses.MarketplaceViewer[this.config.publicClient.chain.id],
+        address: ContractAddresses.MarketplaceViewer[this.config.publicClient.chain!.id],
         abi: MarketplaceViewerABI.abi,
         functionName: functionName,
         args: args,
@@ -48,21 +50,21 @@ export class MarketplaceViewer {
     }
   }
 
-  async getPaginatedOffers({ marketplaceId, start = 0, steps = 20 }: PaginationParams) {
-    return await this.view("getPaginatedOffers", [marketplaceId, start, steps])
+  async getPaginatedOffers({ marketplaceId, start = 0, steps = 20 }: PaginationParams): Promise<Offer[]> {
+    return await this.view("getPaginatedOffers", [marketplaceId, start, steps]) as Offer[]
   }
 
-  async getAllOffersPaginating({ marketplaceId, start = 0, steps = 20 }: PaginationParams) {
+  async getAllOffersPaginating({ marketplaceId, start = 0, steps = 20 }: PaginationParams): Promise<Offer[]> {
     let offers: any[] = []
     let _steps = BigInt(steps)
     let _start = BigInt(start)
 
     while (true) {
-      let result = await this.view("getPaginatedOffers", [
+      let result: any[] = await this.view("getPaginatedOffers", [
         marketplaceId,
         _start,
         _steps,
-      ])
+      ]) as any[]
 
       let fetchedOffers = result[0]
       let lastAccessedId = BigInt(result[1])
@@ -82,7 +84,7 @@ export class MarketplaceViewer {
       _start = lastAccessedId + BigInt(1)
     }
 
-    return offers
+    return offers as Offer[]
   }
 
   async getPaginatedDeals({
@@ -91,14 +93,14 @@ export class MarketplaceViewer {
     isProvider = false,
     start = 0,
     steps = 20,
-  }: DealPaginationParams) {
+  }: DealPaginationParams): Promise<Deal[]> {
     return await this.view("getPaginatedDeals", [
       marketplaceId,
       address,
       isProvider,
       start,
       steps,
-    ])
+    ]) as Deal[]
   }
 
   async getAllDealsPaginating({
@@ -107,46 +109,46 @@ export class MarketplaceViewer {
     isProvider = false,
     start = 0,
     steps = 20,
-  }: DealPaginationParams) {
+  }: DealPaginationParams): Promise<Deal[]> {
     let deals: any[] = []
 
     let _steps = BigInt(steps)
     let _start = BigInt(start)
 
-    let result = await this.view("getPaginatedDeals", [
+    let result: any[] = await this.view("getPaginatedDeals", [
       marketplaceId,
       address,
       isProvider,
       _start,
       _steps,
-    ])
+    ]) as any[]
     deals.push(...result[0])
 
     if (result[1] > deals.length) {
       let totalDeals = result[1]
       for (let i = BigInt(1); i * _steps < totalDeals; i++) {
-        let result = await this.view("getPaginatedDeals", [
+        let result: any[] = await this.view("getPaginatedDeals", [
           marketplaceId,
           address,
           isProvider,
           _start + i * _steps,
           _steps,
-        ])
+        ]) as any[]
         deals.push(...result[0])
       }
 
       if (totalDeals > deals.length) {
-        let result = await this.view("getPaginatedDeals", [
+        let result: any[] = await this.view("getPaginatedDeals", [
           marketplaceId,
           address,
           isProvider,
           _start + totalDeals,
           totalDeals - BigInt(deals.length),
-        ])
+        ]) as any[]
         deals.push(...result[0])
       }
     }
 
-    return deals
+    return deals as Deal[]
   }
 }

@@ -23,6 +23,21 @@ export interface Deal {
   }
 }
 
+export interface Offer {
+  id: bigint,
+  provider: string,
+  publicKey: string,
+  maximumDeals: bigint,
+  autoAccept: boolean,
+  terms: {
+    pricePerSecond: bigint,
+    minDealDuration: bigint,
+    billFullPeriods: boolean,
+    singlePeriodOnly: boolean,
+    metadata: string
+  }
+}
+
 export interface ProviderMetadata {
   provider: string,
   metadata: string,
