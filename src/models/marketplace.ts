@@ -233,7 +233,7 @@ export class Marketplace {
     ])
   }
 
-  async getProvider({marketplaceId, provider}: {marketplaceId: number, provider: string}): Promise<ProviderMetadata> {
+  async getProvider({marketplaceId, provider}: ProviderOperationParams): Promise<ProviderMetadata> {
     return await this.view("getProvider", [
       marketplaceId,
       provider
