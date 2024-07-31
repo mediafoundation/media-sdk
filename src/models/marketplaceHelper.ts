@@ -2,6 +2,7 @@ import {Sdk, SdkConfig} from "../config/sdk";
 import {Uniswap} from "../utils/uniswap";
 import Addresses from "../../contractAddresses.json";
 import abi from "../../abis/MarketplaceHelper.json"
+import {FeeAmount} from "@uniswap/v3-sdk";
 
 const ContractAddresses: typeof Addresses = Addresses
 const MarketplaceHelperABI: typeof abi = abi
@@ -22,7 +23,7 @@ export class MarketplaceHelper {
     }
   }
 
-  wethToMedia(fee) {
+  wethToMedia(fee: FeeAmount) {
     return Uniswap.encodePath(
       [
         ContractAddresses.WETH9[this.config.publicClient.chain!.id],
@@ -31,7 +32,7 @@ export class MarketplaceHelper {
       [fee]
     )
   }
-  mediaToWeth(fee) {
+  mediaToWeth(fee: FeeAmount) {
     return Uniswap.encodePath(
       [
         ContractAddresses.MediaERC20[this.config.publicClient.chain!.id],
@@ -41,7 +42,7 @@ export class MarketplaceHelper {
     )
   }
 
-  async view(functionName, args) {
+  async view(functionName: string, args: any[]) {
     try {
       return await this.config.publicClient.readContract({
         address: ContractAddresses.MarketplaceHelper[this.config.publicClient.chain!.id],
@@ -53,7 +54,7 @@ export class MarketplaceHelper {
       throw error
     }
   }
-  async execute(functionName, args, value = 0n) {
+  async execute(functionName: string, args: any[], value: bigint = 0n) {
     try {
       const { request } = await this.config.publicClient.simulateContract({
         address: ContractAddresses.MarketplaceHelper[this.config.publicClient.chain!.id],
