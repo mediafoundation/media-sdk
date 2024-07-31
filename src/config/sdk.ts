@@ -3,7 +3,7 @@ import {baseSepolia, sepolia} from "viem/chains";
 
 interface SdkConstructor {
     chain?: Chain,
-    transport?: string[] | undefined,
+    transport?: Transport[],
     privateKey?: string | undefined,
     mnemonic?: string | undefined,
     walletClient?: any | undefined,
@@ -37,19 +37,17 @@ export class Sdk {
         mnemonic = undefined,
         walletClient = undefined,
     }: SdkConstructor = {}) {
-        const transportForClient = transport ? transport.map((transport) => http(transport)) : [http(chain?.rpcUrls.default.http[0])]
-
         if ((privateKey || mnemonic) && !walletClient) {
             walletClient = this.generateWalletClient({
                 chain,
-                transports: transportForClient,
+                transports: transport || [http(chain?.rpcUrls.default.http[0])],
                 privateKey,
                 mnemonic,
             })
         }
         let publicClient = walletClient
             ? walletClient.extend(publicActions)
-            : this.generatePublicClient({chain, transports: transportForClient})
+            : this.generatePublicClient({chain, transports: transport || [http(chain?.rpcUrls.default.http[0])]})
         this.config = {
             walletClient: walletClient,
             publicClient: publicClient,
