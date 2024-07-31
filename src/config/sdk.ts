@@ -37,6 +37,8 @@ export class Sdk {
         mnemonic = undefined,
         walletClient = undefined,
     }: SdkConstructor = {}) {
+        const transportForClient = transport ? transport.map((transport) => http(transport)) : [http(chain?.rpcUrls.default.http[0])]
+
         if ((privateKey || mnemonic) && !walletClient) {
             walletClient = this.generateWalletClient({
                 chain,

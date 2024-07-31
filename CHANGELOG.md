@@ -1,3 +1,10 @@
+# [4.4.0](https://github.com/mediafoundation/media-sdk/compare/v4.3.0...v4.4.0) (2024-07-29)
+
+
+### Features
+
+* **sdk.ts:** accept WebSocket transport ([f97f05b](https://github.com/mediafoundation/media-sdk/commit/f97f05bb6d8be525a8d241c5a582cc9c1b88bdd1))
+
 # [4.3.0](https://github.com/mediafoundation/media-sdk/compare/v4.2.3...v4.3.0) (2024-07-26)
 
 
