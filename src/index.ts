@@ -32,6 +32,8 @@ export * from "./types"
 
 export {default as abis} from "../abis"
 
+export {Log, createWalletClient, http, webSocket, custom} from "viem"
+
 
 /*module.exports = {
   validChains,
