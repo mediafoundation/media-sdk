@@ -3,23 +3,12 @@ import Addresses from "../../contractAddresses.json";
 import abi from "../../abis/MarketplaceViewer.json"
 import {Deal} from "../types";
 import {Offer} from "../types";
+import {DealPaginationParams, PaginationParams} from "../types/modelTypes";
 
 const ContractAddresses: typeof Addresses = Addresses
 const MarketplaceViewerABI: typeof abi = abi
 
-type PaginationParams = {
-    marketplaceId: string
-    start?: number
-    steps?: number
-}
 
-type DealPaginationParams = {
-    marketplaceId: string
-    address: string
-    isProvider?: boolean
-    start?: number
-    steps?: number
-}
 
 export class MarketplaceViewer {
   private config: SdkConfig

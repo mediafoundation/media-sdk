@@ -118,3 +118,29 @@ export interface ProviderOperationParams  {
   marketplaceId: number
   provider: string
 }
+
+export interface GetPastEventParams {
+  eventName: string[] | string | undefined,
+  fromBlock: bigint,
+  toBlock: bigint
+}
+
+export interface ListenForEventsParams {
+  eventName: string,
+  callback: (logs: any) => void,
+  onError: (error: any) => void,
+}
+
+export interface PaginationParams {
+  marketplaceId: string
+  start?: number
+  steps?: number
+}
+
+export interface DealPaginationParams {
+  marketplaceId: string
+  address: string
+  isProvider?: boolean
+  start?: number
+  steps?: number
+}

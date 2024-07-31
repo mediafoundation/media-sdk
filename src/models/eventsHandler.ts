@@ -3,20 +3,10 @@ import Addresses from "../../contractAddresses.json";
 import {Sdk, SdkConfig} from "../config/sdk";
 import {Address, Log} from "viem";
 import abis from "../../abis";
-import {ContractEvent} from "../types/modelTypes";
+import {ContractEvent, GetPastEventParams, ListenForEventsParams} from "../types/modelTypes";
 const ContractAddresses: typeof Addresses = Addresses
 
-interface GetPastEventParams {
-  eventName: string[] | string | undefined,
-  fromBlock: bigint,
-  toBlock: bigint
-}
 
-interface ListenForEventsParams {
-  eventName: string,
-  callback: (logs: any) => void,
-  onError: (error: any) => void,
-}
 
 export class EventsHandler {
   private config: SdkConfig
