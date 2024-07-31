@@ -1,7 +1,7 @@
 import Addresses from "../../contractAddresses.json";
 
 import {Sdk, SdkConfig} from "../config/sdk";
-import {Address} from "viem";
+import {Address, Log} from "viem";
 import abis from "../../abis";
 import {ContractEvent} from "../types/modelTypes";
 const ContractAddresses: typeof Addresses = Addresses
@@ -82,7 +82,7 @@ export class EventsHandler {
       address: ContractAddresses[contractName][this.config.publicClient.chain!.id],
       abi: contractAbi.abi,
       eventName: eventName,
-      onLogs: (logs) => callback(logs),
+      onLogs: (logs: Log[] | Log) => callback(logs),
       onError: (error) => onError(error),
     })
   }
