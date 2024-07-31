@@ -2,6 +2,14 @@ import Addresses from "../../contractAddresses.json";
 import {Sdk, SdkConfig} from "../config/sdk";
 import abi from "../../abis/Marketplace.json"
 import {Deal, ProviderMetadata} from "../types";
+import {
+  CancelDealsParams,
+  CreateDealParams,
+  CreateDealsParams,
+  DealOperationParams,
+  DeleteOfferParams, InitializeMarketplaceParams, OfferOperationParams, ProviderOperationParams,
+  UpdateOfferParams
+} from "../types/modelTypes";
 
 const ContractAddresses: typeof Addresses = Addresses
 const MarketplaceABI: typeof abi = abi
@@ -15,65 +23,6 @@ interface CreateOfferParams  {
   billFullPeriods: boolean
   singlePeriodOnly: boolean
   metadata: string
-}
-
-interface UpdateOfferParams  {
-  marketplaceId: number
-  offerId: number
-  maximumDeals: number
-  autoAccept: boolean
-  pricePerSecond: number
-  minDealDuration: number
-  billFullPeriod: boolean
-  singlePeriodOnly: boolean
-  metadata: string
-}
-
-interface DeleteOfferParams  {
-  marketplaceId: number
-  offerId: number
-}
-
-interface CreateDealParams  {
-  marketplaceId: number
-  resourceId: string
-  offerId: number
-  blockedBalance: number
-  sharedKeyCopy: string
-}
-
-interface CreateDealsParams  {
-  marketplaceId: number
-  resourceId: string
-  offersId: number[]
-  blockedBalance: number
-  sharedKeyCopies: string[]
-}
-
-interface CancelDealsParams  {
-  marketplaceId: number
-  resourceId: string
-}
-
-interface DealOperationParams  {
-  marketplaceId: number
-  dealId: number
-}
-
-interface OfferOperationParams  {
-  marketplaceId: number
-  offerId: number
-}
-
-interface InitializeMarketplaceParams  {
-  requiredStake: number
-  marketFeeTo: string
-  marketFeeRate: number
-}
-
-interface ProviderOperationParams  {
-  marketplaceId: number
-  provider: string
 }
 
 export class Marketplace {
