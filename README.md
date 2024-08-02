@@ -28,7 +28,7 @@ To initialize an instance of the Media SDK, use the `Sdk` class. This class cons
 
 - `chain`: A chain object. See [Viem's Chains](https://viem.sh/docs/chains/introduction#chains) for more details. If nothing is provided, the default chain will be used, which is Ethereum Goerli until mainnet launch.
 
-- `transport`: An array of transport objects. See [Viem's Custom Transport](https://viem.sh/docs/clients/transports/custom) for more details.
+- `transport`: An array of transport objects. See [Viem's Transport](https://viem.sh/docs/clients/intro#transports) for more details.
 
 - `privateKey`: A ECP256K1 private key as a hex string to create a wallet client. Example: 'afdfd9c3d2095ef696594f6cedcae59e72dcd697e2a7521b1578140422a4f890'.
 
