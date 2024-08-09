@@ -1,4 +1,5 @@
 import {Address} from "viem";
+import {FeeAmount} from "@uniswap/v3-sdk";
 
 export interface Deal {
   id: bigint,
@@ -143,4 +144,34 @@ export interface DealPaginationParams {
   isProvider?: boolean
   start?: number
   steps?: number
+}
+
+export interface AddLiquidityAndRegisterWithWETHParams {
+  marketplaceId: bigint | number | string
+  label: string
+  publicKey: string
+  minMediaAmountOut: bigint | number | string
+  slippage: bigint | number | string
+  amount: bigint
+  pairFee?: FeeAmount
+}
+
+export interface AddLiquidityAndRegisterParams {
+  marketplaceId: bigint | number | string
+  inputToken: string
+  inputAmount: bigint | number | string
+  label: string
+  publicKey: string
+  slippage: bigint | number | string
+  pairFee?: FeeAmount
+}
+
+export interface SwapAndCreatesDealWithWETHParams {
+  marketplaceId: bigint | number | string
+  resourceId: bigint | number | string
+  offerId: bigint | number | string
+  sharedKeyCopy: string
+  minMediaAmountOut: bigint | number | string
+  amount: bigint
+  pairFee?: FeeAmount
 }

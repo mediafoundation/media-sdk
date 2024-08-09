@@ -3,12 +3,29 @@ import {Uniswap} from "../utils/uniswap";
 import Addresses from "../../contractAddresses.json";
 import abi from "../../abis/MarketplaceHelper.json"
 import {FeeAmount} from "@uniswap/v3-sdk";
+import {
+  AddLiquidityAndRegisterParams,
+  AddLiquidityAndRegisterWithWETHParams,
+  SwapAndCreatesDealWithWETHParams
+} from "../types/modelTypes";
 
 const ContractAddresses: typeof Addresses = Addresses
 const MarketplaceHelperABI: typeof abi = abi
 
+/**
+ * Class representing the MarketplaceHelper contract interactions.
+ */
 export class MarketplaceHelper {
+  /**
+   * @private
+   * @type {SdkConfig}
+   */
   private config: SdkConfig
+
+  /**
+   * Creates an instance of MarketplaceHelper.
+   * @param {Sdk} sdkInstance - An instance of the SDK.
+   */
   constructor(sdkInstance: Sdk) {
     this.config = sdkInstance.config
 
@@ -23,7 +40,12 @@ export class MarketplaceHelper {
     }
   }
 
-  wethToMedia(fee: FeeAmount) {
+  /**
+   * Converts WETH to Media.
+   * @param {FeeAmount} fee - The fee amount.
+   * @returns {string} The encoded path.
+   */
+  wethToMedia(fee: FeeAmount): string {
     return Uniswap.encodePath(
       [
         ContractAddresses.WETH9[this.config.publicClient.chain!.id],
@@ -32,7 +54,13 @@ export class MarketplaceHelper {
       [fee]
     )
   }
-  mediaToWeth(fee: FeeAmount) {
+
+  /**
+   * Converts Media to WETH.
+   * @param {FeeAmount} fee - The fee amount.
+   * @returns {string} The encoded path.
+   */
+  mediaToWeth(fee: FeeAmount): string {
     return Uniswap.encodePath(
       [
         ContractAddresses.MediaERC20[this.config.publicClient.chain!.id],
@@ -42,7 +70,14 @@ export class MarketplaceHelper {
     )
   }
 
-  async view(functionName: string, args: any[]) {
+  /**
+   * Reads data from the MarketplaceHelper contract.
+   * @param {string} functionName - The name of the function to call.
+   * @param {any[]} args - The arguments to pass to the function.
+   * @returns {Promise<any>} The result of the contract call.
+   * @throws Will throw an error if the contract call fails.
+   */
+  async view(functionName: string, args: any[]): Promise<any> {
     try {
       return await this.config.publicClient.readContract({
         address: ContractAddresses.MarketplaceHelper[this.config.publicClient.chain!.id],
@@ -54,7 +89,16 @@ export class MarketplaceHelper {
       throw error
     }
   }
-  async execute(functionName: string, args: any[], value: bigint = 0n) {
+
+  /**
+   * Executes a transaction on the MarketplaceHelper contract.
+   * @param {string} functionName - The name of the function to call.
+   * @param {any[]} args - The arguments to pass to the function.
+   * @param {bigint} value - The value to send with the transaction.
+   * @returns {Promise<any>} The result of the transaction.
+   * @throws Will throw an error if the transaction fails.
+   */
+  async execute(functionName: string, args: any[], value: bigint = 0n): Promise<any> {
     try {
       const { request } = await this.config.publicClient.simulateContract({
         address: ContractAddresses.MarketplaceHelper[this.config.publicClient.chain!.id],
@@ -70,6 +114,11 @@ export class MarketplaceHelper {
     }
   }
 
+  /**
+   * Adds liquidity to the Uniswap pool.
+   * @param {AddLiquidityAndRegisterWithWETHParams} params - The parameters for the transaction.
+   * @returns {Promise<any>} The result of the transaction.
+   */
   async addLiquidityAndRegisterWithETH({
     marketplaceId,
     label,
@@ -78,7 +127,7 @@ export class MarketplaceHelper {
     slippage,
     amount,
     pairFee = 500,
-  }) {
+  }: AddLiquidityAndRegisterWithWETHParams): Promise<any> {
     return await this.execute(
       "addLiquidityAndRegisterWithETH",
       [
@@ -93,6 +142,11 @@ export class MarketplaceHelper {
     )
   }
 
+  /**
+   * Adds liquidity to the Uniswap pool and registers the media.
+   * @param {AddLiquidityAndRegisterParams} params - The parameters for the transaction.
+   * @returns {Promise<any>} The result of the transaction.
+   */
   async addLiquidityAndRegister({
     marketplaceId,
     inputToken,
@@ -101,7 +155,7 @@ export class MarketplaceHelper {
     publicKey,
     slippage,
     pairFee = 500,
-  }) {
+  }: AddLiquidityAndRegisterParams): Promise<any> {
     let minWethAmountOut = 0
     let minMediaAmountOut = 0
 
@@ -134,6 +188,17 @@ export class MarketplaceHelper {
     ])
   }
 
+  /**
+   * Swap tokens and creates a deal.
+   * @param marketplaceId
+   * @param resourceId
+   * @param offerId
+   * @param sharedKeyCopy
+   * @param minMediaAmountOut
+   * @param amount
+   * @param pairFee
+   * @returns {Promise<any>}
+   */
   async swapAndCreateDealWithETH({
     marketplaceId,
     resourceId,
@@ -142,7 +207,7 @@ export class MarketplaceHelper {
     minMediaAmountOut,
     amount,
     pairFee = 500,
-  }) {
+  }: SwapAndCreatesDealWithWETHParams): Promise<any> {
     return await this.execute(
       "swapAndCreateDealWithETH",
       [
