@@ -61,6 +61,17 @@ export interface ContractEvent {
   eventName: string;
 }
 
+export interface CreateOfferParams  {
+  marketplaceId: number
+  maximumDeals: number
+  autoAccept: boolean
+  pricePerSecond: number
+  minDealDuration: number
+  billFullPeriods: boolean
+  singlePeriodOnly: boolean
+  metadata: string
+}
+
 export interface UpdateOfferParams  {
   marketplaceId: number
   offerId: number

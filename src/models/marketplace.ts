@@ -5,7 +5,7 @@ import {Deal, ProviderMetadata} from "../types";
 import {
   CancelDealsParams,
   CreateDealParams,
-  CreateDealsParams,
+  CreateDealsParams, CreateOfferParams,
   DealOperationParams,
   DeleteOfferParams, InitializeMarketplaceParams, OfferOperationParams, ProviderOperationParams,
   UpdateOfferParams
@@ -13,17 +13,6 @@ import {
 
 const ContractAddresses: typeof Addresses = Addresses
 const MarketplaceABI: typeof abi = abi
-
-interface CreateOfferParams  {
-  marketplaceId: number
-  maximumDeals: number
-  autoAccept: boolean
-  pricePerSecond: number
-  minDealDuration: number
-  billFullPeriods: boolean
-  singlePeriodOnly: boolean
-  metadata: string
-}
 
 export class Marketplace {
   private config: SdkConfig
