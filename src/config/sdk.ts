@@ -1,4 +1,4 @@
-import {Account, mnemonicToAccount, privateKeyToAccount} from "viem/accounts";
+import { mnemonicToAccount, privateKeyToAccount} from "viem/accounts";
 
 import { baseSepolia, sepolia } from "viem/chains";
 
