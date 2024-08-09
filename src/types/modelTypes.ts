@@ -73,7 +73,7 @@ export interface CreateOfferParams  {
 }
 
 export interface UpdateOfferParams  {
-  marketplaceId: number
+  marketplaceId: string | number | bigint
   offerId: number
   maximumDeals: number
   autoAccept: boolean
@@ -85,12 +85,12 @@ export interface UpdateOfferParams  {
 }
 
 export interface DeleteOfferParams  {
-  marketplaceId: number
+  marketplaceId: string | number | bigint
   offerId: number
 }
 
 export interface CreateDealParams  {
-  marketplaceId: number
+  marketplaceId: string | number | bigint
   resourceId: string
   offerId: number
   blockedBalance: number
@@ -98,25 +98,25 @@ export interface CreateDealParams  {
 }
 
 export interface CreateDealsParams  {
-  marketplaceId: number
-  resourceId: string
+  marketplaceId: number | string | bigint
+  resourceId: string | number | bigint
   offersId: number[]
   blockedBalance: number
   sharedKeyCopies: string[]
 }
 
 export interface CancelDealsParams  {
-  marketplaceId: number
+  marketplaceId: number | string | bigint
   resourceId: string
 }
 
 export interface DealOperationParams  {
-  marketplaceId: number
-  dealId: number
+  marketplaceId: number | string | bigint
+  dealId: number | string | bigint
 }
 
 export interface OfferOperationParams  {
-  marketplaceId: number
+  marketplaceId: number | string | bigint
   offerId: number
 }
 
@@ -127,7 +127,7 @@ export interface InitializeMarketplaceParams  {
 }
 
 export interface ProviderOperationParams  {
-  marketplaceId: number
+  marketplaceId: number | string | bigint
   provider: string
 }
 
@@ -144,13 +144,13 @@ export interface ListenForEventsParams {
 }
 
 export interface PaginationParams {
-  marketplaceId: string
+  marketplaceId: string | number | bigint
   start?: number
   steps?: number
 }
 
 export interface DealPaginationParams {
-  marketplaceId: string
+  marketplaceId: string | number | bigint
   address: string
   isProvider?: boolean
   start?: number

@@ -1,17 +1,22 @@
-import { mnemonicToAccount, privateKeyToAccount } from "viem/accounts";
+import {Account, mnemonicToAccount, privateKeyToAccount} from "viem/accounts";
 
 import { baseSepolia, sepolia } from "viem/chains";
 
 import {
     Chain,
     createPublicClient,
-    createWalletClient,
+    CustomTransportConfig,
     fallback,
-    http,
+    HttpTransportConfig,
     publicActions, PublicClient,
     Transport,
-    WalletClient
+    WalletClient, WebSocketTransportConfig
 } from "viem";
+
+import {http as httpTransport} from "viem"
+import {custom as customTransport} from "viem"
+import {webSocket as webSocketTransport} from "viem"
+import {createWalletClient as generateWalletClient} from "viem";
 
 /**
  * Interface for SDK constructor parameters.
@@ -51,7 +56,7 @@ export class Sdk {
         walletClient = undefined,
     }: SdkConstructor = {}) {
         if ((privateKey || mnemonic) && !walletClient) {
-            walletClient = this.generateWalletClient({
+            walletClient = this.createWalletClient({
                 chain,
                 transports: transport || [http(chain?.rpcUrls.default.http[0])],
                 privateKey,
@@ -96,7 +101,7 @@ export class Sdk {
      * @param {string | undefined} param0.mnemonic - The mnemonic phrase.
      * @returns {WalletClient} The wallet client.
      */
-    generateWalletClient({
+    createWalletClient({
         chain,
         transports,
         privateKey,
@@ -110,7 +115,7 @@ export class Sdk {
         let account = privateKey
             ? privateKeyToAccount(`0x${privateKey}`)
             : mnemonicToAccount(mnemonic!)
-        return createWalletClient({
+        return generateWalletClient({
             account: account,
             chain: chain,
             transport: fallback(transports),
@@ -124,4 +129,28 @@ export class Sdk {
 export const validChains = {
     11155111: sepolia,
     84532: baseSepolia,
+}
+
+export const http = (url?: string | undefined, config?: HttpTransportConfig | undefined) => httpTransport(url, config)
+export const custom = (provider: any, config?: CustomTransportConfig | undefined) => customTransport(provider, config)
+export const webSocket = (url?: string | undefined, config?: WebSocketTransportConfig | undefined) => webSocketTransport(url, config)
+export const createWalletClient = ({
+    chain,
+    transports,
+    privateKey,
+    mnemonic
+}: {
+    chain: Chain,
+    transports: Transport[],
+    privateKey: string | undefined,
+    mnemonic: string | undefined
+}) => {
+    let account = privateKey
+      ? privateKeyToAccount(`0x${privateKey}`)
+      : mnemonicToAccount(mnemonic!)
+    return generateWalletClient({
+        account: account,
+        chain: chain,
+        transport: fallback(transports),
+    })
 }
