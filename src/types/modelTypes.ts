@@ -121,8 +121,8 @@ export interface ProviderOperationParams  {
 
 export interface GetPastEventParams {
   eventName: string[] | string | undefined,
-  fromBlock: bigint | number | string,
-  toBlock: bigint | number | string
+  fromBlock: bigint
+  toBlock: bigint
 }
 
 export interface ListenForEventsParams {
