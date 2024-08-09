@@ -1,7 +1,7 @@
 import Addresses from "../../contractAddresses.json";
 import {Sdk, SdkConfig} from "../config/sdk";
 import abi from "../../abis/Marketplace.json";
-import {Deal, ProviderMetadata} from "../types";
+import {Deal, Offer, ProviderMetadata} from "../types";
 import {
   CancelDealsParams,
   CreateDealParams,
@@ -239,10 +239,10 @@ export class Marketplace {
   /**
    * Retrieves an offer by its ID from the marketplace.
    * @param {OfferOperationParams} params - The parameters required to get an offer.
-   * @returns {Promise<any>} - The offer information.
+   * @returns {Promise<Offer | null>} - The offer information.
    */
-  async getOfferById({marketplaceId, offerId}: OfferOperationParams) {
-    await this.view("getOffer", [marketplaceId, offerId])
+  async getOfferById({marketplaceId, offerId}: OfferOperationParams): Promise<Offer | null> {
+    return await this.view("getOffer", [marketplaceId, offerId]) as Offer
   }
 
   /**
