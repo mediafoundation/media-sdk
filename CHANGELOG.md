@@ -1,3 +1,35 @@
+# [5.0.0](https://github.com/mediafoundation/media-sdk/compare/v4.4.0...v5.0.0) (2024-08-09)
+
+
+### Bug Fixes
+
+* **marketplace.ts:** Fix return type ([2f8d689](https://github.com/mediafoundation/media-sdk/commit/2f8d6890d1123b399bc2a7c093dc4850ab985697))
+* **marketplaceViewer.ts:** Define return type to view function ([86f428c](https://github.com/mediafoundation/media-sdk/commit/86f428c67ecf8bb224ad8aba80a4f01a0ac382fb))
+* **modelTypes.ts:** Accept bigint | number | string in params ([e229d85](https://github.com/mediafoundation/media-sdk/commit/e229d852a0b4823b6eb1737e74ec1863b2f288cd))
+* **modeltypes.ts:** add missing file ([57fdd61](https://github.com/mediafoundation/media-sdk/commit/57fdd618b097218cad423b7b5d0188c794ad91e3))
+* **modelTypes.ts:** Fix GetPastEventParams ([9e25782](https://github.com/mediafoundation/media-sdk/commit/9e257821479db05c2dfa96281f3b7cb576c28309))
+* **resources.ts:** Type sdk config in attributes ([771c586](https://github.com/mediafoundation/media-sdk/commit/771c586535e3fb38aeb19bffea0ae284eb7eaac9))
+* **sdk.ts:** remove useless variable ([c54c580](https://github.com/mediafoundation/media-sdk/commit/c54c5803e6964af3d1cc75ea3af121826a374c45))
+* **types:** Fix types and exports ([da20c55](https://github.com/mediafoundation/media-sdk/commit/da20c55543f076e0df28e212242c45adfcfc544d))
+
+
+### Features
+
+* **eventsHandler.ts:** Add explicit interfaces to eventsHandler.ts ([a724aca](https://github.com/mediafoundation/media-sdk/commit/a724acaf85a62c1de54e34cccb616763148338bb))
+* **eventsHandler.ts:** Add type to logs ([b8c3fb0](https://github.com/mediafoundation/media-sdk/commit/b8c3fb07cee7ba94fe981106d382fd9436454942))
+* **exports:** Export corresponding types ([5387df4](https://github.com/mediafoundation/media-sdk/commit/5387df43e732ba2c3637a01f27988ce7dc9e9b0e))
+* **index.ts:** Export viem's useful functions ([9bb8741](https://github.com/mediafoundation/media-sdk/commit/9bb8741b36aafc644abc7e44ca81435203594d25))
+* **marketplaceHelper.ts:** Add custom params and documentation ([63efe68](https://github.com/mediafoundation/media-sdk/commit/63efe68bc795bdf23cae33e07626cb71469dcd85))
+* **marketplaceHelper:** Use typed params ([5e3135b](https://github.com/mediafoundation/media-sdk/commit/5e3135b03bbfe31a46e7ba6668538e4ff3c97f6b))
+* **marketplaceViewer.ts:** Use custom types for params and returns ([7816ea0](https://github.com/mediafoundation/media-sdk/commit/7816ea0d10d0d13c253a8de74b5468c1292e77a9))
+* **sdk.ts:** generic transport are accepted in sdk constructor ([ba73bbf](https://github.com/mediafoundation/media-sdk/commit/ba73bbf57243b904d9f1ebec7e2b636d18c0a9cb))
+
+
+### BREAKING CHANGES
+
+* **sdk.ts:** Sdk constructor changes transport type from string[] | undefined to Transport[] |
+undefined
+
 # [4.4.0](https://github.com/mediafoundation/media-sdk/compare/v4.3.0...v4.4.0) (2024-07-29)
 
 
