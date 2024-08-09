@@ -9,9 +9,17 @@ const ContractAddresses: typeof Addresses = Addresses
 const MarketplaceViewerABI: typeof abi = abi
 
 
-
+/**
+ * Class representing the MarketplaceViewer contract.
+ */
 export class MarketplaceViewer {
   private config: SdkConfig
+
+  /**
+   * Creates an instance of MarketplaceViewer.
+   * @param {Sdk} sdkInstance - An instance of the SDK containing configuration details.
+   * @throws Will throw an error if the MarketplaceViewer address is not found for the current network ID.
+   */
   constructor(sdkInstance: Sdk) {
     this.config = sdkInstance.config
 
@@ -26,6 +34,13 @@ export class MarketplaceViewer {
     }
   }
 
+  /**
+   * Calls a read-only function on the MarketplaceViewer contract.
+   * @param {string} functionName - The name of the contract function to call.
+   * @param {any[]} args - The arguments to pass to the contract function.
+   * @returns {Promise<any>} - The result of the contract function.
+   * @throws Will throw an error if the contract read operation fails.
+   */
   async view(functionName: string, args: any[]): Promise<any> {
     try {
       return await this.config.publicClient.readContract({
@@ -39,10 +54,20 @@ export class MarketplaceViewer {
     }
   }
 
+  /**
+   * Retrieves paginated offers from the marketplace.
+   * @param {PaginationParams} params - The parameters for pagination (marketplaceId, start, steps).
+   * @returns {Promise<Offer[]>} - A promise that resolves to an array of offers.
+   */
   async getPaginatedOffers({ marketplaceId, start = 0, steps = 20 }: PaginationParams): Promise<Offer[]> {
     return await this.view("getPaginatedOffers", [marketplaceId, start, steps]) as Offer[]
   }
 
+  /**
+   * Retrieves all offers from the marketplace by paginating through them.
+   * @param {PaginationParams} params - The parameters for pagination (marketplaceId, start, steps).
+   * @returns {Promise<Offer[]>} - A promise that resolves to an array of all offers.
+   */
   async getAllOffersPaginating({ marketplaceId, start = 0, steps = 20 }: PaginationParams): Promise<Offer[]> {
     let offers: any[] = []
     let _steps = BigInt(steps)
@@ -76,6 +101,11 @@ export class MarketplaceViewer {
     return offers as Offer[]
   }
 
+  /**
+   * Retrieves paginated deals from the marketplace.
+   * @param {DealPaginationParams} params - The parameters for deal pagination (marketplaceId, address, isProvider, start, steps).
+   * @returns {Promise<Deal[]>} - A promise that resolves to an array of deals.
+   */
   async getPaginatedDeals({
     marketplaceId,
     address,
@@ -92,6 +122,11 @@ export class MarketplaceViewer {
     ]) as Deal[]
   }
 
+  /**
+   * Retrieves all deals from the marketplace by paginating through them.
+   * @param {DealPaginationParams} params - The parameters for deal pagination (marketplaceId, address, isProvider, start, steps).
+   * @returns {Promise<Deal[]>} - A promise that resolves to an array of all deals.
+   */
   async getAllDealsPaginating({
     marketplaceId,
     address,
