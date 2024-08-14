@@ -4,13 +4,33 @@ import {Address} from "viem";
 
 const ERC20ABI: typeof abi = abi
 
+/**
+ * Class representing the ERC20 contract interactions.
+ */
 export class ERC20 {
+  /**
+   * @private
+   * @type {SdkConfig}
+   */
   private config: SdkConfig
+
+  /**
+   * Creates an instance of ERC20.
+   * @param {Sdk} sdkInstance - An instance of the SDK.
+   */
   constructor(sdkInstance: Sdk) {
     this.config = sdkInstance.config
   }
 
-  async view(address: Address, functionName: string, args: any) {
+  /**
+   * Reads data from the ERC20 contract.
+   * @param {Address} address - The address of the contract.
+   * @param {string} functionName - The name of the function to call.
+   * @param {any[]} args - The arguments to pass to the function.
+   * @returns {Promise<any>} The result of the contract call.
+   * @throws Will throw an error if the contract call fails.
+   */
+  async view(address: Address, functionName: string, args: any): Promise<any> {
     try {
       return await this.config.publicClient.readContract({
         address: address,
@@ -23,7 +43,15 @@ export class ERC20 {
     }
   }
 
-  async execute(address: Address, functionName: string, args: any) {
+  /**
+   * Executes a transaction on the ERC20 contract.
+   * @param {Address} address - The address of the contract.
+   * @param {string} functionName - The name of the function to call.
+   * @param {any[]} args - The arguments to pass to the function.
+   * @returns {Promise<any>} The result of the transaction.
+   * @throws Will throw an error if the transaction fails.
+   */
+  async execute(address: Address, functionName: string, args: any): Promise<any> {
     try {
       const { request } = await this.config.publicClient.simulateContract({
         address: address,
@@ -38,7 +66,12 @@ export class ERC20 {
     }
   }
 
-  async balanceOf(address: Address) {
+  /**
+   * Retrieves the balance of a specified address.
+   * @param {Address} address - The address to query the balance of.
+   * @returns {Promise<any>} The balance of the address.
+   */
+  async balanceOf(address: Address): Promise<any> {
     try {
       return await this.view(address, "balanceOf", [
         this.config.walletClient.account!.address,
@@ -48,7 +81,13 @@ export class ERC20 {
     }
   }
 
-  async allowance(token: Address, spender: Address) {
+  /**
+   * Retrieves the allowance of a spender for a specified token.
+   * @param {Address} token - The address of the token.
+   * @param {Address} spender - The address of the spender.
+   * @returns {Promise<any>} The allowance of the spender.
+   */
+  async allowance(token: Address, spender: Address): Promise<any> {
     try {
       return await this.view(token, "allowance", [
         this.config.walletClient.account!.address,
@@ -59,7 +98,14 @@ export class ERC20 {
     }
   }
 
-  async approve(address: Address, spender: Address, amount: string) {
+  /**
+   * Approves a spender to spend a specified amount of tokens.
+   * @param {Address} address - The address of the contract.
+   * @param {Address} spender - The address of the spender.
+   * @param {string} amount - The amount of tokens to approve.
+   * @returns {Promise<any>} The result of the transaction.
+   */
+  async approve(address: Address, spender: Address, amount: string): Promise<any> {
     try {
       return await this.execute(address, "approve", [spender, amount])
     } catch (error) {
@@ -67,7 +113,14 @@ export class ERC20 {
     }
   }
 
-  async transfer(address: Address, to: Address, amount: string) {
+  /**
+   * Transfers tokens to a specified address.
+   * @param {Address} address - The address of the contract.
+   * @param {Address} to - The address to transfer tokens to.
+   * @param {string} amount - The amount of tokens to transfer.
+   * @returns {Promise<any>} The result of the transaction.
+   */
+  async transfer(address: Address, to: Address, amount: string): Promise<any> {
     try {
       return await this.execute(address, "transfer", [to, amount])
     } catch (error) {
@@ -75,7 +128,16 @@ export class ERC20 {
     }
   }
 
-  async transferFrom(address: Address, from: Address, to: Address, amount: string) {
+  /**
+   * Transfers tokens from one address to another.
+   * @param {Address} address - The address of the contract.
+   * @param {Address} from - The address to transfer tokens from.
+   * @param {Address} to - The address to transfer tokens to.
+   * @param {string} amount - The amount of tokens to transfer.
+   * @returns {Promise<any>} The result of the transaction.
+   * @throws Will throw an error if the transaction fails.
+   */
+  async transferFrom(address: Address, from: Address, to: Address, amount: string): Promise<any> {
     try {
       return await this.execute(address, "transferFrom", [from, to, amount])
     } catch (error) {

@@ -20,7 +20,7 @@ export {Quoter} from "./models/quoter";
 
 export {Signer} from "./utils/signer";
 
-export {Sdk, validChains} from "./config/sdk";
+export {Sdk, validChains, http, webSocket, custom, createWalletClient} from "./config/sdk";
 
 export {RatingSystem} from "./models/ratingSystem"
 
@@ -28,7 +28,11 @@ export {Disputes} from "./models/disputes"
 
 export {default as Addresses} from "../contractAddresses.json";
 
+export * from "./types"
+
 export {default as abis} from "../abis"
+
+export {Log} from "viem"
 
 
 /*module.exports = {
