@@ -17,19 +17,11 @@
     "viem": "^1.11.0"
   },
   "devDependencies": {
-    "@semantic-release/changelog": "^6.0.3",
-    "@semantic-release/exec": "^6.0.3",
-    "@semantic-release/git": "^10.0.1",
-    "commitizen": "^4.3.0",
-    "cz-conventional-changelog": "^3.3.0",
     "jest": "^29.7.0",
     "ts-jest": "^29.1.1",
-    "@types/jest": "^29.5.4",
-    "semantic-release": "^22.0.8"
+    "@types/jest": "^29.5.4"
   },
   "scripts": {
-    "build": "rm -rf dist/lib && tsc && tsc --build tsconfig.es5.json",
-    "commit": "cz",
-    "release": "CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD) semantic-release --no-ci"
+    "build": "rm -rf dist/lib && tsc && tsc --build tsconfig.es5.json"
   }
 }
