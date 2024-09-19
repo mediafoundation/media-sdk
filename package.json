@@ -10,6 +10,7 @@
   "private": false,
   "dependencies": {
     "@metamask/eth-sig-util": "^7.0.0",
+    "@metamask/scure-bip39": "^2.1.1",
     "@uniswap/sdk-core": "^4.0.9",
     "@uniswap/v3-sdk": "^3.10.0",
     "bignumber.js": "^9.1.2",
