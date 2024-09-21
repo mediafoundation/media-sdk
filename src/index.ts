@@ -20,6 +20,8 @@ export {Quoter} from "./models/quoter";
 
 export {Signer} from "./utils/signer";
 
+export {WalletUtils} from "./utils/walletUtils";
+
 export {Sdk, validChains, http, webSocket, custom, createWalletClient} from "./config/sdk";
 
 export {RatingSystem} from "./models/ratingSystem"
