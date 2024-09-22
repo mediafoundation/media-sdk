@@ -1,3 +1,16 @@
+# [5.0.1](https://github.com/mediafoundation/media-sdk/compare/v5.0.1...v5.1.1) (2024-09-19)
+
+### Features
+
+* **walletUtils**: Add a function to create a Hierarchical Deterministic account from mnemonic phrase ([79ad1869](https://github.com/mediafoundation/media-sdk/commit/79ad18699d82547a39a3da0cdc91b7d591c2fc52))
+
+# [5.0.1](https://github.com/mediafoundation/media-sdk/compare/v5.0.0...v5.0.1) (2024-09-03)
+
+### Chore
+
+* **dependencies**: Do not use semantic release, remove its dependencies ([d6e00c1](https://github.com/mediafoundation/media-sdk/commit/d6e00c1f4a768d9bb7ba41dd06c0a8f4bf4a9f1d))
+
+
 # [5.0.0](https://github.com/mediafoundation/media-sdk/compare/v4.4.0...v5.0.0) (2024-08-09)
 
 

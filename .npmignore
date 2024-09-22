@@ -8,13 +8,10 @@ abis/
 .vscode/
 
 # Exclude configuration files
-.czrc
 .gitignore
-.releaserc.js
 contractAddresses.json
 jest.config.js
 package-lock.json
-publish.sh
 .DS_STORE
 yarn.lock
 .npmignore
