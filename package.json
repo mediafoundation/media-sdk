@@ -1,6 +1,6 @@
 {
   "name": "media-sdk",
-  "version": "5.1.1",
+  "version": "5.1.2",
   "main": "dist/lib/es5/src/index.js",
   "types": "dist/lib/es5/src/index.d.ts",
   "module": "dist/lib/es6/src/index.js",
