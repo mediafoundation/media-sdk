@@ -1,3 +1,10 @@
+
+# [5.2.0](https://github.com/mediafoundation/media-sdk/compare/v5.1.1...v5.2.0) (2024-10-04)
+
+### Features
+
+* **Bump viem to v2.20.0**
+
 # [5.0.1](https://github.com/mediafoundation/media-sdk/compare/v5.0.1...v5.1.1) (2024-09-19)
 
 ### Features
