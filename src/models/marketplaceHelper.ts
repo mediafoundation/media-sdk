@@ -6,7 +6,9 @@ import {FeeAmount} from "@uniswap/v3-sdk";
 import {
   AddLiquidityAndRegisterParams,
   AddLiquidityAndRegisterWithWETHParams,
-  SwapAndCreatesDealWithWETHParams
+  SwapAndCreateDealParams,
+  SwapAndCreateDealsWithWETHParams,
+  SwapAndCreateDealWithWETHParams
 } from "../types/modelTypes";
 
 const ContractAddresses: typeof Addresses = Addresses
@@ -116,7 +118,11 @@ export class MarketplaceHelper {
 
   /**
    * Adds liquidity to the Uniswap pool.
-   * @param {AddLiquidityAndRegisterWithWETHParams} params - The parameters for the transaction.
+   * @param marketplaceId - The marketplace ID.
+   * @param inputToken - The input token address.
+   * @param inputAmount - The input token amount.
+   * @param slippage - The slippage tolerance.
+   * @param pairFee - The pair fee.
    * @returns {Promise<any>} The result of the transaction.
    */
   async addLiquidityAndRegisterWithETH({
@@ -144,7 +150,13 @@ export class MarketplaceHelper {
 
   /**
    * Adds liquidity to the Uniswap pool and registers the media.
-   * @param {AddLiquidityAndRegisterParams} params - The parameters for the transaction.
+   * @param marketplaceId
+   * @param inputToken
+   * @param inputAmount
+   * @param label
+   * @param publicKey
+   * @param slippage
+   * @param pairFee
    * @returns {Promise<any>} The result of the transaction.
    */
   async addLiquidityAndRegister({
@@ -207,7 +219,7 @@ export class MarketplaceHelper {
     minMediaAmountOut,
     amount,
     pairFee = 500,
-  }: SwapAndCreatesDealWithWETHParams): Promise<any> {
+  }: SwapAndCreateDealWithWETHParams): Promise<any> {
     return await this.execute(
       "swapAndCreateDealWithETH",
       [
@@ -222,6 +234,18 @@ export class MarketplaceHelper {
     )
   }
 
+  /**
+   * Swap tokens and create a deal.
+   * @param marketplaceId
+   * @param inputToken
+   * @param inputAmount
+   * @param resourceId
+   * @param offerId
+   * @param sharedKeyCopy
+   * @param minMediaAmountOut
+   * @param pairFee
+   * @returns {Promise<any>}
+   */
   async swapAndCreateDeal({
     marketplaceId,
     inputToken,
@@ -231,7 +255,7 @@ export class MarketplaceHelper {
     sharedKeyCopy,
     minMediaAmountOut,
     pairFee = 500,
-  }) {
+  }: SwapAndCreateDealParams): Promise<any> {
 
     let inputToWethToMediaPath = Uniswap.encodePath(
       [
@@ -254,6 +278,17 @@ export class MarketplaceHelper {
     ])
   }
 
+  /**
+   * Swap tokens and create deals.
+   * @param marketplaceId
+   * @param resourceId
+   * @param offerIds
+   * @param sharedKeyCopies
+   * @param minMediaAmountOut
+   * @param amount
+   * @param pairFee
+   * @returns {Promise<any>}
+   */
   async swapAndCreateDealsWithETH({
     marketplaceId,
     resourceId,
@@ -262,7 +297,7 @@ export class MarketplaceHelper {
     minMediaAmountOut,
     amount,
     pairFee = 500,
-  }) {
+  }: SwapAndCreateDealsWithWETHParams): Promise<any> {
     return await this.execute(
       "swapAndCreateDealsWithETH",
       [

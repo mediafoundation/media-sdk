@@ -1,5 +1,11 @@
 
-# [5.2.0](https://github.com/mediafoundation/media-sdk/compare/v5.1.1...v5.2.0) (2024-10-04)
+# [5.2.0](https://github.com/mediafoundation/media-sdk/compare/v5.1.2...v5.2.0) (2024-10-04)
+
+### Bug Fixes
+
+* **Add missing interfaces**
+
+# [5.1.2](https://github.com/mediafoundation/media-sdk/compare/v5.1.1...v5.1.2) (2024-10-04)
 
 ### Features
 
