@@ -177,11 +177,32 @@ export interface AddLiquidityAndRegisterParams {
   pairFee?: FeeAmount
 }
 
-export interface SwapAndCreatesDealWithWETHParams {
+export interface SwapAndCreateDealWithWETHParams {
   marketplaceId: bigint | number | string
   resourceId: bigint | number | string
   offerId: bigint | number | string
   sharedKeyCopy: string
+  minMediaAmountOut: bigint | number | string
+  amount: bigint
+  pairFee?: FeeAmount
+}
+
+export interface SwapAndCreateDealParams {
+  marketplaceId: bigint | number | string
+  inputToken: string
+  inputAmount: bigint | number | string
+  resourceId: bigint | number | string
+  offerId: bigint | number | string
+  sharedKeyCopy: string
+  minMediaAmountOut: bigint | number | string
+  pairFee?: FeeAmount
+}
+
+export interface SwapAndCreateDealsWithWETHParams {
+  marketplaceId: bigint | number | string
+  resourceId: bigint | number | string
+  offerIds: bigint[] | number[]
+  sharedKeyCopies: string[]
   minMediaAmountOut: bigint | number | string
   amount: bigint
   pairFee?: FeeAmount
