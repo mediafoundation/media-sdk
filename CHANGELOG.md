@@ -1,4 +1,10 @@
 
+# [5.2.4](https://github.com/mediafoundation/media-sdk/compare/v5.2.3...v5.2.4) (2024-15-04)
+
+### Bug Fixes
+
+* fix initializeMarketplace function
+
 # [5.2.3](https://github.com/mediafoundation/media-sdk/compare/v5.2.2...v5.2.3) (2024-15-04)
 
 ### Bug Fixes

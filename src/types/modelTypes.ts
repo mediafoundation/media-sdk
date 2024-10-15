@@ -121,9 +121,10 @@ export interface OfferOperationParams  {
 }
 
 export interface InitializeMarketplaceParams  {
-  requiredStake: number
-  marketFeeTo: string
-  marketFeeRate: number
+  requiredStake: number | string | bigint
+  marketFeeTo: Address
+  marketFeeRate: number | string | bigint
+  metadata: string
 }
 
 export interface ProviderOperationParams  {

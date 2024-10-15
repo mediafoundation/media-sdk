@@ -79,11 +79,12 @@ export class MarketplaceStorage {
    * @param {marketFeeRate} marketFeeRate - The rate of the market fee. (e.g. 50000 for 5%)
    * @returns {Promise<any>} - The transaction receipt.
    */
-  async initializeMarketplace({requiredStake, marketFeeTo, marketFeeRate}: InitializeMarketplaceParams): Promise<any> {
+  async initializeMarketplace({requiredStake, marketFeeTo, marketFeeRate, metadata}: InitializeMarketplaceParams): Promise<any> {
     return await this.execute("initializeMarketplace", [
       requiredStake,
       marketFeeTo,
       marketFeeRate,
+      metadata
     ])
   }
 
