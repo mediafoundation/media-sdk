@@ -210,3 +210,14 @@ export interface SwapAndCreateDealsWithWETHParams {
   amount: bigint
   poolFee?: FeeAmount
 }
+
+export interface SwapAndCreateDealsParams {
+  marketplaceId: bigint | number | string
+  inputToken: string
+  inputAmount: bigint | number | string
+  resourceId: bigint | number | string
+  offerIds: bigint[] | number[] | string[]
+  sharedKeyCopies: string[]
+  minAmountOut: bigint | number | string
+  path: string
+}

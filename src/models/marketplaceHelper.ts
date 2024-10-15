@@ -7,6 +7,7 @@ import {
   AddLiquidityAndRegisterParams,
   AddLiquidityAndRegisterWithWETHParams,
   SwapAndCreateDealParams,
+  SwapAndCreateDealsParams,
   SwapAndCreateDealsWithWETHParams,
   SwapAndCreateDealWithWETHParams
 } from "../types/modelTypes";
@@ -293,4 +294,43 @@ export class MarketplaceHelper {
       amount
     )
   }
+
+  /**
+   * Swap tokens and create deals.
+   * @param marketplaceId - The marketplace ID.
+   * @param inputToken - The input token address.
+   * @param inputAmount - The input amount.
+   * @param resourceId - The resource ID.
+   * @param offerIds - The offer IDs.
+   * @param sharedKeyCopies - The shared key copies.
+   * @param minAmountOut - The minimum amount of media to receive.
+   * @param path - The preferred Uniswap path. (Used to swap the input token to MEDIA)
+   * @returns {Promise<any>}
+   * @throws Will throw an error if the transaction fails.
+   */
+
+  async swapAndCreateDeals({
+    marketplaceId,
+    inputToken,
+    inputAmount,
+    resourceId,
+    offerIds,
+    sharedKeyCopies,
+    minAmountOut,
+    path,
+  }: SwapAndCreateDealsParams): Promise<any> {
+    return await this.execute("swapAndCreateDeals", [
+      marketplaceId,
+      inputToken,
+      inputAmount,
+      resourceId,
+      offerIds,
+      sharedKeyCopies,
+      minAmountOut,
+      path,
+    ])
+  }
+
+
 }
+

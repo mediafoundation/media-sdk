@@ -116,16 +116,16 @@ export class Marketplace {
    * @returns {Promise<any>} - The transaction receipt.
    */
   async updateOffer({
-                      marketplaceId,
-                      offerId,
-                      maximumDeals,
-                      autoAccept,
-                      pricePerSecond,
-                      minDealDuration,
-                      billFullPeriod,
-                      singlePeriodOnly,
-                      metadata,
-                    }: UpdateOfferParams): Promise<any> {
+      marketplaceId,
+      offerId,
+      maximumDeals,
+      autoAccept,
+      pricePerSecond,
+      minDealDuration,
+      billFullPeriod,
+      singlePeriodOnly,
+      metadata,
+    }: UpdateOfferParams): Promise<any> {
     return await this.execute("updateOffer", [
       marketplaceId,
       offerId,
