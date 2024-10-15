@@ -41,7 +41,7 @@ export class Quoter {
     }
   }
 
-  async view(functionName, args) {
+  async view(functionName: string, args: any[]): Promise<any> {
     try {
       return await this.config.publicClient.readContract({
         address: ContractAddresses.QuoterV2[this.chainId],

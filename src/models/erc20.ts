@@ -58,7 +58,7 @@ export class ERC20 {
         abi: ERC20ABI.abi,
         functionName: functionName,
         args: args,
-        account: this.config.walletClient.account!.address,
+        account: this.config.walletClient.account,
       })
       return await this.config.walletClient.writeContract(request)
     } catch (error) {

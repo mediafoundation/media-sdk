@@ -159,22 +159,25 @@ export interface DealPaginationParams {
 
 export interface AddLiquidityAndRegisterWithWETHParams {
   marketplaceId: bigint | number | string
-  label: string
+  metadata: string
   publicKey: string
-  minMediaAmountOut: bigint | number | string
+  minOut: bigint[] | number[] | string[]
+  path: string
   slippage: bigint | number | string
+  poolFee?: FeeAmount
   amount: bigint
-  pairFee?: FeeAmount
 }
 
 export interface AddLiquidityAndRegisterParams {
   marketplaceId: bigint | number | string
   inputToken: string
   inputAmount: bigint | number | string
-  label: string
+  metadata: string
   publicKey: string
+  minOut: bigint[] | number[] | string[]
+  paths: string[]
   slippage: bigint | number | string
-  pairFee?: FeeAmount
+  poolFee?: FeeAmount
 }
 
 export interface SwapAndCreateDealWithWETHParams {
@@ -184,7 +187,7 @@ export interface SwapAndCreateDealWithWETHParams {
   sharedKeyCopy: string
   minMediaAmountOut: bigint | number | string
   amount: bigint
-  pairFee?: FeeAmount
+  poolFee?: FeeAmount
 }
 
 export interface SwapAndCreateDealParams {
@@ -195,7 +198,7 @@ export interface SwapAndCreateDealParams {
   offerId: bigint | number | string
   sharedKeyCopy: string
   minMediaAmountOut: bigint | number | string
-  pairFee?: FeeAmount
+  path: string
 }
 
 export interface SwapAndCreateDealsWithWETHParams {
@@ -205,5 +208,5 @@ export interface SwapAndCreateDealsWithWETHParams {
   sharedKeyCopies: string[]
   minMediaAmountOut: bigint | number | string
   amount: bigint
-  pairFee?: FeeAmount
+  poolFee?: FeeAmount
 }

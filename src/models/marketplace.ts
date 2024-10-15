@@ -9,7 +9,6 @@ import {
   CreateOfferParams,
   DealOperationParams,
   DeleteOfferParams,
-  InitializeMarketplaceParams,
   OfferOperationParams,
   ProviderOperationParams,
   UpdateOfferParams
@@ -155,12 +154,12 @@ export class Marketplace {
    * @returns {Promise<any>} - The transaction receipt.
    */
   async createDeal({
-                     marketplaceId,
-                     resourceId,
-                     offerId,
-                     blockedBalance,
-                     sharedKeyCopy,
-                   }: CreateDealParams): Promise<any> {
+      marketplaceId,
+      resourceId,
+      offerId,
+      blockedBalance,
+      sharedKeyCopy,
+    }: CreateDealParams): Promise<any> {
     return await this.execute("createDeal", [
       marketplaceId,
       resourceId,
@@ -176,12 +175,12 @@ export class Marketplace {
    * @returns {Promise<any>} - The transaction receipt.
    */
   async createDeals({
-                      marketplaceId,
-                      resourceId,
-                      offersId,
-                      blockedBalance,
-                      sharedKeyCopies,
-                    }: CreateDealsParams): Promise<any> {
+      marketplaceId,
+      resourceId,
+      offersId,
+      blockedBalance,
+      sharedKeyCopies,
+    }: CreateDealsParams): Promise<any> {
     return await this.execute("createDeals", [
       marketplaceId,
       resourceId,
@@ -243,19 +242,6 @@ export class Marketplace {
    */
   async getOfferById({marketplaceId, offerId}: OfferOperationParams): Promise<Offer | null> {
     return await this.view("getOffer", [marketplaceId, offerId]) as Offer
-  }
-
-  /**
-   * Initializes the marketplace with the required parameters.
-   * @param {InitializeMarketplaceParams} params - The parameters required to initialize the marketplace.
-   * @returns {Promise<any>} - The transaction receipt.
-   */
-  async initializeMarketplace({requiredStake, marketFeeTo, marketFeeRate}: InitializeMarketplaceParams): Promise<any> {
-    return await this.execute("initializeMarketplace", [
-      requiredStake,
-      marketFeeTo,
-      marketFeeRate,
-    ])
   }
 
   /**

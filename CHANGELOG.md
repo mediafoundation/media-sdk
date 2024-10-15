@@ -1,4 +1,16 @@
 
+# [5.2.0](https://github.com/mediafoundation/media-sdk/compare/v5.2.0...v5.2.1) (2024-14-04)
+
+### Features
+
+* **Added MarketplaceStorage model**
+
+### Bug Fixes
+
+* **Add missing abis**
+* **Normalized view and execute across all models**
+* **Added Rating and Disputes contract addresses to models**
+
 # [5.2.0](https://github.com/mediafoundation/media-sdk/compare/v5.1.2...v5.2.0) (2024-10-04)
 
 ### Bug Fixes
