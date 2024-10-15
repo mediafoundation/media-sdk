@@ -89,16 +89,16 @@ console.log(result)
 Anybody can initialize a new marketplace. The marketplace will be initialized with the address of the caller as the owner. The owner can then transfer ownership to another address.
 
 ```javascript 
-import { Sdk, Marketplace } from 'media-sdk'
+import { Sdk, MarketplaceStorage } from 'media-sdk'
 
 // initialize the sdk using your mnemonic
 const sdk = new Sdk({ mnemonic: 'degree tackle suggest window test behind mesh extra cover prepare oak script' })
 
 // instanciate the marketplace contract
-const marketplace = new Marketplace(sdk)
+const marketplaceStorage = new MarketplaceStorage(sdk)
 
 //initialize a new marketplace
-const hash = await marketplace.initializeMarketplace({
+const hash = await marketplaceStorage.initializeMarketplace({
   requiredStake: 100,  // marketplace min required staked liquidity 
   marketFeeTo: sdk.config.walletClient.account.address, // market fee recipient address 
   marketFeeRate: 5000 // market fee rate % (5000 = 0.5%)

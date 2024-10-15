@@ -1,4 +1,12 @@
 
+# [5.2.1](https://github.com/mediafoundation/media-sdk/compare/v5.2.0...v5.2.2) (2024-15-04)
+
+### Bug Fixes
+
+* added missing function and type param
+* new contract addresses for maketplacehelper
+* fixed readme
+
 # [5.2.0](https://github.com/mediafoundation/media-sdk/compare/v5.2.0...v5.2.1) (2024-14-04)
 
 ### Features
