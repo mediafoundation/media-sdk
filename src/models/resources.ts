@@ -18,7 +18,7 @@ export class Resources {
     }
   }
 
-  async view(functionName, args): Promise<any> {
+  async view(functionName: string, args: any[]): Promise<any> {
     try {
       return await this.config.publicClient.readContract({
         address: ContractAddresses.Resources[this.config.publicClient.chain!.id],
@@ -31,7 +31,7 @@ export class Resources {
     }
   }
 
-  async execute(functionName, args): Promise<any> {
+  async execute(functionName: string, args: any[]): Promise<any> {
     try {
       const { request } = await this.config.publicClient.simulateContract({
         address: ContractAddresses.Resources[this.config.publicClient.chain!.id],

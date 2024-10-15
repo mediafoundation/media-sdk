@@ -119,30 +119,35 @@ export class MarketplaceHelper {
   /**
    * Adds liquidity to the Uniswap pool.
    * @param marketplaceId - The marketplace ID.
-   * @param inputToken - The input token address.
-   * @param inputAmount - The input token amount.
+   * @param metadata - The provider metadata.
+   * @param publicKey - The provider public key.
+   * @param minOut - Array with the minimum amounts of media and weth to receive.
+   * @param path - The preferred MEDIA/WETH Uniswap path. (Used to swap half of the ETH to MEDIA)
    * @param slippage - The slippage tolerance.
-   * @param pairFee - The pair fee.
+   * @param poolFee - The pair fee of the pool where your liquidity will be added.
+   * @param amount - The amount of ETH to send.
    * @returns {Promise<any>} The result of the transaction.
    */
   async addLiquidityAndRegisterWithETH({
     marketplaceId,
-    label,
+    metadata,
     publicKey,
-    minMediaAmountOut,
+    minOut,
+    path,
     slippage,
-    amount,
-    pairFee = 500,
+    poolFee = 500,
+    amount
   }: AddLiquidityAndRegisterWithWETHParams): Promise<any> {
     return await this.execute(
       "addLiquidityAndRegisterWithETH",
       [
         marketplaceId,
-        label,
+        metadata,
         publicKey,
-        minMediaAmountOut,
-        this.wethToMedia(pairFee),
+        minOut,
+        path,
         slippage,
+        poolFee
       ],
       amount
     )
@@ -150,53 +155,39 @@ export class MarketplaceHelper {
 
   /**
    * Adds liquidity to the Uniswap pool and registers the media.
-   * @param marketplaceId
-   * @param inputToken
-   * @param inputAmount
-   * @param label
-   * @param publicKey
-   * @param slippage
-   * @param pairFee
+   * @param marketplaceId - The marketplace ID.
+   * @param inputToken - The input token address.
+   * @param inputAmount - The input amount.
+   * @param metadata - The provider metadata.
+   * @param publicKey - The provider public key.
+   * @param minOut - Array with the minimum amounts of media and weth to receive.
+   * @param paths - The preferred Uniswap paths. (Used to swap half of the input token to MEDIA and the other half to ETH)
+   * @param slippage - The slippage tolerance.
+   * @param poolFee - The pair fee of the pool where your liquidity will be added.
    * @returns {Promise<any>} The result of the transaction.
    */
   async addLiquidityAndRegister({
     marketplaceId,
     inputToken,
     inputAmount,
-    label,
+    metadata,
     publicKey,
+    minOut,
+    paths,
     slippage,
-    pairFee = 500,
+    poolFee = 500,
   }: AddLiquidityAndRegisterParams): Promise<any> {
-    let minWethAmountOut = 0
-    let minMediaAmountOut = 0
-
-    let inputToWeth = Uniswap.encodePath(
-      [inputToken, ContractAddresses.WETH9[this.config.publicClient.chain!.id]],
-      [pairFee]
-    )
-
-    let inputToWethToMediaPath = Uniswap.encodePath(
-      [
-        inputToken,
-        ContractAddresses.WETH9[this.config.publicClient.chain!.id],
-        ContractAddresses.MediaERC20[this.config.publicClient.chain!.id],
-      ],
-      [pairFee, pairFee]
-    )
-
-    let paths = [inputToWeth, inputToWethToMediaPath]
 
     return await this.execute("addLiquidityAndRegister", [
       marketplaceId,
       inputToken,
       inputAmount,
-      label,
+      metadata,
       publicKey,
-      minWethAmountOut,
-      minMediaAmountOut,
+      minOut,
       paths,
       slippage,
+      poolFee
     ])
   }
 
@@ -208,7 +199,7 @@ export class MarketplaceHelper {
    * @param sharedKeyCopy
    * @param minMediaAmountOut
    * @param amount
-   * @param pairFee
+   * @param poolFee
    * @returns {Promise<any>}
    */
   async swapAndCreateDealWithETH({
@@ -218,7 +209,7 @@ export class MarketplaceHelper {
     sharedKeyCopy,
     minMediaAmountOut,
     amount,
-    pairFee = 500,
+    poolFee = 500,
   }: SwapAndCreateDealWithWETHParams): Promise<any> {
     return await this.execute(
       "swapAndCreateDealWithETH",
@@ -228,7 +219,7 @@ export class MarketplaceHelper {
         offerId,
         sharedKeyCopy,
         minMediaAmountOut,
-        this.wethToMedia(pairFee),
+        this.wethToMedia(poolFee),
       ],
       amount
     )
@@ -236,14 +227,14 @@ export class MarketplaceHelper {
 
   /**
    * Swap tokens and create a deal.
-   * @param marketplaceId
-   * @param inputToken
-   * @param inputAmount
-   * @param resourceId
-   * @param offerId
-   * @param sharedKeyCopy
-   * @param minMediaAmountOut
-   * @param pairFee
+   * @param marketplaceId - The marketplace ID.
+   * @param inputToken - The input token address.
+   * @param inputAmount - The input amount.
+   * @param resourceId - The resource ID.
+   * @param offerId - The offer ID.
+   * @param sharedKeyCopy - The shared key copy.
+   * @param minMediaAmountOut - The minimum amount of media to receive.
+   * @param path - The preferred Uniswap path. (Used to swap the input token to MEDIA)
    * @returns {Promise<any>}
    */
   async swapAndCreateDeal({
@@ -254,17 +245,8 @@ export class MarketplaceHelper {
     offerId,
     sharedKeyCopy,
     minMediaAmountOut,
-    pairFee = 500,
+    path,
   }: SwapAndCreateDealParams): Promise<any> {
-
-    let inputToWethToMediaPath = Uniswap.encodePath(
-      [
-        inputToken,
-        ContractAddresses.WETH9[this.config.publicClient.chain!.id],
-        ContractAddresses.MediaERC20[this.config.publicClient.chain!.id],
-      ],
-      [pairFee, pairFee]
-    )
 
     return await this.execute("swapAndCreateDeal", [
       marketplaceId,
@@ -274,7 +256,7 @@ export class MarketplaceHelper {
       offerId,
       sharedKeyCopy,
       minMediaAmountOut,
-      inputToWethToMediaPath,
+      path,
     ])
   }
 
@@ -286,7 +268,7 @@ export class MarketplaceHelper {
    * @param sharedKeyCopies
    * @param minMediaAmountOut
    * @param amount
-   * @param pairFee
+   * @param poolFee
    * @returns {Promise<any>}
    */
   async swapAndCreateDealsWithETH({
@@ -296,7 +278,7 @@ export class MarketplaceHelper {
     sharedKeyCopies,
     minMediaAmountOut,
     amount,
-    pairFee = 500,
+    poolFee = 500,
   }: SwapAndCreateDealsWithWETHParams): Promise<any> {
     return await this.execute(
       "swapAndCreateDealsWithETH",
@@ -306,7 +288,7 @@ export class MarketplaceHelper {
         offerIds,
         sharedKeyCopies,
         minMediaAmountOut,
-        this.wethToMedia(pairFee),
+        this.wethToMedia(poolFee),
       ],
       amount
     )

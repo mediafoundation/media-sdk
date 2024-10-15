@@ -4,6 +4,8 @@ export {ERC20} from "./models/erc20";
 
 export {MarketplaceViewer} from "./models/marketplaceViewer";
 
+export {MarketplaceStorage} from "./models/marketplaceStorage";
+
 export {Resources} from "./models/resources";
 
 export {Encryption} from "./utils/encryption";

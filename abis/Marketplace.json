@@ -9,22 +9,91 @@
         },
         {
           "internalType": "contract Resources",
-          "name": "_resources",
+          "name": "_resourcesAddress",
           "type": "address"
         },
         {
           "internalType": "contract Staking",
-          "name": "_staking",
+          "name": "_stakingAddress",
           "type": "address"
         },
         {
           "internalType": "contract INonfungiblePositionManager",
           "name": "_positionManagerAddress",
           "type": "address"
+        },
+        {
+          "internalType": "contract MarketplaceStorage",
+          "name": "_storageAddress",
+          "type": "address"
         }
       ],
       "stateMutability": "nonpayable",
       "type": "constructor"
+    },
+    {
+      "inputs": [],
+      "name": "AccessControlBadConfirmation",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "neededRole",
+          "type": "bytes32"
+        }
+      ],
+      "name": "AccessControlUnauthorizedAccount",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "target",
+          "type": "address"
+        }
+      ],
+      "name": "AddressEmptyCode",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "AddressInsufficientBalance",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "FailedInnerCall",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ReentrancyGuardReentrantCall",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "token",
+          "type": "address"
+        }
+      ],
+      "name": "SafeERC20FailedOperation",
+      "type": "error"
     },
     {
       "anonymous": false,
@@ -56,32 +125,6 @@
       "inputs": [
         {
           "indexed": false,
-          "internalType": "address",
-          "name": "_addr",
-          "type": "address"
-        }
-      ],
-      "name": "AddressAuthorized",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "internalType": "address",
-          "name": "_addr",
-          "type": "address"
-        }
-      ],
-      "name": "AddressDeauthorized",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
           "internalType": "uint256",
           "name": "marketplaceId",
           "type": "uint256"
@@ -100,25 +143,6 @@
         }
       ],
       "name": "BillingStartExtended",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "internalType": "uint256",
-          "name": "_marketplaceId",
-          "type": "uint256"
-        },
-        {
-          "indexed": false,
-          "internalType": "address",
-          "name": "_client",
-          "type": "address"
-        }
-      ],
-      "name": "ClientUpdated",
       "type": "event"
     },
     {
@@ -278,19 +302,6 @@
           "internalType": "uint256",
           "name": "_marketplaceId",
           "type": "uint256"
-        }
-      ],
-      "name": "MarketplaceInitialized",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "internalType": "uint256",
-          "name": "_marketplaceId",
-          "type": "uint256"
         },
         {
           "indexed": false,
@@ -338,25 +349,6 @@
         }
       ],
       "name": "OfferUpdated",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": true,
-          "internalType": "address",
-          "name": "previousOwner",
-          "type": "address"
-        },
-        {
-          "indexed": true,
-          "internalType": "address",
-          "name": "newOwner",
-          "type": "address"
-        }
-      ],
-      "name": "OwnershipTransferred",
       "type": "event"
     },
     {
@@ -485,59 +477,88 @@
       "type": "event"
     },
     {
+      "anonymous": false,
       "inputs": [
         {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "name": "REQUIRED_STAKE",
-      "outputs": [
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
         {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "previousAdminRole",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "newAdminRole",
+          "type": "bytes32"
         }
       ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "name": "RoleAdminChanged",
+      "type": "event"
     },
     {
+      "anonymous": false,
       "inputs": [
         {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "name": "authorizedAddresses",
-      "outputs": [
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
         {
+          "indexed": true,
           "internalType": "address",
-          "name": "",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "sender",
           "type": "address"
         }
       ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "name": "RoleGranted",
+      "type": "event"
     },
     {
+      "anonymous": false,
       "inputs": [
         {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
           "internalType": "address",
-          "name": "",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "sender",
           "type": "address"
         }
       ],
-      "name": "authorizedProxies",
+      "name": "RoleRevoked",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "DEFAULT_ADMIN_ROLE",
       "outputs": [
         {
-          "internalType": "bool",
+          "internalType": "bytes32",
           "name": "",
-          "type": "bool"
+          "type": "bytes32"
         }
       ],
       "stateMutability": "view",
@@ -567,17 +588,17 @@
     {
       "inputs": [
         {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
         }
       ],
-      "name": "marketFeeRate",
+      "name": "getRoleAdmin",
       "outputs": [
         {
-          "internalType": "uint256",
+          "internalType": "bytes32",
           "name": "",
-          "type": "uint256"
+          "type": "bytes32"
         }
       ],
       "stateMutability": "view",
@@ -587,31 +608,40 @@
     {
       "inputs": [
         {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "name": "marketFeeTo",
-      "outputs": [
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
         {
           "internalType": "address",
-          "name": "",
+          "name": "account",
           "type": "address"
         }
       ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "name": "grantRole",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
     },
     {
-      "inputs": [],
-      "name": "marketplacesCounter",
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "hasRole",
       "outputs": [
         {
-          "internalType": "uint256",
+          "internalType": "bool",
           "name": "",
-          "type": "uint256"
+          "type": "bool"
         }
       ],
       "stateMutability": "view",
@@ -659,115 +689,6 @@
       "constant": true
     },
     {
-      "inputs": [],
-      "name": "owner",
-      "outputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "name": "owners",
-      "outputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
-    },
-    {
-      "inputs": [],
-      "name": "positionManager",
-      "outputs": [
-        {
-          "internalType": "contract INonfungiblePositionManager",
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
-    },
-    {
-      "inputs": [],
-      "name": "protocolFeeRate",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
-    },
-    {
-      "inputs": [],
-      "name": "protocolFeeTo",
-      "outputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
-    },
-    {
-      "inputs": [],
-      "name": "recoverNative",
-      "outputs": [
-        {
-          "internalType": "bool",
-          "name": "",
-          "type": "bool"
-        }
-      ],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "renounceOwnership",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "newOwner",
-          "type": "address"
-        }
-      ],
-      "name": "transferOwnership",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
       "inputs": [
         {
           "internalType": "address",
@@ -803,96 +724,63 @@
       "constant": true
     },
     {
+      "inputs": [],
+      "name": "recoverNative",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
       "inputs": [
         {
-          "internalType": "uint256",
-          "name": "requiredStake",
-          "type": "uint256"
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
         },
         {
           "internalType": "address",
-          "name": "_marketFeeTo",
+          "name": "callerConfirmation",
           "type": "address"
-        },
-        {
-          "internalType": "uint256",
-          "name": "_marketFeeRate",
-          "type": "uint256"
         }
       ],
-      "name": "initializeMarketplace",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "marketplaceId",
-          "type": "uint256"
-        }
-      ],
+      "name": "renounceRole",
+      "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
     },
     {
       "inputs": [
         {
-          "internalType": "uint256",
-          "name": "marketplaceId",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "stake",
-          "type": "uint256"
-        }
-      ],
-      "name": "setRequiredStake",
-      "outputs": [
-        {
-          "internalType": "bool",
-          "name": "",
-          "type": "bool"
-        }
-      ],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "marketplaceId",
-          "type": "uint256"
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
         },
         {
           "internalType": "address",
-          "name": "newOwner",
+          "name": "account",
           "type": "address"
         }
       ],
-      "name": "transferMarketplaceOwnership",
-      "outputs": [
-        {
-          "internalType": "bool",
-          "name": "",
-          "type": "bool"
-        }
-      ],
+      "name": "revokeRole",
+      "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
     },
     {
       "inputs": [
         {
-          "internalType": "uint256",
-          "name": "marketplaceId",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "feeRate",
-          "type": "uint256"
+          "internalType": "bytes4",
+          "name": "interfaceId",
+          "type": "bytes4"
         }
       ],
-      "name": "setMarketFeeRate",
+      "name": "supportsInterface",
       "outputs": [
         {
           "internalType": "bool",
@@ -900,32 +788,14 @@
           "type": "bool"
         }
       ],
-      "stateMutability": "nonpayable",
-      "type": "function"
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
     },
     {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "marketplaceId",
-          "type": "uint256"
-        },
-        {
-          "internalType": "address",
-          "name": "feeTo",
-          "type": "address"
-        }
-      ],
-      "name": "setMarketFeeTo",
-      "outputs": [
-        {
-          "internalType": "bool",
-          "name": "",
-          "type": "bool"
-        }
-      ],
-      "stateMutability": "nonpayable",
-      "type": "function"
+      "stateMutability": "payable",
+      "type": "receive",
+      "payable": true
     },
     {
       "inputs": [
@@ -1280,30 +1150,6 @@
           "type": "uint256"
         },
         {
-          "internalType": "string",
-          "name": "metadata",
-          "type": "string"
-        }
-      ],
-      "name": "updateClient",
-      "outputs": [
-        {
-          "internalType": "bool",
-          "name": "",
-          "type": "bool"
-        }
-      ],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "marketplaceId",
-          "type": "uint256"
-        },
-        {
           "internalType": "uint256",
           "name": "resourceId",
           "type": "uint256"
@@ -1536,88 +1382,17 @@
     {
       "inputs": [
         {
-          "internalType": "address",
-          "name": "_addr",
+          "internalType": "contract IERC721",
+          "name": "_token",
           "type": "address"
-        }
-      ],
-      "name": "authorizeProxy",
-      "outputs": [
-        {
-          "internalType": "bool",
-          "name": "",
-          "type": "bool"
-        }
-      ],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "_addr",
-          "type": "address"
-        }
-      ],
-      "name": "deAuthorizeProxy",
-      "outputs": [
-        {
-          "internalType": "bool",
-          "name": "",
-          "type": "bool"
-        }
-      ],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "_tokenAddress",
-          "type": "address"
-        }
-      ],
-      "name": "setToken",
-      "outputs": [
-        {
-          "internalType": "bool",
-          "name": "",
-          "type": "bool"
-        }
-      ],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "feeTo",
-          "type": "address"
-        }
-      ],
-      "name": "setProtocolFeeTo",
-      "outputs": [
-        {
-          "internalType": "bool",
-          "name": "",
-          "type": "bool"
-        }
-      ],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
+        },
         {
           "internalType": "uint256",
-          "name": "feeRate",
+          "name": "_tokenId",
           "type": "uint256"
         }
       ],
-      "name": "setProtocolFeeRate",
+      "name": "recoverERC721",
       "outputs": [
         {
           "internalType": "bool",
@@ -1636,7 +1411,7 @@
           "type": "address"
         }
       ],
-      "name": "recoverTokens",
+      "name": "recoverERC20",
       "outputs": [
         {
           "internalType": "bool",
@@ -1728,31 +1503,6 @@
           "internalType": "struct Marketplace.Provider",
           "name": "",
           "type": "tuple"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "marketplaceId",
-          "type": "uint256"
-        },
-        {
-          "internalType": "address",
-          "name": "client",
-          "type": "address"
-        }
-      ],
-      "name": "getClient",
-      "outputs": [
-        {
-          "internalType": "string",
-          "name": "",
-          "type": "string"
         }
       ],
       "stateMutability": "view",
