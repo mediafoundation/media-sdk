@@ -1,5 +1,12 @@
 
-# [5.2.1](https://github.com/mediafoundation/media-sdk/compare/v5.2.0...v5.2.2) (2024-15-04)
+# [5.2.3](https://github.com/mediafoundation/media-sdk/compare/v5.2.2...v5.2.3) (2024-15-04)
+
+### Bug Fixes
+
+* new contract addresses for maketplacehelper
+* json abis
+
+# [5.2.2](https://github.com/mediafoundation/media-sdk/compare/v5.2.1...v5.2.2) (2024-15-04)
 
 ### Bug Fixes
 
@@ -7,7 +14,7 @@
 * new contract addresses for maketplacehelper
 * fixed readme
 
-# [5.2.0](https://github.com/mediafoundation/media-sdk/compare/v5.2.0...v5.2.1) (2024-14-04)
+# [5.2.1](https://github.com/mediafoundation/media-sdk/compare/v5.2.0...v5.2.1) (2024-14-04)
 
 ### Features
 
