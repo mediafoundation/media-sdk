@@ -1,8 +1,9 @@
 import {Sdk, SdkConfig} from "../config/sdk";
-import {Address} from "viem";
 import abi from "../../abis/RatingSystem.json"
+import Addresses from "../../contractAddresses.json"
 
 const RatingSystemABI: typeof abi = abi
+const ContractAddresses: typeof Addresses = Addresses;
 
 export class RatingSystem {
     private config: SdkConfig
@@ -10,10 +11,10 @@ export class RatingSystem {
         this.config = sdkInstance.config
     }
 
-    async view(address: Address, functionName: string, args: any) {
+    async view(functionName: string, args: any) {
         try {
             return await this.config.publicClient.readContract({
-                address: address,
+                address: ContractAddresses.RatingSystem[this.config.publicClient.chain!.id],
                 abi: RatingSystemABI.abi,
                 functionName: functionName,
                 args: args
@@ -23,10 +24,10 @@ export class RatingSystem {
         }
     }
 
-    async execute(address: Address, functionName: string, args: any) {
+    async execute(functionName: string, args: any) {
         try {
             const { request } = await this.config.publicClient.simulateContract({
-                address: address,
+                address: ContractAddresses.RatingSystem[this.config.publicClient.chain!.id],
                 abi: RatingSystemABI.abi,
                 functionName: functionName,
                 args: args,
