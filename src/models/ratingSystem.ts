@@ -1,7 +1,6 @@
 import {Sdk, SdkConfig} from "../config/sdk";
 import abi from "../../abis/RatingSystem.json"
 import Addresses from "../../contractAddresses.json"
-import {Address} from "viem"
 import {GetAverageRatingParams, RateProviderParams, RemoveRatingParams} from "../types/modelTypes"
 
 const RatingSystemABI: typeof abi = abi
