@@ -1,6 +1,8 @@
 import {Sdk, SdkConfig} from "../config/sdk";
 import abi from "../../abis/RatingSystem.json"
 import Addresses from "../../contractAddresses.json"
+import {Address} from "viem"
+import {GetAverageRatingParams, RateProviderParams, RemoveRatingParams} from "../types/modelTypes"
 
 const RatingSystemABI: typeof abi = abi
 const ContractAddresses: typeof Addresses = Addresses;
@@ -37,5 +39,17 @@ export class RatingSystem {
         } catch (error) {
             throw error
         }
+    }
+
+    async rateProvider({marketplaceId, dealId, rating}: RateProviderParams) {
+        return await this.execute("rateProvider", [marketplaceId, dealId, rating])
+    }
+
+    async removeRating({marketplaceId, dealId}: RemoveRatingParams) {
+        return await this.execute("removeRating", [marketplaceId, dealId])
+    }
+
+    async getAverageRating({marketplaceId, provider}: GetAverageRatingParams) {
+        return await this.view("getAverageRating", [marketplaceId, provider])
     }
 }

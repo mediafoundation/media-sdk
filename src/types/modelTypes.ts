@@ -207,3 +207,19 @@ export interface SwapAndCreateDealsWithWETHParams {
   amount: bigint
   pairFee?: FeeAmount
 }
+
+export interface RateProviderParams {
+    marketplaceId: string | number | bigint
+    dealId: string | number | bigint
+    rating: string | number | bigint
+}
+
+export interface RemoveRatingParams {
+    marketplaceId: string | number | bigint
+    dealId: string | number | bigint
+}
+
+export interface GetAverageRatingParams {
+    marketplaceId: string | number | bigint
+    provider: Address
+}
