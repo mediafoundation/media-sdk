@@ -86,6 +86,12 @@
           "internalType": "uint256",
           "name": "_id",
           "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "_resourceOwner",
+          "type": "address"
         }
       ],
       "name": "AddedResource",
@@ -118,6 +124,12 @@
           "internalType": "uint256",
           "name": "_id",
           "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "_resourceOwner",
+          "type": "address"
         }
       ],
       "name": "RemovedResource",
@@ -219,6 +231,12 @@
           "internalType": "uint256",
           "name": "_id",
           "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "_resourceOwner",
+          "type": "address"
         }
       ],
       "name": "UpdatedResource",

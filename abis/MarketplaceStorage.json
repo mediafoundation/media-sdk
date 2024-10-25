@@ -303,20 +303,6 @@
     },
     {
       "inputs": [],
-      "name": "MARKETPLACE_ROLE",
-      "outputs": [
-        {
-          "internalType": "bytes32",
-          "name": "",
-          "type": "bytes32"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
-    },
-    {
-      "inputs": [],
       "name": "PROXY_ROLE",
       "outputs": [
         {
@@ -796,7 +782,7 @@
           "type": "string"
         }
       ],
-      "name": "setMarketplaceMetadata",
+      "name": "setMarketMetadata",
       "outputs": [
         {
           "internalType": "bool",

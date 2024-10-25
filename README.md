@@ -99,9 +99,10 @@ const marketplaceStorage = new MarketplaceStorage(sdk)
 
 //initialize a new marketplace
 const hash = await marketplaceStorage.initializeMarketplace({
-  requiredStake: 100,  // marketplace min required staked liquidity 
+  requiredStake: 10000000,  // marketplace min required staked liquidity 
   marketFeeTo: sdk.config.walletClient.account.address, // market fee recipient address 
-  marketFeeRate: 5000 // market fee rate % (5000 = 0.5%)
+  marketFeeRate: 5000, // market fee rate % (5000 = 0.5%)
+  metadata: '{"name": "Test Marketplace"}',
 })
 
 // wait for the transaction to be mined

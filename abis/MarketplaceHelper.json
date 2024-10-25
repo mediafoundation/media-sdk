@@ -835,12 +835,12 @@
         },
         {
           "internalType": "uint256",
-          "name": "minMediaAmount",
+          "name": "amount0Min",
           "type": "uint256"
         },
         {
           "internalType": "uint256",
-          "name": "minWethAmount",
+          "name": "amount1Min",
           "type": "uint256"
         },
         {

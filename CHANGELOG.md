@@ -1,18 +1,25 @@
 
-# [5.2.4](https://github.com/mediafoundation/media-sdk/compare/v5.2.3...v5.2.4) (2024-15-04)
+# [6.0.0](https://github.com/mediafoundation/media-sdk/compare/v5.2.4...v6.0.0) (2024-10-25)
+
+### BREAKING CHANGES
+
+* new contract addresses
+* json abis
+
+# [5.2.4](https://github.com/mediafoundation/media-sdk/compare/v5.2.3...v5.2.4) (2024-10-15)
 
 ### Bug Fixes
 
 * fix initializeMarketplace function
 
-# [5.2.3](https://github.com/mediafoundation/media-sdk/compare/v5.2.2...v5.2.3) (2024-15-04)
+# [5.2.3](https://github.com/mediafoundation/media-sdk/compare/v5.2.2...v5.2.3) (2024-10-15)
 
 ### Bug Fixes
 
 * new contract addresses for maketplacehelper
 * json abis
 
-# [5.2.2](https://github.com/mediafoundation/media-sdk/compare/v5.2.1...v5.2.2) (2024-15-04)
+# [5.2.2](https://github.com/mediafoundation/media-sdk/compare/v5.2.1...v5.2.2) (2024-10-15)
 
 ### Bug Fixes
 
@@ -20,7 +27,7 @@
 * new contract addresses for maketplacehelper
 * fixed readme
 
-# [5.2.1](https://github.com/mediafoundation/media-sdk/compare/v5.2.0...v5.2.1) (2024-14-04)
+# [5.2.1](https://github.com/mediafoundation/media-sdk/compare/v5.2.0...v5.2.1) (2024-10-14)
 
 ### Features
 
