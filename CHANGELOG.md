@@ -1,4 +1,10 @@
 
+# [6.1.0](https://github.com/mediafoundation/media-sdk/compare/v6.0.0...v6.1.0) (2024-11-02)
+
+### Features
+
+* **walletUtils.ts** Create an account from its private key
+
 # [6.0.0](https://github.com/mediafoundation/media-sdk/compare/v5.2.4...v6.0.0) (2024-10-25)
 
 ### BREAKING CHANGES
