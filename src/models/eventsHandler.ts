@@ -158,6 +158,25 @@ export class EventsHandler {
   }
 
   /**
+   * Retrieves past events from the RatingSystem contract.
+   * @param {Object} param0 - The parameters for retrieving past events.
+   * @param {string[]|string|undefined} [param0.eventName] - The name(s) of the event(s) to retrieve.
+   * @param {bigint} param0.fromBlock - The starting block number.
+   * @param {bigint} param0.toBlock - The ending block number.
+   * @returns {Promise<ContractEvent[]>} The past events.
+   */
+
+  async getRatingPastEvents({eventName, fromBlock, toBlock}: GetPastEventParams): Promise<ContractEvent[]> {
+    return await this.getPastEvents({
+      contractName: "RatingSystem",
+      contractAbi: abis.RatingSystemAbi,
+      eventName,
+      fromBlock,
+      toBlock,
+    })
+  }
+
+  /**
    * Listens for a specific event from the Marketplace contract.
    * @param {Object} param0 - The parameters for listening to contract events.
    * @param {string} param0.eventName - The name of the event to listen for.
@@ -206,5 +225,22 @@ export class EventsHandler {
       callback,
       onError,
     })
+  }
+
+  /**
+   * Listens for a specific event from the RatingSystem contract.
+   * @param {Object} param0 - The parameters for listening to contract events.
+   * @param {string} param0.eventName - The name of the event to listen for.
+   * @param {function} param0.callback - The callback function to handle the event logs.
+   * @param {function} param0.onError - The callback function to handle errors.
+   */
+  async listenForRatingSystemEvent({eventName, callback, onError}: ListenForEventsParams) {
+      await this.listenForContractEvent({
+        contractName: "RatingSystem",
+        contractAbi: abis.RatingSystemAbi,
+        eventName,
+        callback,
+        onError,
+      })
   }
 }
