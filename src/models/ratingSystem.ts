@@ -1,6 +1,7 @@
 import Addresses from "../../contractAddresses.json";
 import { Sdk, SdkConfig } from "../config/sdk";
 import abi from "../../abis/RatingSystem.json";
+import {GetAverageRatingParams, RateProviderParams, RemoveRatingParams} from "../types/modelTypes"
 
 const ContractAddresses: typeof Addresses = Addresses;
 const RatingSystemABI: typeof abi = abi;
@@ -21,31 +22,65 @@ export class RatingSystem {
     }
   }
 
-  async view(functionName: string, args: any[]): Promise<any> {
+  async view(functionName: string, args: any) {
     try {
       return await this.config.publicClient.readContract({
         address: ContractAddresses.RatingSystem[this.config.publicClient.chain!.id],
         abi: RatingSystemABI.abi,
         functionName: functionName,
-        args: args,
-      });
+        args: args
+      })
     } catch (error) {
-      throw error;
+      throw error
     }
   }
 
-  async execute(functionName: string, args: any[]): Promise<any> {
+  async execute(functionName: string, args: any) {
     try {
       const { request } = await this.config.publicClient.simulateContract({
         address: ContractAddresses.RatingSystem[this.config.publicClient.chain!.id],
         abi: RatingSystemABI.abi,
         functionName: functionName,
         args: args,
-        account: this.config.walletClient.account,
-      });
-      return await this.config.walletClient.writeContract(request);
+        account: this.config.walletClient.account!.address,
+      })
+      return await this.config.walletClient.writeContract(request)
     } catch (error) {
-      throw error;
+      throw error
     }
   }
+
+  /**
+ * Rates a provider for a specific deal in a marketplace.
+ * @param {RateProviderParams} params - The parameters for rating a provider.
+ * @param {string | number | bigint} params.marketplaceId - The ID of the marketplace.
+ * @param {string | number | bigint} params.dealId - The ID of the deal.
+ * @param {string | number | bigint} params.rating - The rating to be given.
+ * @returns {Promise<any>} - The result of the contract execution.
+ */
+async rateProvider({marketplaceId, dealId, rating}: RateProviderParams) {
+  return await this.execute("rateProvider", [marketplaceId, dealId, rating])
+}
+
+/**
+ * Removes a rating for a specific deal in a marketplace.
+ * @param {RemoveRatingParams} params - The parameters for removing a rating.
+ * @param {string | number | bigint} params.marketplaceId - The ID of the marketplace.
+ * @param {string | number | bigint} params.dealId - The ID of the deal.
+ * @returns {Promise<any>} - The result of the contract execution.
+ */
+async removeRating({marketplaceId, dealId}: RemoveRatingParams) {
+  return await this.execute("removeRating", [marketplaceId, dealId])
+}
+
+/**
+ * Retrieves the average rating of a provider in a marketplace.
+ * @param {GetAverageRatingParams} params - The parameters for getting the average rating.
+ * @param {string | number | bigint} params.marketplaceId - The ID of the marketplace.
+ * @param {Address} params.provider - The account of the provider.
+ * @returns {Promise<any>} - The average rating of the provider.
+ */
+async getAverageRating({marketplaceId, provider}: GetAverageRatingParams) {
+  return await this.view("getAverageRating", [marketplaceId, provider])
+}
 }
