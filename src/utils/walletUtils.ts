@@ -1,6 +1,7 @@
 import {mnemonicToSeed} from "@metamask/scure-bip39";
-import {HDAccount, HDKey, hdKeyToAccount} from "viem/accounts";
+import {Account, HDAccount, HDKey, hdKeyToAccount, privateKeyToAccount} from "viem/accounts";
 import {wordlist} from "@metamask/scure-bip39/dist/wordlists/english";
+import {Hex} from "viem"
 
 export class WalletUtils {
   /**
@@ -15,5 +16,14 @@ export class WalletUtils {
     return hdKeyToAccount(hdKey, {
       addressIndex: accountIndex
     })
+  }
+
+  /**
+   * Creates an Account from a private key.
+   * @param {Hex} privateKey - The private key in hexadecimal format: `0x${string}`.
+   * @returns {Promise<Account>} The account derived from the private key.
+   */
+  static async privateKeyToAccount(privateKey: Hex): Promise<Account> {
+    return privateKeyToAccount(privateKey)
   }
 }
