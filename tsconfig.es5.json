@@ -8,6 +8,7 @@
     "moduleResolution": "Node",
     "noImplicitAny": false,
     "strict": true,
+    "disableSizeLimit": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
