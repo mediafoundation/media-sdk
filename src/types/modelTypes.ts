@@ -222,3 +222,19 @@ export interface SwapAndCreateDealsParams {
   minAmountOut: bigint | number | string
   path: string
 }
+
+export interface GetAverageRatingParams {
+  marketplaceId: number | string | bigint
+  provider: Address
+}
+
+export interface RateProviderParams {
+    marketplaceId: number | string | bigint
+    dealId: number | string | bigint
+    rating: number | string | bigint
+}
+
+export interface RemoveRatingParams {
+    marketplaceId: number | string | bigint
+    dealId: number | string | bigint
+}

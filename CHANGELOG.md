@@ -1,3 +1,9 @@
+# [6.2.0](https://github.com/mediafoundation/media-sdk/compare/v6.1.0...v6.2.0) (2024-12-02)
+
+### Features
+
+* **eventsHandler.ts** Add functions to getPasEvents and listenForEvents on RatingSystem contract
+* **ratingSystem.ts** Add functions base on smart contract
 
 # [6.1.0](https://github.com/mediafoundation/media-sdk/compare/v6.0.0...v6.1.0) (2024-11-02)
 
