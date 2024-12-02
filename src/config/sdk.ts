@@ -65,7 +65,7 @@ export class Sdk {
         }
         let publicClient = walletClient
             ? walletClient.extend(publicActions)
-            : this.generatePublicClient({ chain, transports: transport || [http(chain?.rpcUrls.default.http[0])] })
+            : Sdk.generatePublicClient({ chain, transports: transport || [http(chain?.rpcUrls.default.http[0])] })
         this.config = {
             walletClient: walletClient,
             publicClient: publicClient,
@@ -79,7 +79,7 @@ export class Sdk {
      * @param {Transport[]} param0.transports - The transport methods.
      * @returns {PublicClient} The public client.
      */
-    generatePublicClient({
+    static generatePublicClient({
         chain,
         transports
     }: {
