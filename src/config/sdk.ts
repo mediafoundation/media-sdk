@@ -56,7 +56,7 @@ export class Sdk {
         walletClient = undefined,
     }: SdkConstructor = {}) {
         if ((privateKey || mnemonic) && !walletClient) {
-            walletClient = this.createWalletClient({
+            walletClient = Sdk.createWalletClient({
                 chain,
                 transports: transport || [http(chain?.rpcUrls.default.http[0])],
                 privateKey,
@@ -65,7 +65,7 @@ export class Sdk {
         }
         let publicClient = walletClient
             ? walletClient.extend(publicActions)
-            : this.generatePublicClient({ chain, transports: transport || [http(chain?.rpcUrls.default.http[0])] })
+            : Sdk.generatePublicClient({ chain, transports: transport || [http(chain?.rpcUrls.default.http[0])] })
         this.config = {
             walletClient: walletClient,
             publicClient: publicClient,
@@ -79,7 +79,7 @@ export class Sdk {
      * @param {Transport[]} param0.transports - The transport methods.
      * @returns {PublicClient} The public client.
      */
-    generatePublicClient({
+    static generatePublicClient({
         chain,
         transports
     }: {
@@ -101,7 +101,7 @@ export class Sdk {
      * @param {string | undefined} param0.mnemonic - The mnemonic phrase.
      * @returns {WalletClient} The wallet client.
      */
-    createWalletClient({
+    static createWalletClient({
         chain,
         transports,
         privateKey,
@@ -134,23 +134,3 @@ export const validChains = {
 export const http = (url?: string | undefined, config?: HttpTransportConfig | undefined) => httpTransport(url, config)
 export const custom = (provider: any, config?: CustomTransportConfig | undefined) => customTransport(provider, config)
 export const webSocket = (url?: string | undefined, config?: WebSocketTransportConfig | undefined) => webSocketTransport(url, config)
-export const createWalletClient = ({
-    chain,
-    transports,
-    privateKey,
-    mnemonic
-}: {
-    chain: Chain,
-    transports: Transport[],
-    privateKey: string | undefined,
-    mnemonic: string | undefined
-}) => {
-    let account = privateKey
-      ? privateKeyToAccount(`0x${privateKey}`)
-      : mnemonicToAccount(mnemonic!)
-    return generateWalletClient({
-        account: account,
-        chain: chain,
-        transport: fallback(transports),
-    })
-}

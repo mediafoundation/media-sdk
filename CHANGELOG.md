@@ -1,3 +1,13 @@
+# [7.0.0](https://github.com/mediafoundation/media-sdk/compare/v6.2.0...v7.0.0) (2024-12-02)
+
+### Bug Fixes
+* **sdk.ts** Remove duplicate function
+* **sdk.ts** Make generatePublicClient a static function
+
+### BREAKING CHANGES
+
+* Change createWalletClient -> Sdk.createWalletClient
+
 # [6.2.0](https://github.com/mediafoundation/media-sdk/compare/v6.1.0...v6.2.0) (2024-12-02)
 
 ### Features
