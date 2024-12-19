@@ -47,6 +47,11 @@ export interface ProviderMetadata {
   publicKey: string
 }
 
+export interface Rating {
+  sum: bigint,
+  count: bigint
+}
+
 export interface ContractEvent {
   address: Address;
   blockHash: string;

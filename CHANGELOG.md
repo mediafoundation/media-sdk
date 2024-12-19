@@ -1,3 +1,10 @@
+# [7.1.0](https://github.com/mediafoundation/media-sdk/compare/vv7.0.0...v7.1.0) (2024-12-19)
+
+### Features
+* **types**: Export all types from ModelTypes
+* **ratingSystem**: Add functions to model
+* **types** Add new types
+
 # [7.0.0](https://github.com/mediafoundation/media-sdk/compare/v6.2.0...v7.0.0) (2024-12-02)
 
 ### Bug Fixes
