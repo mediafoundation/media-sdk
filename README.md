@@ -52,11 +52,11 @@ const sdk = new Sdk({ privateKey: 'afdfd9c3d2095ef696594f6cedcae59e72dcd697e2a75
 Using a browser wallet:
 
 ```javascript
-import { Sdk, custom, createWalletClient, validChains } from 'media-sdk'
+import { Sdk, custom, validChains } from 'media-sdk'
 
 const [account] = await window.ethereum.request({method: 'eth_requestAccounts'})
 
-const walletClient = createWalletClient({
+const walletClient = Sdk.createWalletClient({
     account: account,
     chain: validChains[Number(window.ethereum.chainId)],
     transport: [custom(window.ethereum)]
