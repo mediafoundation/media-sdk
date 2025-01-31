@@ -20,6 +20,8 @@ export {Uniswap} from "./utils/uniswap";
 
 export {Quoter} from "./models/quoter";
 
+export {SwapRouter} from "./models/swapRouter";
+
 export {Signer} from "./utils/signer";
 
 export {WalletUtils} from "./utils/walletUtils";
