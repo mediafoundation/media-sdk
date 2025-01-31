@@ -1,3 +1,8 @@
+# [7.1.1](https://github.com/mediafoundation/media-sdk/compare/vv7.0.0...v7.1.1) (2025-01-31)
+
+### Features
+* **swapRouter**: Add model for SwapRouter
+
 # [7.1.0](https://github.com/mediafoundation/media-sdk/compare/vv7.0.0...v7.1.0) (2024-12-19)
 
 ### Features
