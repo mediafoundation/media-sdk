@@ -35,7 +35,7 @@ export class Quoter {
       "Wrapped Ether"
     )
     if (ContractAddresses.QuoterV2[this.chainId] === undefined) {
-      throw new Error(
+      console.error(
         "Quoter address not found for network id: " + this.chainId
       )
     }

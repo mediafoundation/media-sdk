@@ -16,7 +16,7 @@ export class RatingSystem {
         ContractAddresses.RatingSystem[this.config.publicClient.chain!.id] ===
         undefined
     ) {
-      throw new Error(
+      console.error(
           "RatingSystem address not found for network id: " +
           this.config.publicClient.chain!.id
       );

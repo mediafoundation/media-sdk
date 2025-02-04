@@ -22,7 +22,7 @@ export class Disputes {
       ContractAddresses.Disputes[this.config.publicClient.chain!.id] ===
       undefined
     ) {
-      throw new Error(
+      console.error(
         "Disputes address not found for network id: " +
           this.config.publicClient.chain!.id
       );

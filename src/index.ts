@@ -22,6 +22,8 @@ export {Quoter} from "./models/quoter";
 
 export {SwapRouter} from "./models/swapRouter";
 
+export {WETH9} from "./models/weth9";
+
 export {Signer} from "./utils/signer";
 
 export {WalletUtils} from "./utils/walletUtils";

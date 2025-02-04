@@ -1,6 +1,6 @@
 import { mnemonicToAccount, privateKeyToAccount} from "viem/accounts";
 
-import { baseSepolia, sepolia } from "viem/chains";
+import { baseSepolia, sepolia, base, mainnet } from "viem/chains";
 
 import {
     Chain,
@@ -129,6 +129,8 @@ export class Sdk {
 export const validChains = {
     11155111: sepolia,
     84532: baseSepolia,
+    8453: base,
+    1: mainnet,
 }
 
 export const http = (url?: string | undefined, config?: HttpTransportConfig | undefined) => httpTransport(url, config)
