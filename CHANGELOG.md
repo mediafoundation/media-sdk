@@ -1,9 +1,17 @@
-# [7.1.1](https://github.com/mediafoundation/media-sdk/compare/vv7.0.0...v7.1.1) (2025-01-31)
+# [7.1.2](https://github.com/mediafoundation/media-sdk/compare/v7.1.1...v7.1.2) (2025-02-02)
+
+### Features
+* Add model for and json abis for WETH9
+* change throw new Error to console.error to allow users to use swapRouter, quoter and weth9 models on chains that are not yet supported
+* added contract addresses for MEDIA Base and Media Ethereum Mainnet
+* added base and mainnet to valid chains
+
+# [7.1.1](https://github.com/mediafoundation/media-sdk/compare/v7.1.0...v7.1.1) (2025-01-31)
 
 ### Features
 * **swapRouter**: Add model for SwapRouter
 
-# [7.1.0](https://github.com/mediafoundation/media-sdk/compare/vv7.0.0...v7.1.0) (2024-12-19)
+# [7.1.0](https://github.com/mediafoundation/media-sdk/compare/v7.0.0...v7.1.0) (2024-12-19)
 
 ### Features
 * **types**: Export all types from ModelTypes

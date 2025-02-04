@@ -11,8 +11,8 @@ export class Resources {
     this.config = sdkInstance.config
 
     if (ContractAddresses.Resources[this.config.publicClient.chain!.id] === undefined) {
-      throw new Error(
-        "MarketplaceViewer address not found for network id: " +
+      console.error(
+        "Resources address not found for network id: " +
           this.config.publicClient.chain!.id
       )
     }

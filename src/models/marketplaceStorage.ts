@@ -23,8 +23,8 @@ export class MarketplaceStorage {
     if (
       ContractAddresses.MarketplaceStorage[this.config.publicClient.chain!.id] === undefined
     ) {
-      throw new Error(
-        "MarketplaceViewer address not found for network id: " +
+      console.error(
+        "MarketplaceStorage address not found for network id: " +
         this.config.publicClient.chain!.id
       );
     }

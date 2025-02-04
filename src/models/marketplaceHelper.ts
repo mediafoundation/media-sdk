@@ -36,7 +36,7 @@ export class MarketplaceHelper {
       ContractAddresses.MarketplaceHelper[this.config.publicClient.chain!.id] ===
       undefined
     ) {
-      throw new Error(
+      console.error(
         "MarketplaceViewer address not found for network id: " +
           this.config.publicClient.chain!.id
       )
